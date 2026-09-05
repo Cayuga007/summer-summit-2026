@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyyfwwuagtr6g"]
+
+[ext_resource type="Script" uid="uid://omsdvrcb2cut" path="res://Scripts/main_menu.gd" id="1_vbv8a"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_vbv8a")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 521.0
+offset_top = 53.0
+offset_right = 609.0
+offset_bottom = 76.0
+text = "Main Menu"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 519.0
+offset_top = 127.0
+offset_right = 618.0
+offset_bottom = 263.0
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="LevelSelectButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level Select"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

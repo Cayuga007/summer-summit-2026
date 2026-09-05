@@ -34,7 +34,16 @@ text = "Level 3"
 layout_mode = 2
 text = "Level 4"
 
+[node name="BackButton" type="Button" parent="."]
+offset_left = 527.0
+offset_top = 464.0
+offset_right = 627.0
+offset_bottom = 495.0
+text = "Back
+"
+
 [connection signal="pressed" from="VBoxContainer/Level1Button" to="." method="_on_level_1_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level2Button" to="." method="_on_level_2_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level3Button" to="." method="_on_level_3_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level4Button" to="." method="_on_level_4_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
