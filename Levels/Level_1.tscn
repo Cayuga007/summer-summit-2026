@@ -45,12 +45,11 @@ shape = SubResource("WorldBoundaryShape2D_8a5oj")
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("3_nl7va")]
 position = Vector2(2267, 249)
 
-[node name="IcePlatform" parent="." unique_id=1287491701 instance=ExtResource("6_ntpbt")]
-position = Vector2(1054, 212)
-scale = Vector2(25.320004, 1)
-
 [node name="Platform2" parent="." unique_id=1123089830 instance=ExtResource("7_43ny2")]
-position = Vector2(825, 304)
+position = Vector2(485, 210)
 
 [node name="GravityPlatform" parent="." unique_id=1574595770 instance=ExtResource("8_uq0sc")]
-position = Vector2(424, 216)
+position = Vector2(332, 213)
+
+[node name="IcePlatform" parent="." unique_id=1287491701 instance=ExtResource("6_ntpbt")]
+position = Vector2(416, 214)
