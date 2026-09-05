@@ -1,7 +1,7 @@
 class_name Paintbrush extends Node2D
 
 
-@export var paint_prefab: Paint
+@export var paint_prefab: PackedScene
 
 var _is_holding := false
 
@@ -17,4 +17,10 @@ func _input(event: InputEvent) -> void:
 		elif event.is_released():
 			_is_holding = false
 	if event is InputEventMouseMotion and _is_holding:
-		print("Paint")
+		spawn_paint()
+
+
+func spawn_paint() -> void:
+	var new_paint: StaticBody2D = paint_prefab.instantiate()
+	add_child(new_paint)
+	new_paint.global_position = get_global_mouse_position()

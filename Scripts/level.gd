@@ -1,11 +1,13 @@
 extends Node2D
 
 const PAUSE_MENU := preload("res://UI/Pause_Menu.tscn")
+const PAINTBRUSH = preload("res://paintbrush.tscn")
 
 var pause_menu: CanvasLayer
 
 
 func _ready() -> void:
+	add_child(PAINTBRUSH.instantiate())
 	$VictoryDoor.level_completed.connect(_on_level_completed)
 	pause_menu = PAUSE_MENU.instantiate()
 	add_child(pause_menu)
