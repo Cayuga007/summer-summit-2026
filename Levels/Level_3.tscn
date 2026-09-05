@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://3pxu1s44jlxk"]
+
+[ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level_1.gd" id="1_67bi5"]
+[ext_resource type="PackedScene" uid="uid://qth4natevc18" path="res://UI/Level_completed.tscn" id="2_usv5v"]
+[ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_aig73"]
+[ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platform.tscn" id="4_c0thm"]
+[ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_fwchg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
+
+[node name="Level_3" type="Node2D"]
+script = ExtResource("1_67bi5")
+
+[node name="LevelCompleted" parent="." instance=ExtResource("2_usv5v")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1151, 258)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Player" parent="." instance=ExtResource("3_aig73")]
+position = Vector2(117, 99)
+
+[node name="Platform" parent="." instance=ExtResource("4_c0thm")]
+position = Vector2(133.00006, 214)
+
+[node name="Platform" parent="Platform" instance=ExtResource("4_c0thm")]
+position = Vector2(87.92307, 254)
+
+[node name="Wall" type="StaticBody2D" parent="."]
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(290, 1.9999876)
+shape = SubResource("WorldBoundaryShape2D_8a5oj")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(4, 644)
+shape = SubResource("WorldBoundaryShape2D_8a5oj")
+
+[node name="VictoryDoor" parent="." instance=ExtResource("5_fwchg")]
+position = Vector2(636, 371)

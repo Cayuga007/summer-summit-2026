@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://qth4natevc18"]
+
+[ext_resource type="Script" uid="uid://klo6cmqe81lk" path="res://Scripts/level_completed.gd" id="1_qp5ha"]
+
+[node name="LevelCompleted" type="CanvasLayer"]
+script = ExtResource("1_qp5ha")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 513.0
+offset_top = 204.0
+offset_right = 642.0
+offset_bottom = 227.0
+text = "Level Completed"
+
+[node name="RetryLevel" type="VBoxContainer" parent="."]
+offset_left = 533.0
+offset_top = 326.0
+offset_right = 623.0
+offset_bottom = 357.0
+
+[node name="RetryButton" type="Button" parent="RetryLevel"]
+layout_mode = 2
+text = "Retry Level"
+
+[node name="NextLevel" type="VBoxContainer" parent="."]
+offset_left = 681.0
+offset_top = 325.0
+offset_right = 771.0
+offset_bottom = 391.0
+
+[node name="NextButton" type="Button" parent="NextLevel"]
+layout_mode = 2
+text = "Next Level"
+
+[node name="LevelSelect" type="VBoxContainer" parent="."]
+offset_left = 399.0
+offset_top = 325.0
+offset_right = 489.0
+offset_bottom = 365.0
+
+[node name="LevelSelectButton" type="Button" parent="LevelSelect"]
+layout_mode = 2
+text = "Level Select"
+
+[connection signal="pressed" from="RetryLevel/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="NextLevel/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="LevelSelect/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
