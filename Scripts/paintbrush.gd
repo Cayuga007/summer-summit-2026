@@ -2,11 +2,15 @@ class_name Paintbrush extends Node2D
 
 
 @export var paint_prefab: PackedScene
+@export var paint_meter: CanvasLayer
+@export var max_meter_amount: float = 100
+@export var meter_spill_amount: float = 0.1
 @export var paint_radius := 30
 @export var paint_spacing := 5.0
 
 var _is_holding := false
 var _previous_paint_position := Vector2.ZERO
+var _meter_amount := max_meter_amount
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +18,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:
+	if _meter_amount <= 0: return
+	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			_is_holding = true
@@ -33,8 +39,8 @@ func paint_between(previous: Vector2, current: Vector2) -> void:
 	
 	for i in range(1, steps + 1):
 		var t := float(i) / steps
-		var position := previous.lerp(current, t)
-		spawn_paint(position)
+		var paint_spawn_position := previous.lerp(current, t)
+		spawn_paint(paint_spawn_position)
 
 
 func spawn_paint(spawn_position: Vector2) -> void:
@@ -47,3 +53,7 @@ func spawn_paint(spawn_position: Vector2) -> void:
 	var mesh_instance: MeshInstance2D = new_paint.get_child(1)
 	mesh_instance.mesh.radius = paint_radius
 	mesh_instance.mesh.height = paint_radius * 2
+	
+	_meter_amount -= meter_spill_amount
+	var progress_bar: ProgressBar = paint_meter.get_child(0)
+	progress_bar.value = _meter_amount / max_meter_amount * 100
