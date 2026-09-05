@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://3x3t13qaswo7"]
+
+[ext_resource type="Script" uid="uid://w3j2k1hy1uyi" path="res://Scripts/gravity_platform.gd" id="1_621p3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1v8no"]
+size = Vector2(20, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ajho"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mi635"]
+
+[node name="GravityPlatform" type="StaticBody2D" unique_id=1487216132]
+modulate = Color(0, 1, 0.5764706, 1)
+scale = Vector2(13, 1)
+script = ExtResource("1_621p3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=109906355]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_1v8no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=282006335]
+shape = SubResource("RectangleShape2D_5ajho")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
+modulate = Color(1, 1, 0.10980392, 1)
+scale = Vector2(20, 20)
+mesh = SubResource("BoxMesh_mi635")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

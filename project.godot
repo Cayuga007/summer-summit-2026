@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 LevelManager="*res://Scripts/Level_manager.gd"
+PlayerVariables="*uid://sli8dx076pjj"
 
 [display]
 

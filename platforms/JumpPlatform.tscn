@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cf5u6dpgh3adc"]
+
+[ext_resource type="Script" uid="uid://co4nr1wrjd3t7" path="res://Scripts/jump_platform.gd" id="1_bounce"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1v8no"]
+size = Vector2(20, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ajho"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mi635"]
+
+[node name="JumpPlatform" type="StaticBody2D" unique_id=1487216132]
+scale = Vector2(13, 1)
+script = ExtResource("1_bounce")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=109906355]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_1v8no")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=282006335]
+shape = SubResource("RectangleShape2D_5ajho")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
+modulate = Color(1, 1, 0.10980392, 1)
+scale = Vector2(20, 20)
+mesh = SubResource("BoxMesh_mi635")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
