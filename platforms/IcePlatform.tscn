@@ -2,30 +2,28 @@
 
 [ext_resource type="Script" uid="uid://wu3xlcevoe00" path="res://Scripts/ice_platform.gd" id="1_7q2t7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ajho"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sgw1c"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_mi635"]
+[sub_resource type="SphereMesh" id="SphereMesh_0y20v"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1v8no"]
-size = Vector2(20, 23)
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdrh6"]
+radius = 11.0
 
 [node name="IcePlatform" type="StaticBody2D" unique_id=1287491701]
 modulate = Color(0.2901961, 1, 1, 1)
-scale = Vector2(27.92, 1)
 script = ExtResource("1_7q2t7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=117430617]
-shape = SubResource("RectangleShape2D_5ajho")
+shape = SubResource("CircleShape2D_sgw1c")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=362814123]
 scale = Vector2(20, 20)
-mesh = SubResource("BoxMesh_mi635")
+mesh = SubResource("SphereMesh_0y20v")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=410504733]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1900512911]
-position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_1v8no")
+shape = SubResource("CircleShape2D_jdrh6")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
