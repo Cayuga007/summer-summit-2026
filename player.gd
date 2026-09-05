@@ -3,6 +3,7 @@ extends CharacterBody2D
 var ice_contacts := 0
 var bounce_contacts := 0
 var gravity_flipped := false
+var _portal_cooldown := 0.0
 
 var on_ice: bool:
 	get:
@@ -29,6 +30,16 @@ func exit_bounce() -> void:
 	bounce_contacts = maxi(bounce_contacts - 1, 0)
 
 
+func is_portal_cooling() -> bool:
+	return _portal_cooldown > 0.0
+
+
+func teleport_via_portal(destination: Vector2) -> void:
+	global_position = destination
+	velocity.y = 0.0
+	_portal_cooldown = PlayerVariables.portal_cooldown
+
+
 func toggle_gravity() -> void:
 	gravity_flipped = not gravity_flipped
 	up_direction = Vector2.DOWN if gravity_flipped else Vector2.UP
@@ -46,6 +57,9 @@ func _is_falling() -> bool:
 
 
 func _physics_process(delta: float) -> void:
+	if _portal_cooldown > 0.0:
+		_portal_cooldown -= delta
+
 	if not is_on_floor():
 		var gravity := get_gravity()
 		if gravity_flipped:
