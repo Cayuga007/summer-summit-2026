@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cf5u6dpgh3adc" path="res://platforms/JumpPlatform.tscn" id="7_43ny2"]
 [ext_resource type="PackedScene" uid="uid://3x3t13qaswo7" path="res://platforms/GravityPlatform.tscn" id="8_uq0sc"]
 [ext_resource type="PackedScene" uid="uid://c1l05i3hik58a" path="res://paintbrush.tscn" id="9_x75k1"]
+[ext_resource type="PackedScene" uid="uid://d2e07fxjnm3cq" path="res://platforms/level_platform.tscn" id="10_wpk6a"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
@@ -57,4 +58,6 @@ position = Vector2(825, 304)
 position = Vector2(424, 216)
 
 [node name="Paintbrush" parent="." unique_id=1638959940 instance=ExtResource("9_x75k1")]
-paint_prefab = ExtResource("2_8a5oj")
+
+[node name="Platform4" parent="." unique_id=307582361 instance=ExtResource("10_wpk6a")]
+position = Vector2(86, 347)
