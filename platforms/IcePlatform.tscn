@@ -17,7 +17,6 @@ script = ExtResource("1_7q2t7")
 shape = SubResource("CircleShape2D_sgw1c")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=362814123]
-scale = Vector2(20, 20)
 mesh = SubResource("SphereMesh_0y20v")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=410504733]

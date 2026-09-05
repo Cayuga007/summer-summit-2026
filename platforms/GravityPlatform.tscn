@@ -23,8 +23,6 @@ shape = SubResource("CircleShape2D_wnu83")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
 modulate = Color(1, 1, 0.10980392, 1)
-scale = Vector2(20, 20)
 mesh = SubResource("SphereMesh_tuo1d")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
