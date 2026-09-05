@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c1l05i3hik58a"]
+
+[ext_resource type="Script" uid="uid://br2lq756kfoy6" path="res://Scripts/paintbrush.gd" id="1_kh68u"]
+
+[node name="Paintbrush" type="Node2D" unique_id=1638959940]
+script = ExtResource("1_kh68u")
