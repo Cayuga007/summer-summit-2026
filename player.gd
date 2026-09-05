@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var ice_contacts := 0
 var bounce_contacts := 0
-var gravity_contacts := 0
+var gravity_flipped := false
 
 var on_ice: bool:
 	get:
@@ -11,10 +11,6 @@ var on_ice: bool:
 var on_bounce: bool:
 	get:
 		return bounce_contacts > 0
-		
-var on_gravity: bool:
-	get:
-		return gravity_contacts > 0
 
 
 func enter_ice() -> void:
@@ -32,22 +28,34 @@ func enter_bounce() -> void:
 func exit_bounce() -> void:
 	bounce_contacts = maxi(bounce_contacts - 1, 0)
 
-func enter_gravity() -> void:
-	gravity_contacts += 1
 
-func exit_gravity() -> void:
-	gravity_contacts = maxi(gravity_contacts - 1, 0)
+func toggle_gravity() -> void:
+	gravity_flipped = not gravity_flipped
+	up_direction = Vector2.DOWN if gravity_flipped else Vector2.UP
+	$Icon.flip_v = gravity_flipped
+	# Launch into the new "down" so we leave the pad instead of sticking to it.
+	velocity.y = abs(PlayerVariables.jump_velocity) * (-1.0 if gravity_flipped else 1.0)
+
+
+func _oriented(upward: float) -> float:
+	return -upward if gravity_flipped else upward
+
+
+func _is_falling() -> bool:
+	return velocity.y <= 0.0 if gravity_flipped else velocity.y >= 0.0
+
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		var gravity := get_gravity()
+		if gravity_flipped:
+			gravity = -gravity
+		velocity += gravity * delta
 
-	if on_gravity and is_on_floor():
-		velocity.y *= PlayerVariables.flip_gravity
-	if on_bounce and (is_on_floor() or velocity.y >= 0.0):
-		velocity.y = PlayerVariables.bounce_velocity
+	if on_bounce and (is_on_floor() or _is_falling()):
+		velocity.y = _oriented(PlayerVariables.bounce_velocity)
 	elif Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = PlayerVariables.jump_velocity
+		velocity.y = _oriented(PlayerVariables.jump_velocity)
 
 	var direction := Input.get_axis("left", "right")
 	var target_speed := PlayerVariables.speed

@@ -47,14 +47,26 @@ shape = SubResource("WorldBoundaryShape2D_8a5oj")
 position = Vector2(2267, 249)
 
 [node name="IcePlatform" parent="." unique_id=1287491701 instance=ExtResource("6_ntpbt")]
-position = Vector2(1054, 212)
-scale = Vector2(25.320004, 1)
+position = Vector2(914, 220)
+scale = Vector2(4, 4)
 
 [node name="Platform2" parent="." unique_id=1123089830 instance=ExtResource("7_43ny2")]
-position = Vector2(825, 304)
+position = Vector2(616, 271)
+scale = Vector2(4, 4)
 
 [node name="GravityPlatform" parent="." unique_id=1574595770 instance=ExtResource("8_uq0sc")]
-position = Vector2(424, 216)
+position = Vector2(356.00003, 212)
+scale = Vector2(4, 4)
+
+[node name="GravityPlatform2" parent="." unique_id=1574595771 instance=ExtResource("8_uq0sc")]
+position = Vector2(700.00006, -280)
+scale = Vector2(4, 4)
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
+position = Vector2(4, -400)
+rotation = 3.1415927
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=2004289121]
+shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="Paintbrush" parent="." unique_id=1638959940 instance=ExtResource("9_x75k1")]
-paint_prefab = ExtResource("2_8a5oj")
