@@ -2,6 +2,7 @@ class_name Paintbrush extends Node2D
 
 
 @export var paint_prefab: PackedScene
+@export var paint_radius := 30
 @export var paint_spacing := 5.0
 
 var _is_holding := false
@@ -40,3 +41,9 @@ func spawn_paint(spawn_position: Vector2) -> void:
 	var new_paint: StaticBody2D = paint_prefab.instantiate()
 	add_child(new_paint)
 	new_paint.global_position = spawn_position
+	
+	var collision_shape: CollisionShape2D = new_paint.get_child(0)
+	collision_shape.shape.radius = paint_radius
+	var mesh_instance: MeshInstance2D = new_paint.get_child(1)
+	mesh_instance.mesh.radius = paint_radius
+	mesh_instance.mesh.height = paint_radius * 2
