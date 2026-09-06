@@ -21,6 +21,10 @@ var impact_timer: float = 99.0
 var is_wave_propagating: bool = false
 
 func _ready() -> void:
+	mouse_entered.connect(func():
+		ButtonSFX.get_child(0).play())
+	pressed.connect(func():
+		ButtonSFX.get_child(1).play())
 	add_theme_stylebox_override("normal", StyleBoxEmpty.new())
 	add_theme_stylebox_override("hover", StyleBoxEmpty.new())
 	add_theme_stylebox_override("pressed", StyleBoxEmpty.new())
@@ -102,3 +106,5 @@ func _trigger_jelly_strike() -> void:
 	shader_material.set_shader_parameter("hit_origin", uv_origin)
 	impact_timer = 0.0
 	is_wave_propagating = true
+	
+	
