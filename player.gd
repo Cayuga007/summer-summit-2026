@@ -192,6 +192,7 @@ func die() -> void:
 	# Trigger the pixel sand dissolve effect.
 	trigger_sand_dissolve(impact_velocity)
 
+
 func trigger_sand_dissolve(impact_vel: Vector2 = Vector2.ZERO) -> void:
 	if not sand_particles:
 		return
@@ -205,10 +206,8 @@ func trigger_sand_dissolve(impact_vel: Vector2 = Vector2.ZERO) -> void:
 
 	var mat := sand_particles.process_material as ShaderMaterial
 	if mat:
-		var actual_size: Vector2 = frame_texture.get_size()
-		
 		mat.set_shader_parameter("sprite_texture", frame_texture)
-		mat.set_shader_parameter("sprite_size", actual_size)
+		mat.set_shader_parameter("sprite_size", frame_texture.get_size())
 		mat.set_shader_parameter("emitter_velocity", impact_vel)
 		mat.set_shader_parameter("inherit_ratio", 1.0)
 

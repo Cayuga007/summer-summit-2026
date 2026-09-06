@@ -136,11 +136,12 @@ collision_friction = 0.4
 collision_bounce = 0.33
 collision_use_scale = true
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_risw2"]
-size = Vector2(2, 2)
+[sub_resource type="CanvasTexture" id="CanvasTexture_itxgx"]
 
 [sub_resource type="Shader" id="Shader_itxgx"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.7.2.stable's ParticleProcessMaterial.
+
+
 
 shader_type particles;
 render_mode disable_velocity;
@@ -368,19 +369,56 @@ vec3 process_radial_displacement(DynamicsParameters param, float lifetime, inout
 void process_physical_parameters(inout PhysicalParameters params, float lifetime_percent) {
 }
 
-// Place this above void start()
-float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-}
-
 void start() {
-	// Safe initialization across all Godot 4 versions
-	CUSTOM.x = 0.0;
-	CUSTOM.y = 0.0;
-	CUSTOM.z = 0.0;
-	CUSTOM.w = 0.0;
+	uint base_number = NUMBER;
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DisplayParameters params;
+	calculate_initial_display_params(params, alt_seed);
+	// Reset alt seed?
+	//alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DynamicsParameters dynamic_params;
+	calculate_initial_dynamics_params(dynamic_params, alt_seed);
+	PhysicalParameters physics_params;
+	calculate_initial_physical_params(physics_params, alt_seed);
+	process_display_param(params, 0.0);
+	if (rand_from_seed(alt_seed) > AMOUNT_RATIO) {
+		ACTIVE = false;
+	}
 
-	// 1. Map particle index to 2D pixel coordinates
+	if (RESTART_CUSTOM) {
+		CUSTOM = vec4(0.0);
+		CUSTOM.w = params.lifetime;
+		CUSTOM.x = dynamic_params.angle;
+		USERDATA1.w = 0.0;
+	}
+	if (RESTART_COLOR) {
+		COLOR = params.color;
+	}
+	if (RESTART_ROT_SCALE) {
+		TRANSFORM[0].xyz = vec3(1.0, 0.0, 0.0);
+		TRANSFORM[1].xyz = vec3(0.0, 1.0, 0.0);
+		TRANSFORM[2].xyz = vec3(0.0, 0.0, 1.0);
+	}
+	process_display_param(params, 0.0);
+
+	if (RESTART_POSITION) {
+		TRANSFORM[3].xyz = calculate_initial_position(params, alt_seed);
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+	}
+	if (RESTART_VELOCITY) {
+		// We use USERDATA to accumulate our velocities. That way, we can pass both animated velocities and accumulated velocities from
+		// acceleration in VELOCITY, allowing for proper interpolation of animated velocities as well. 
+		USERDATA1.xyz = get_random_direction_from_spread(alt_seed, spread) * dynamic_params.initial_velocity_multiplier;
+	} else {
+		USERDATA1.xyz = VELOCITY.xyz;
+	}
+
+	process_display_param(params, 0.0);
+
+	USERDATA1.xyz = (EMISSION_TRANSFORM * vec4(USERDATA1.xyz, 0.0)).xyz;
+	USERDATA1.xyz += EMITTER_VELOCITY * inherit_emitter_velocity_ratio;
+	USERDATA1.z = 0.0;
+	TRANSFORM[3].z = 0.0;
 	int total_pixels = int(sprite_size.x * sprite_size.y);
 	int p_index = int(INDEX) % total_pixels;
 
@@ -388,25 +426,22 @@ void start() {
 	float py = float(p_index / int(sprite_size.x));
 	vec2 uv = (vec2(px, py) + 0.5) / sprite_size;
 
-	// 2. Sample color from the texture
 	vec4 col = texture(sprite_texture, uv);
 
 	if (col.a >= 0.1) {
 		COLOR = col;
 
-		// 3. Add pixel offset to the node's global transform
 		vec2 local_pos = vec2(px, py) - (sprite_size * 0.5);
 		TRANSFORM = EMISSION_TRANSFORM;
 		TRANSFORM[3].xy += local_pos;
 
-		// 4. Generate random jitter using our own hash function instead of Godot's internal seed
-		float rnd_x = hash(vec2(px, py)); 
-		float rnd_y = hash(vec2(py, px)); 
-		
+		// Self-contained hash prevents Godot version seed crashes
+		float rnd_x = fract(sin(dot(vec2(px, py), vec2(12.9898, 78.233))) * 43758.5453);
+		float rnd_y = fract(sin(dot(vec2(py, px), vec2(12.9898, 78.233))) * 43758.5453);
+
 		float h_jitter = (rnd_x - 0.5) * spread_horizontal;
 		float v_jitter = rnd_y * 20.0;
 
-		// 5. Apply inherited velocity and jitter
 		vec2 initial_2d = (emitter_velocity * inherit_ratio) + vec2(h_jitter, -v_jitter);
 		VELOCITY = vec3(initial_2d.x, initial_2d.y, 0.0);
 		
@@ -444,8 +479,6 @@ void process() {
 	vec3 controlled_displacement = vec3(0.0);
 	controlled_displacement += process_orbit_displacement(dynamic_params, lifetime_percent, alt_seed, TRANSFORM, EMISSION_TRANSFORM, DELTA, params.lifetime * LIFETIME);
 	controlled_displacement += process_radial_displacement(dynamic_params, lifetime_percent, alt_seed, TRANSFORM, EMISSION_TRANSFORM, DELTA);
-
-
 
 	process_physical_parameters(physics_params, lifetime_percent);
 	vec3 force;
@@ -537,16 +570,17 @@ void process() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cgsek"]
 shader = SubResource("Shader_itxgx")
-shader_parameter/sprite_size = Vector2(32, 32)
+shader_parameter/sprite_texture = ExtResource("3_itxgx")
+shader_parameter/sprite_size = Vector2(32.26, 32)
 shader_parameter/emitter_velocity = Vector2(0, 0)
 shader_parameter/inherit_ratio = 1.0
 shader_parameter/spread_horizontal = 35.0
 shader_parameter/direction = Vector3(1, 0, 0)
 shader_parameter/spread = 45.0
 shader_parameter/flatness = 0.0
-shader_parameter/inherit_emitter_velocity_ratio = 0.0
-shader_parameter/initial_linear_velocity_min = 0.0
-shader_parameter/initial_linear_velocity_max = 0.0
+shader_parameter/inherit_emitter_velocity_ratio = 1.0
+shader_parameter/initial_linear_velocity_min = -0.88
+shader_parameter/initial_linear_velocity_max = 0.445
 shader_parameter/directional_velocity_min = 1.0
 shader_parameter/directional_velocity_max = 1.0
 shader_parameter/angular_velocity_min = 0.0
@@ -579,8 +613,8 @@ shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
 shader_parameter/velocity_pivot = Vector3(0, 0, 0)
 shader_parameter/color_value = Color(1, 1, 1, 1)
 shader_parameter/gravity = Vector3(0, 98, 0)
-shader_parameter/collision_friction = 0.8
-shader_parameter/collision_bounce = 0.0
+shader_parameter/collision_friction = 0.58
+shader_parameter/collision_bounce = 0.45
 
 [node name="Player" type="CharacterBody2D" unique_id=1599564440 groups=["Player"]]
 scale = Vector2(0.5, 0.5)
@@ -608,12 +642,11 @@ one_shot = true
 explosiveness = 0.98
 process_material = SubResource("ParticleProcessMaterial_cr25j")
 
-[node name="SandParticles" type="GPUParticles2D" parent="." unique_id=1541255496]
-z_index = 10
+[node name="SandParticles" type="GPUParticles2D" parent="." unique_id=1215569143]
 emitting = false
-amount = 5254
-texture = SubResource("PlaceholderTexture2D_risw2")
-lifetime = 1.84
+amount = 5241
+texture = SubResource("CanvasTexture_itxgx")
+lifetime = 3.55
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ShaderMaterial_cgsek")

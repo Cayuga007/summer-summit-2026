@@ -20,6 +20,7 @@ polygon = PackedVector2Array(577, 555, -58, 558, -50, 701, 1189, 690, 1184, 551)
 [node name="0TimTest" type="Node2D" unique_id=784913612]
 
 [node name="Player" parent="." unique_id=1599564440 instance=ExtResource("1_wyk0b")]
+position = Vector2(453, 467)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1086898958]
 
