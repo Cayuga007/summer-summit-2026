@@ -72,7 +72,7 @@ func next() -> void:
 	if has_next_level():
 		load_level(current_index + 1)
 	else:
-		go_to_level_select()
+		go_to_main_menu()
 
 
 func has_next_level() -> bool:
