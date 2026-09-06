@@ -26,7 +26,7 @@ zoom = Vector2(0.5, 0.5)
 position = Vector2(1079, 126)
 
 [node name="Platform" parent="." unique_id=1061748757 instance=ExtResource("4_dbc5v")]
-position = Vector2(1079, 225)
+position = Vector2(1082, 219)
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=421238776]
 rotation = 1.5707964
@@ -36,7 +36,7 @@ position = Vector2(0, 2)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="Wall2" type="StaticBody2D" parent="." unique_id=521107091]
-position = Vector2(2295, 631)
+position = Vector2(2282, 630)
 rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=822386779]
@@ -59,9 +59,6 @@ shape = SubResource("WorldBoundaryShape2D_vb2uo")
 
 [node name="VictoryDoor" parent="." unique_id=1062209962 instance=ExtResource("5_t5q4t")]
 position = Vector2(1171, 144)
-
-[node name="PortalPlatform" parent="." unique_id=1487216132 instance=ExtResource("6_tfynm")]
-position = Vector2(980, 201)
 
 [node name="PortalPlatform2" parent="." unique_id=83747843 instance=ExtResource("6_tfynm")]
 position = Vector2(252, 108)
