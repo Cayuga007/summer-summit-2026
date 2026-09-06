@@ -10,9 +10,10 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
-[node name="Level_6" type="Node2D" unique_id=57220166]
+[node name="Level_6" type="Node2D" unique_id=57220166 node_paths=PackedStringArray("_buckets")]
 script = ExtResource("1_e8h74")
-starting_paint_amount = 70.0
+_buckets = NodePath("Buckets")
+starting_paint_amount = 40.0
 
 [node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_ex0ux")]
 visible = false
@@ -28,8 +29,16 @@ position = Vector2(-1041, 599)
 scale = Vector2(2.4399977, 1)
 
 [node name="Platform2" parent="." unique_id=1487216132 instance=ExtResource("4_wo10n")]
-position = Vector2(-185, 167)
+position = Vector2(-185, -1.0000153)
 scale = Vector2(19.574303, 0.9200003)
+
+[node name="Platform4" parent="." unique_id=1689334548 instance=ExtResource("4_wo10n")]
+position = Vector2(754, 443)
+scale = Vector2(4.254305, 0.9200003)
+
+[node name="Platform5" parent="." unique_id=1342524761 instance=ExtResource("4_wo10n")]
+position = Vector2(987.00006, 293)
+scale = Vector2(4.254305, 0.9200003)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)
@@ -45,21 +54,18 @@ rotation = -3.1415925
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_ov3s6")]
-position = Vector2(-1059, -73)
+position = Vector2(-1059, -241)
 
 [node name="HazardBlock" parent="." unique_id=2111362905 instance=ExtResource("6_ex0ux")]
-position = Vector2(-128, 220)
+position = Vector2(-128, 52)
 scale = Vector2(61.399998, 1)
 
 [node name="HazardBlock2" parent="." unique_id=128917152 instance=ExtResource("6_ex0ux")]
-position = Vector2(-128, 114)
+position = Vector2(-128, -54)
 scale = Vector2(61.399998, 1)
-
-[node name="HazardBlock3" parent="." unique_id=1462720855 instance=ExtResource("6_ex0ux")]
-position = Vector2(1146.0001, 363)
-scale = Vector2(1.3599967, 17.36)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=1337327784]
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_hg3os")]
-position = Vector2(1022, 436)
+position = Vector2(385, 449)
+fill_amount = 100

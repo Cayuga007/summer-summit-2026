@@ -54,10 +54,11 @@ func _rebuild_unlocked_colors() -> void:
 # Level parameters
 var max_meter_amount: float = 100
 var meter_spill_amount: float = 0.25
+var paint_radius := 15
 
 # Core movement — change these anytime; the player reads them live.
 var speed := 500.0
-var jump_velocity := -800.0
+var jump_velocity := -1000.0
 var gravity_multiplier := 3.0
 
 # Normal ground: snappy start and stop.
@@ -72,7 +73,7 @@ var ice_friction := 50.0
 
 # Air: keep ice momentum, still allow some steering.
 var air_acceleration := 300
-var air_friction := 100.0
+var air_friction := 0.0
 
 # JUMP PLATFORM
 # More negative = higher bounce. Same value every launch, so height stays constant.
