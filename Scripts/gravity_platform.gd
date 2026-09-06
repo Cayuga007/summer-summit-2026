@@ -1,5 +1,10 @@
 extends StaticBody2D
 
+
+func play_interact_sfx() -> void:
+	$GravityPlatformSFX.play()
+
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and body.has_method("enter_gravity_pad"):
 		body.enter_gravity_pad(self)

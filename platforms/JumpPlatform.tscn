@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://cf5u6dpgh3adc"]
+[gd_scene load_steps=6 format=3 uid="uid://cf5u6dpgh3adc"]
 
 [ext_resource type="Script" uid="uid://co4nr1wrjd3t7" path="res://Scripts/jump_platform.gd" id="1_bounce"]
+[ext_resource type="AudioStream" uid="uid://v1aihoyqvxpu" path="res://Audio/JumpPlatformSFX.mp3" id="2_jump"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7q2t7"]
 
@@ -18,6 +19,11 @@ shape = SubResource("CircleShape2D_7q2t7")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
 modulate = Color(1, 1, 0.10980392, 1)
 mesh = SubResource("SphereMesh_tuo1d")
+
+[node name="JumpPlatformSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jump")
+volume_db = -8.587
+bus = &"SFX"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
 position = Vector2(0, 1)

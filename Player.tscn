@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://32q6t44ytub2"]
+[gd_scene load_steps=27 format=4 uid="uid://32q6t44ytub2"]
 
 [ext_resource type="Script" uid="uid://b28e6i86n267t" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://biao75isgycq5" path="res://icon.svg" id="1_xhfnw"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://81d8ne1w8tl2" path="res://assets/draft/jump8.png" id="13_2n1s8"]
 [ext_resource type="Texture2D" uid="uid://b68ujdvsb15ul" path="res://assets/draft/jump9.png" id="14_3vjad"]
 [ext_resource type="AudioStream" uid="uid://j7y2uj5dup3p" path="res://Audio/WalkingSFX.mp3" id="15_walksfx"]
+[ext_resource type="AudioStream" uid="uid://bhnx6hyk5gad5" path="res://Audio/IcePlatformSFX.mp3" id="16_icesfx"]
 [ext_resource type="AudioStream" uid="uid://buqs5ir7sias2" path="res://Audio/SlimeDeathSFX.mp3" id="21_0pi4m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
@@ -131,6 +132,11 @@ process_material = SubResource("ParticleProcessMaterial_cr25j")
 
 [node name="WalkingSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_walksfx")
+volume_db = -8.587
+bus = &"SFX"
+
+[node name="IcePlatformSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_icesfx")
 volume_db = -8.587
 bus = &"SFX"
 

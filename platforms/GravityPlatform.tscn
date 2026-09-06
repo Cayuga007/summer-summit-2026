@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://3x3t13qaswo7"]
+[gd_scene load_steps=5 format=3 uid="uid://3x3t13qaswo7"]
 
 [ext_resource type="Script" uid="uid://w3j2k1hy1uyi" path="res://Scripts/gravity_platform.gd" id="1_621p3"]
+[ext_resource type="AudioStream" uid="uid://n6lfx762kt42" path="res://Audio/GravityPlatformSFX.mp3" id="2_grav"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_tuo1d"]
 
@@ -14,6 +15,11 @@ script = ExtResource("1_621p3")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
 modulate = Color(1, 1, 0.10980392, 1)
 mesh = SubResource("SphereMesh_tuo1d")
+
+[node name="GravityPlatformSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_grav")
+volume_db = -8.587
+bus = &"SFX"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
 

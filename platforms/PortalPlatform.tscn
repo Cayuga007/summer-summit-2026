@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://otae08kccpyf"]
 
 [ext_resource type="Script" uid="uid://b1id6mpmjl6ot" path="res://Scripts/portal_platform.gd" id="1_hufnu"]
+[ext_resource type="AudioStream" uid="uid://dmjbil63vp36r" path="res://Audio/PortalPlatformSFX.mp3" id="2_portal"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_tuo1d"]
 radius = 9.646
@@ -16,6 +17,11 @@ script = ExtResource("1_hufnu")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
 modulate = Color(0.43529412, 0, 1, 1)
 mesh = SubResource("SphereMesh_tuo1d")
+
+[node name="PortalPlatformSFX" type="AudioStreamPlayer" parent="." unique_id=1126558691]
+stream = ExtResource("2_portal")
+volume_db = -8.587
+bus = &"SFX"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
 

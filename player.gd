@@ -9,6 +9,7 @@ var is_dead := false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var walking_sfx: AudioStreamPlayer = $WalkingSFX
+@onready var ice_sfx: AudioStreamPlayer = $IcePlatformSFX
 @onready var jump_sfx: AudioStreamPlayer = $JumpSFX
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
 
@@ -53,6 +54,10 @@ func _ready() -> void:
 		var walk_stream: AudioStreamMP3 = walking_sfx.stream.duplicate()
 		walk_stream.loop = true
 		walking_sfx.stream = walk_stream
+	if ice_sfx.stream is AudioStreamMP3:
+		var ice_stream: AudioStreamMP3 = ice_sfx.stream.duplicate()
+		ice_stream.loop = true
+		ice_sfx.stream = ice_stream
 
 
 func enter_ice() -> void:
@@ -89,6 +94,8 @@ func toggle_gravity() -> void:
 	gravity_flipped = not gravity_flipped
 	$Icon.flip_v = gravity_flipped
 	sprite.flip_v = gravity_flipped
+	if not _gravity_pads.is_empty() and _gravity_pads[0].has_method("play_interact_sfx"):
+		_gravity_pads[0].play_interact_sfx()
 
 
 func _desired_up() -> Vector2:
@@ -344,7 +351,14 @@ func _is_walking() -> bool:
 
 
 func _update_walking_sfx() -> void:
-	if _is_walking():
+	var walking_on_ice := _is_walking() and on_ice
+	var walking_on_ground := _is_walking() and not on_ice
+	if walking_on_ice:
+		if not ice_sfx.playing:
+			ice_sfx.play()
+	elif ice_sfx.playing:
+		ice_sfx.stop()
+	if walking_on_ground:
 		if not walking_sfx.playing:
 			walking_sfx.play()
 	elif walking_sfx.playing:
