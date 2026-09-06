@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://ckomwa1i1v83q"]
-
-[node name="PaintMeter" type="CanvasLayer" unique_id=1937635955]
-
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=2067280672]
-offset_right = 490.0
-offset_bottom = 27.0
-value = 100.0

@@ -2,7 +2,7 @@ class_name Paintbrush extends Node2D
 
 
 @export var paint_prefab: PackedScene
-@export var paint_meter: CanvasLayer
+@export var paint_ui: CanvasLayer
 @export var max_meter_amount: float = 100
 @export var meter_spill_amount: float = 0.1
 @export var paint_radius := 30
@@ -55,5 +55,5 @@ func spawn_paint(spawn_position: Vector2) -> void:
 	mesh_instance.mesh.height = paint_radius * 2
 	
 	_meter_amount -= meter_spill_amount
-	var progress_bar: ProgressBar = paint_meter.get_child(0)
+	var progress_bar: ProgressBar = paint_ui.get_child(0)
 	progress_bar.value = _meter_amount / max_meter_amount * 100
