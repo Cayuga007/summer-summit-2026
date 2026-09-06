@@ -13,6 +13,7 @@
 [node name="Level_3" type="Node2D" unique_id=57220166 node_paths=PackedStringArray("_buckets")]
 script = ExtResource("1_67bi5")
 _buckets = NodePath("Buckets")
+starting_paint_amount = 30.0
 
 [node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_usv5v")]
 visible = false

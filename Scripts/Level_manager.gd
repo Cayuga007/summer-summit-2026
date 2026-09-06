@@ -6,6 +6,12 @@ const LEVELS: Array[String] = [
 	"res://Levels/Level_2.tscn",
 	"res://Levels/Level_3.tscn",
 	"res://Levels/Level_4.tscn",
+	"res://Levels/Level_5.tscn",
+	"res://Levels/Level_6.tscn",
+	"res://Levels/Level_7.tscn",
+	"res://Levels/Level_8.tscn",
+	"res://Levels/Level_9.tscn",
+	
 ]
 
 const MAIN_MENU := "res://UI/Main_menu.tscn"

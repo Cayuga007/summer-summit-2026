@@ -23,6 +23,26 @@ func _on_level_3_button_pressed() -> void:
 func _on_level_4_button_pressed() -> void:
 	LevelManager.load_level(3)
 	hide()
+	
+func _on_level_5_button_pressed() -> void:
+	LevelManager.load_level(4)
+	hide()
+	
+func _on_level_6_button_pressed() -> void:
+	LevelManager.load_level(5)
+	hide()
+	
+func _on_level_7_button_pressed() -> void:
+	LevelManager.load_level(6)
+	hide()
+	
+func _on_level_8_button_pressed() -> void:
+	LevelManager.load_level(7)
+	hide()
+	
+func _on_level_9_button_pressed() -> void:
+	LevelManager.load_level(8)
+	hide()
 
 func _on_back_button_pressed() -> void:
 	if get_tree().current_scene == self:

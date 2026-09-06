@@ -13,10 +13,10 @@ offset_bottom = 263.0
 text = "Level Select"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1324103756]
-offset_left = 541.0
-offset_top = 292.0
-offset_right = 603.0
-offset_bottom = 428.0
+offset_left = 475.0
+offset_top = 285.0
+offset_right = 537.0
+offset_bottom = 421.0
 
 [node name="Level1Button" type="Button" parent="VBoxContainer" unique_id=1313344845]
 layout_mode = 2
@@ -34,6 +34,32 @@ text = "Level 3"
 layout_mode = 2
 text = "Level 4"
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1329227933]
+offset_left = 611.0
+offset_top = 279.0
+offset_right = 673.0
+offset_bottom = 450.0
+
+[node name="Level5Button" type="Button" parent="VBoxContainer2" unique_id=650470859]
+layout_mode = 2
+text = "Level 5"
+
+[node name="Level6Button" type="Button" parent="VBoxContainer2" unique_id=749004779]
+layout_mode = 2
+text = "Level 6"
+
+[node name="Level7Button" type="Button" parent="VBoxContainer2" unique_id=281829463]
+layout_mode = 2
+text = "Level 7"
+
+[node name="Level8Button" type="Button" parent="VBoxContainer2" unique_id=108154956]
+layout_mode = 2
+text = "Level 8"
+
+[node name="Level9Button" type="Button" parent="VBoxContainer2" unique_id=8415426]
+layout_mode = 2
+text = "Level 9"
+
 [node name="BackButton" type="Button" parent="." unique_id=879658485]
 offset_left = 527.0
 offset_top = 464.0
@@ -46,4 +72,9 @@ text = "Back
 [connection signal="pressed" from="VBoxContainer/Level2Button" to="." method="_on_level_2_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level3Button" to="." method="_on_level_3_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level4Button" to="." method="_on_level_4_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Level5Button" to="." method="_on_level_5_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Level6Button" to="." method="_on_level_6_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Level7Button" to="." method="_on_level_7_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Level8Button" to="." method="_on_level_8_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Level9Button" to="." method="_on_level_9_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

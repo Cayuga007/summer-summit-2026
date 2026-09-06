@@ -1,7 +1,10 @@
 extends Node
 
 
+signal unlocks_changed
+
 const UNLOCK_EVERY := 3
+const STARTER_COLOR = preload("res://platforms/platform.tscn")
 
 # Waiting to be unlocked, in order.
 var colors = [
@@ -13,25 +16,40 @@ var colors = [
 
 # Currently available paint colors.
 var unlocked_colors = [
-	preload("res://platforms/platform.tscn"),
+	STARTER_COLOR,
 ]
 
 var completed_levels: Array[int] = []
+var debug_all_colors := false
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("unlock debug"):
+		toggle_debug_unlocks()
+
+
+func toggle_debug_unlocks() -> void:
+	debug_all_colors = not debug_all_colors
+	_rebuild_unlocked_colors()
+	unlocks_changed.emit()
 
 
 func register_level_completed(level_index: int) -> void:
 	if completed_levels.has(level_index):
 		return
 	completed_levels.append(level_index)
-	if completed_levels.size() % UNLOCK_EVERY == 0:
-		_unlock_next_color()
+	_rebuild_unlocked_colors()
+	unlocks_changed.emit()
 
 
-func _unlock_next_color() -> void:
-	var next_index := unlocked_colors.size() - 1
-	if next_index < 0 or next_index >= colors.size():
+func _rebuild_unlocked_colors() -> void:
+	unlocked_colors = [STARTER_COLOR]
+	if debug_all_colors:
+		unlocked_colors.append_array(colors)
 		return
-	unlocked_colors.append(colors[next_index])
+	var unlock_count := completed_levels.size() / UNLOCK_EVERY
+	for i in range(mini(unlock_count, colors.size())):
+		unlocked_colors.append(colors[i])
 
 # Level parameters
 var max_meter_amount: float = 100
@@ -47,13 +65,13 @@ var friction := 4000.0
 
 # ICE PLATFORM
 # Ice: slow to change speed, keeps sliding, can build a bit extra momentum.
-var ice_speed := 400.0
+var ice_speed := 700.0
 var ice_acceleration := 800.0
 var ice_friction := 200.0
 
 # Air: keep ice momentum, still allow some steering.
-var air_acceleration := 1500.0
-var air_friction := 200.0
+var air_acceleration := 300
+var air_friction := 60.0
 
 # JUMP PLATFORM
 # More negative = higher bounce. Same value every launch, so height stays constant.

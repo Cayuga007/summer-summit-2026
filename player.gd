@@ -18,6 +18,8 @@ var on_bounce: bool:
 
 # Landing recovery lock state.
 var is_landing := false
+# Horizontal speed to keep after leaving ice / jumping.
+var _air_carry_speed := 0.0
 
 # Base Y-offset applied during jumping animation.
 const JUMP_Y_OFFSET: float = -109.0
@@ -65,6 +67,10 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		move_and_slide()
 		return
+
+	if Input.is_action_just_pressed("teleport debug"):
+		global_position = get_global_mouse_position()
+		velocity = Vector2.ZERO
 		
 	if not is_on_floor():
 		var gravity := get_gravity()
@@ -72,11 +78,16 @@ func _physics_process(delta: float) -> void:
 			gravity = -gravity
 		velocity += gravity * delta
 
+	var just_jumped := false
 	if on_bounce and (is_on_floor() or _is_falling()):
 		velocity.y = _oriented(PlayerVariables.bounce_velocity)
+		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
+		just_jumped = true
 		is_landing = false
 	elif Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = _oriented(PlayerVariables.jump_velocity)
+		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
+		just_jumped = true
 		is_landing = false
 
 	var direction := Input.get_axis("left", "right")
@@ -84,16 +95,24 @@ func _physics_process(delta: float) -> void:
 	var accel := PlayerVariables.acceleration
 	var decel := PlayerVariables.friction
 
-	if on_ice and is_on_floor():
+	if on_ice and is_on_floor() and not just_jumped:
 		target_speed = PlayerVariables.ice_speed
 		accel = PlayerVariables.ice_acceleration
 		decel = PlayerVariables.ice_friction
-	elif not is_on_floor():
+		_air_carry_speed = abs(velocity.x)
+	elif not is_on_floor() or just_jumped:
 		accel = PlayerVariables.air_acceleration
 		decel = PlayerVariables.air_friction
+		target_speed = maxf(PlayerVariables.speed, maxf(_air_carry_speed, abs(velocity.x)))
+	else:
+		_air_carry_speed = 0.0
 
 	if direction:
-		velocity.x = move_toward(velocity.x, direction * target_speed, accel * delta)
+		var desired := direction * target_speed
+		# Holding the travel direction must not bleed ice/jump momentum.
+		if signf(velocity.x) == signf(direction) and abs(velocity.x) > abs(desired):
+			desired = velocity.x
+		velocity.x = move_toward(velocity.x, desired, accel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, decel * delta)
 
