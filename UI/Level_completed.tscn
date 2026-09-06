@@ -39,6 +39,7 @@ gradient = SubResource("Gradient_d4yoq")
 script = ExtResource("1_qp5ha")
 
 [node name="Label" type="Label" parent="." unique_id=1976327430]
+modulate = Color(0, 0, 0, 1)
 offset_left = 311.0
 offset_top = 243.0
 offset_right = 818.0
