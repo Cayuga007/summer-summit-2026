@@ -81,3 +81,11 @@ position = Vector2(444, -252)
 
 [node name="Bucket2" parent="Buckets" unique_id=589115563 instance=ExtResource("7_ous34")]
 position = Vector2(945, -544)
+
+[node name="Wall" parent="." unique_id=597471235 instance=ExtResource("4_ikr5p")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="." unique_id=1093821719 instance=ExtResource("4_ikr5p")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)

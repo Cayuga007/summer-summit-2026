@@ -13,7 +13,7 @@
 [node name="Level_9" type="Node2D" unique_id=57220166 node_paths=PackedStringArray("_buckets")]
 script = ExtResource("1_h1ytg")
 _buckets = NodePath("Buckets")
-starting_paint_amount = 40.0
+starting_paint_amount = 70.0
 
 [node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_lgifw")]
 visible = false
@@ -31,6 +31,10 @@ scale = Vector2(2.5599957, 1)
 [node name="Platform2" parent="." unique_id=1487216132 instance=ExtResource("4_g2h8r")]
 position = Vector2(-702, -403)
 scale = Vector2(9.159994, 1)
+
+[node name="Platform3" parent="." unique_id=1618551231 instance=ExtResource("4_g2h8r")]
+position = Vector2(-1, -682)
+scale = Vector2(23.519997, 1)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)
@@ -53,18 +57,26 @@ position = Vector2(-683, 279)
 scale = Vector2(1, 14.519999)
 
 [node name="HazardBlock3" parent="." unique_id=613777288 instance=ExtResource("6_lgifw")]
-position = Vector2(-266, -112)
-scale = Vector2(1, 14.519999)
+position = Vector2(-266, -141)
+scale = Vector2(1, 12.239998)
 
 [node name="HazardBlock4" parent="." unique_id=608772852 instance=ExtResource("6_lgifw")]
-position = Vector2(290, 128)
+position = Vector2(290, 55)
 scale = Vector2(32, 1.1599984)
 
 [node name="HazardBlock2" parent="." unique_id=1899795906 instance=ExtResource("6_lgifw")]
-position = Vector2(-96, 507)
-scale = Vector2(1, 8.879999)
+position = Vector2(-96, 545)
+scale = Vector2(1, 7.1200004)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=1257825698]
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_bko5p")]
 position = Vector2(-298, 495)
+
+[node name="Wall" parent="." unique_id=169395555 instance=ExtResource("4_g2h8r")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="." unique_id=526010942 instance=ExtResource("4_g2h8r")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)

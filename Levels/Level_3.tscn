@@ -41,13 +41,13 @@ position = Vector2(-1137, 275)
 scale = Vector2(2.2799978, 8)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
-position = Vector2(0, 666)
+position = Vector2(0, 656)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2004289120]
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
-position = Vector2(4, -688)
+position = Vector2(4, -672)
 rotation = -3.1415925
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=2004289121]
@@ -68,3 +68,11 @@ scale = Vector2(12.52, 1)
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_aig73")]
 position = Vector2(-827, 110)
+
+[node name="Wall" parent="." unique_id=1559226435 instance=ExtResource("4_c0thm")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="." unique_id=1050680370 instance=ExtResource("4_c0thm")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)

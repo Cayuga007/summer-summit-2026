@@ -27,20 +27,24 @@ position = Vector2(-928, 599)
 scale = Vector2(4.5999947, 1)
 
 [node name="Platform4" parent="." unique_id=1487216132 instance=ExtResource("4_bhjwr")]
-position = Vector2(-928, -182)
-scale = Vector2(4.5999947, 7.8)
+position = Vector2(-928, -244)
+scale = Vector2(4.5999947, 6.44)
 
 [node name="Platform5" parent="." unique_id=923603183 instance=ExtResource("4_bhjwr")]
 position = Vector2(991, -97.00002)
 scale = Vector2(3.559997, 9.479998)
 
 [node name="Platform6" parent="." unique_id=2096265866 instance=ExtResource("4_bhjwr")]
-position = Vector2(102.99994, 93.999954)
-scale = Vector2(10.039997, 9.200001)
+position = Vector2(70, 91.999954)
+scale = Vector2(9.4124975, 9.200001)
 
 [node name="Platform2" parent="." unique_id=1441687969 instance=ExtResource("4_bhjwr")]
-position = Vector2(0, -613)
-scale = Vector2(23.519993, 1)
+position = Vector2(-303, -608)
+scale = Vector2(17.35999, 1)
+
+[node name="Platform7" parent="." unique_id=1822292932 instance=ExtResource("4_bhjwr")]
+position = Vector2(1048, -612)
+scale = Vector2(4.679991, 1)
 
 [node name="Platform3" parent="." unique_id=2514462 instance=ExtResource("4_bhjwr")]
 position = Vector2(385, 597)
@@ -63,9 +67,17 @@ shape = SubResource("WorldBoundaryShape2D_8a5oj")
 position = Vector2(1108, 464)
 
 [node name="HazardBlock4" parent="." unique_id=608772852 instance=ExtResource("6_yuuu4")]
-position = Vector2(-911, 225.00002)
+position = Vector2(-911, 98)
 scale = Vector2(15.400002, 1.1599984)
 
 [node name="HazardBlock5" parent="." unique_id=2111362905 instance=ExtResource("6_yuuu4")]
-position = Vector2(136, -379)
-scale = Vector2(31.360006, 1.1599984)
+position = Vector2(103.00006, -381)
+scale = Vector2(29.400007, 1.1599984)
+
+[node name="Wall" parent="." unique_id=1422548824 instance=ExtResource("4_bhjwr")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="." unique_id=1001928666 instance=ExtResource("4_bhjwr")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)

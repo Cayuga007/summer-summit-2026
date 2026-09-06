@@ -97,3 +97,11 @@ position = Vector2(-1075, -380)
 
 [node name="PortalPlatform" parent="." unique_id=1469516988 instance=ExtResource("8_l78s2")]
 position = Vector2(442, 39)
+
+[node name="Wall" parent="." unique_id=588526262 instance=ExtResource("4_du6eh")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="." unique_id=1428044788 instance=ExtResource("4_du6eh")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)

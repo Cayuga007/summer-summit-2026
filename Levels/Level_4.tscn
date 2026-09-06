@@ -44,3 +44,11 @@ shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_etm6j")]
 position = Vector2(1094, 479)
+
+[node name="Wall" parent="." unique_id=318673864 instance=ExtResource("4_7bqri")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="." unique_id=742906591 instance=ExtResource("4_7bqri")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)
