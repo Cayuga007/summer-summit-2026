@@ -21,7 +21,7 @@ var _air_carry_speed := 0.0
 
 
 # Base Y-offset applied during jumping animation.
-const JUMP_Y_OFFSET: float = -109.0
+
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_particles: GPUParticles2D = $DeathParticles
@@ -143,9 +143,7 @@ func update_animation() -> void:
 		if sprite.animation != "Jumping":
 			sprite.play("Jumping")
 
-		# Apply vertical jumping offset.
-		sprite.offset.y = -JUMP_Y_OFFSET if gravity_flipped else JUMP_Y_OFFSET
-
+	
 		# Pause default playback so physics manually steers the frames.
 		sprite.pause()
 
@@ -169,12 +167,14 @@ func update_animation() -> void:
 			is_landing = true
 			sprite.set_frame_and_progress(6, 0.0)
 			sprite.play()
-			sprite.offset.y = -JUMP_Y_OFFSET if gravity_flipped else JUMP_Y_OFFSET
+			
+			
 			return
 
 	# If landing sequence (frames 6 -> 7 -> 8) is still playing, keep waiting until frame 8 finishes.
 	if is_landing:
-		sprite.offset.y = -JUMP_Y_OFFSET if gravity_flipped else JUMP_Y_OFFSET
+		
+		
 		return
 
 	# Reset Y offset for standard ground animations.

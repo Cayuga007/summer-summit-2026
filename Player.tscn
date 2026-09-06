@@ -6,19 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://cpoq28cbxqg8n" path="res://assets/mc/mc_idle0.png" id="3_wi0c6"]
 [ext_resource type="Texture2D" uid="uid://dron5ox730a4b" path="res://assets/mc/mc_idle1.png" id="4_hp6x6"]
 [ext_resource type="Texture2D" uid="uid://dev0eq2c5u73k" path="res://assets/mc/mc_idle2.png" id="5_3tkgg"]
-[ext_resource type="Texture2D" uid="uid://dlit1ynbot7pq" path="res://assets/draft/jump1.png" id="6_efikj"]
 [ext_resource type="Texture2D" uid="uid://b2c3jj3c84vjk" path="res://assets/mc/mc_walk1.png" id="6_l6ohk"]
-[ext_resource type="Texture2D" uid="uid://d3rgm4fb67sl3" path="res://assets/draft/jump2.png" id="7_itxgx"]
+[ext_resource type="Texture2D" uid="uid://crbwjqivve87p" path="res://assets/mc/mc_jump1.png" id="7_itxgx"]
 [ext_resource type="Texture2D" uid="uid://nyk2laenm2h1" path="res://assets/mc/mc_walk2.png" id="7_oudfo"]
-[ext_resource type="Texture2D" uid="uid://dq5rpfe0q4h4n" path="res://assets/draft/jump3.png" id="8_cgsek"]
+[ext_resource type="Texture2D" uid="uid://ccsuk850iglyj" path="res://assets/mc/mc_jump2.png" id="8_cgsek"]
 [ext_resource type="Texture2D" uid="uid://bk6jdihory23b" path="res://assets/mc/mc_walk3.png" id="8_d6rpx"]
-[ext_resource type="Texture2D" uid="uid://cdrwla07wl401" path="res://assets/draft/jump4.png" id="9_0pi4m"]
+[ext_resource type="Texture2D" uid="uid://vrqdnv5hn727" path="res://assets/mc/mc_jump3.png" id="9_0pi4m"]
 [ext_resource type="Texture2D" uid="uid://cln806556pxse" path="res://assets/mc/mc_walk4.png" id="9_r3kul"]
-[ext_resource type="Texture2D" uid="uid://683xb8wm3v6b" path="res://assets/draft/jump5.png" id="10_sg6sq"]
-[ext_resource type="Texture2D" uid="uid://c8c5n3eh1hlx7" path="res://assets/draft/jump6.png" id="11_h84ma"]
-[ext_resource type="Texture2D" uid="uid://ydxdtlkrgho6" path="res://assets/draft/jump7.png" id="12_47wu6"]
-[ext_resource type="Texture2D" uid="uid://81d8ne1w8tl2" path="res://assets/draft/jump8.png" id="13_2n1s8"]
-[ext_resource type="Texture2D" uid="uid://b68ujdvsb15ul" path="res://assets/draft/jump9.png" id="14_3vjad"]
+[ext_resource type="Texture2D" uid="uid://dugou2p2m5mpy" path="res://assets/mc/mc_jump4.png" id="10_sg6sq"]
+[ext_resource type="Texture2D" uid="uid://bgx628rui6oit" path="res://assets/mc/mc_jump5.png" id="11_h84ma"]
+[ext_resource type="Texture2D" uid="uid://cryvsr1ftceux" path="res://assets/mc/mc_jump6.png" id="12_47wu6"]
+[ext_resource type="Texture2D" uid="uid://e031w4au8vrk" path="res://assets/mc/mc_jump7.png" id="13_2n1s8"]
+[ext_resource type="Texture2D" uid="uid://def0bd1efqq8l" path="res://assets/mc/mc_jump8.png" id="14_3vjad"]
+[ext_resource type="Texture2D" uid="uid://2x0kmmm12087" path="res://assets/mc/mc_jump9.png" id="15_yt0h1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
 radius = 85.70297
@@ -48,32 +48,32 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.7,
-"texture": ExtResource("6_efikj")
-}, {
-"duration": 0.7,
+"duration": 1.0,
 "texture": ExtResource("7_itxgx")
 }, {
-"duration": 0.7,
+"duration": 1.0,
 "texture": ExtResource("8_cgsek")
 }, {
-"duration": 0.7,
+"duration": 1.0,
 "texture": ExtResource("9_0pi4m")
 }, {
-"duration": 0.7,
+"duration": 1.0,
 "texture": ExtResource("10_sg6sq")
 }, {
-"duration": 0.7,
+"duration": 1.0,
 "texture": ExtResource("11_h84ma")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": ExtResource("12_47wu6")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": ExtResource("13_2n1s8")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": ExtResource("14_3vjad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_yt0h1")
 }],
 "loop": 0,
 "name": &"Jumping",
@@ -370,6 +370,7 @@ void process_physical_parameters(inout PhysicalParameters params, float lifetime
 }
 
 void start() {
+	
 	uint base_number = NUMBER;
 	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
 	DisplayParameters params;
@@ -430,6 +431,7 @@ void start() {
 
 	if (col.a >= 0.1) {
 		COLOR = col;
+		CUSTOM = col;
 
 		vec2 local_pos = vec2(px, py) - (sprite_size * 0.5);
 		TRANSFORM = EMISSION_TRANSFORM;
@@ -538,7 +540,7 @@ void process() {
 	float base_angle = dynamic_params.angle;
 	base_angle += CUSTOM.y * LIFETIME * dynamic_params.angular_velocity;
 	CUSTOM.x = base_angle * degree_to_rad;
-	COLOR = params.color;
+	//COLOR = params.color;
 
 	TRANSFORM[0] = vec4(cos(CUSTOM.x), -sin(CUSTOM.x), 0.0, 0.0);
 	TRANSFORM[1] = vec4(sin(CUSTOM.x), cos(CUSTOM.x), 0.0, 0.0);
@@ -565,22 +567,22 @@ void process() {
 	if (CUSTOM.y > CUSTOM.w) {
 		ACTIVE = false;
 	}
+	
 }
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cgsek"]
 shader = SubResource("Shader_itxgx")
-shader_parameter/sprite_texture = ExtResource("3_itxgx")
-shader_parameter/sprite_size = Vector2(32.26, 32)
+shader_parameter/sprite_size = Vector2(32, 32)
 shader_parameter/emitter_velocity = Vector2(0, 0)
 shader_parameter/inherit_ratio = 1.0
 shader_parameter/spread_horizontal = 35.0
 shader_parameter/direction = Vector3(1, 0, 0)
 shader_parameter/spread = 45.0
-shader_parameter/flatness = 0.0
+shader_parameter/flatness = 1.0
 shader_parameter/inherit_emitter_velocity_ratio = 1.0
-shader_parameter/initial_linear_velocity_min = -0.88
-shader_parameter/initial_linear_velocity_max = 0.445
+shader_parameter/initial_linear_velocity_min = 0.0
+shader_parameter/initial_linear_velocity_max = 0.0
 shader_parameter/directional_velocity_min = 1.0
 shader_parameter/directional_velocity_max = 1.0
 shader_parameter/angular_velocity_min = 0.0
@@ -613,8 +615,8 @@ shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
 shader_parameter/velocity_pivot = Vector3(0, 0, 0)
 shader_parameter/color_value = Color(1, 1, 1, 1)
 shader_parameter/gravity = Vector3(0, 98, 0)
-shader_parameter/collision_friction = 0.58
-shader_parameter/collision_bounce = 0.45
+shader_parameter/collision_friction = 0.595
+shader_parameter/collision_bounce = 0.64
 
 [node name="Player" type="CharacterBody2D" unique_id=1599564440 groups=["Player"]]
 scale = Vector2(0.5, 0.5)
@@ -629,9 +631,10 @@ position = Vector2(0, 9.536743e-07)
 texture = ExtResource("1_xhfnw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=287264362]
+position = Vector2(-2, -34)
 scale = Vector2(2.05, 2.05)
 sprite_frames = SubResource("SpriteFrames_cr25j")
-animation = &"Idle"
+animation = &"Jumping"
 
 [node name="DeathParticles" type="GPUParticles2D" parent="." unique_id=365475038]
 emitting = false
@@ -644,9 +647,9 @@ process_material = SubResource("ParticleProcessMaterial_cr25j")
 
 [node name="SandParticles" type="GPUParticles2D" parent="." unique_id=1215569143]
 emitting = false
-amount = 5241
+amount = 8500
 texture = SubResource("CanvasTexture_itxgx")
-lifetime = 3.55
+lifetime = 49.76
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ShaderMaterial_cgsek")
