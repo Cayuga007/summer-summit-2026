@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://ydxdtlkrgho6" path="res://assets/draft/jump7.png" id="12_47wu6"]
 [ext_resource type="Texture2D" uid="uid://81d8ne1w8tl2" path="res://assets/draft/jump8.png" id="13_2n1s8"]
 [ext_resource type="Texture2D" uid="uid://b68ujdvsb15ul" path="res://assets/draft/jump9.png" id="14_3vjad"]
+[ext_resource type="Shader" uid="uid://uav44peg5ha6" path="res://pixel_sand.gdshader" id="20_cgsek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
 radius = 85.70297
@@ -66,13 +67,13 @@ animations = [{
 "duration": 0.7,
 "texture": ExtResource("11_h84ma")
 }, {
-"duration": 0.7,
+"duration": 0.5,
 "texture": ExtResource("12_47wu6")
 }, {
-"duration": 0.7,
+"duration": 0.5,
 "texture": ExtResource("13_2n1s8")
 }, {
-"duration": 0.7,
+"duration": 0.5,
 "texture": ExtResource("14_3vjad")
 }],
 "loop": 0,
@@ -97,9 +98,63 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_itxgx"]
+interpolation_mode = 2
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.5687885, 1)
+colors = PackedColorArray(1, 0.8509804, 0.7882353, 1, 0.8980706, 0.93905944, 0.8360821, 1, 0.8509804, 0.972549, 0.85490197, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0pi4m"]
+gradient = SubResource("Gradient_itxgx")
+width = 13
+height = 13
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Curve" id="Curve_itxgx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6523347, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cgsek"]
+curve = SubResource("Curve_itxgx")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cr25j"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 54.07
+inherit_velocity_ratio = 0.895
+velocity_pivot = Vector3(0, -90, 0)
+direction = Vector3(0, -90, 0)
+spread = 60.0
+flatness = 1.0
+initial_velocity_min = 63.35
+initial_velocity_max = 334.75
+gravity = Vector3(0, 198, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_cgsek")
+collision_mode = 1
+collision_friction = 0.4
+collision_bounce = 0.33
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_cgsek"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cr25j"]
+gradient = SubResource("Gradient_cgsek")
+width = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0pi4m"]
+shader = ExtResource("20_cgsek")
+shader_parameter/sprite_size = Vector2(32, 32)
+shader_parameter/atlas_rect = Vector4(0, 0, 1, 1)
+shader_parameter/gravity_strength = 350.0
+shader_parameter/spread_horizontal = 40.0
+shader_parameter/emitter_velocity = Vector2(0, 0)
+shader_parameter/inherit_ratio = 1.0
+shader_parameter/floor_y_offset = 16.0
+shader_parameter/horizontal_damping = 4.0
+shader_parameter/velocity_deadzone = 2.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1599564440 groups=["Player"]]
 scale = Vector2(0.5, 0.5)
@@ -116,10 +171,22 @@ texture = ExtResource("1_xhfnw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=287264362]
 scale = Vector2(2.05, 2.05)
 sprite_frames = SubResource("SpriteFrames_cr25j")
-animation = &"Death"
+animation = &"Idle"
 
 [node name="DeathParticles" type="GPUParticles2D" parent="." unique_id=365475038]
 emitting = false
+amount = 37
+texture = SubResource("GradientTexture2D_0pi4m")
+lifetime = 3.0599999999999996
+one_shot = true
+explosiveness = 0.98
+process_material = SubResource("ParticleProcessMaterial_cr25j")
+
+[node name="SandParticles" type="GPUParticles2D" parent="." unique_id=1541255496]
+emitting = false
+amount = 5254
+texture = SubResource("GradientTexture1D_cr25j")
+lifetime = 1.84
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_cr25j")
+process_material = SubResource("ShaderMaterial_0pi4m")
