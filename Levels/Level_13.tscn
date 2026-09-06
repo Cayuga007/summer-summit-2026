@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgdyoh2nhc3ld"]
+[gd_scene format=3 uid="uid://cgdyoh2nhc3ld"]
 
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_73ky0"]
 [ext_resource type="PackedScene" uid="uid://qth4natevc18" path="res://UI/Level_completed.tscn" id="2_cggpm"]
@@ -11,89 +11,86 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
-[node name="Level_13" type="Node2D" node_paths=PackedStringArray("_buckets")]
+[node name="Level_13" type="Node2D" unique_id=389958481 node_paths=PackedStringArray("_buckets")]
 script = ExtResource("1_73ky0")
 _buckets = NodePath("Buckets")
 starting_paint_amount = 20.0
+unlocks = 5
 
-[node name="LevelCompleted" parent="." instance=ExtResource("2_cggpm")]
+[node name="LevelCompleted" parent="." unique_id=798327044 instance=ExtResource("2_cggpm")]
 visible = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=837408743]
 zoom = Vector2(0.5, 0.5)
 
-[node name="Player" parent="." instance=ExtResource("3_t02o0")]
+[node name="Player" parent="." unique_id=864404923 instance=ExtResource("3_t02o0")]
 position = Vector2(-1020, -288)
 
-[node name="Platform" parent="." instance=ExtResource("4_tsrm8")]
+[node name="Platform" parent="." unique_id=1905428966 instance=ExtResource("4_tsrm8")]
 position = Vector2(-1018, 207.00002)
 scale = Vector2(2.8399947, 9.04)
 
-[node name="Platform2" parent="." instance=ExtResource("4_tsrm8")]
+[node name="Platform2" parent="." unique_id=859226991 instance=ExtResource("4_tsrm8")]
 position = Vector2(-540, -3.0000153)
 scale = Vector2(1.6799948, 13.2)
 
-[node name="Platform3" parent="." instance=ExtResource("4_tsrm8")]
-position = Vector2(-138, 379)
+[node name="Platform3" parent="." unique_id=1164574962 instance=ExtResource("4_tsrm8")]
+position = Vector2(-142, 417.99994)
 scale = Vector2(1.6799948, 5.3599997)
 
-[node name="Platform4" parent="." instance=ExtResource("4_tsrm8")]
-position = Vector2(298, -284.99997)
-scale = Vector2(1.6799948, 7.4399996)
+[node name="Platform7" parent="." unique_id=1911292054 instance=ExtResource("4_tsrm8")]
+position = Vector2(248, 489)
+scale = Vector2(7.1199937, 3.2799993)
 
-[node name="Platform5" parent="." instance=ExtResource("4_tsrm8")]
-position = Vector2(684, 337.00003)
-scale = Vector2(1.6799948, 5.9599996)
-
-[node name="Platform6" parent="." instance=ExtResource("4_tsrm8")]
-position = Vector2(1064, -279)
-scale = Vector2(1.6799948, 7.4799995)
-
-[node name="Platform7" parent="." instance=ExtResource("4_tsrm8")]
-position = Vector2(952, 489)
-scale = Vector2(4.359995, 3.2799993)
-
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1014523875]
 position = Vector2(0, 666)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2023435161]
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
-[node name="VictoryDoor" parent="." instance=ExtResource("5_u4n5n")]
-position = Vector2(1080, 212.00002)
+[node name="VictoryDoor" parent="." unique_id=1387641807 instance=ExtResource("5_u4n5n")]
+position = Vector2(470, -529)
 
-[node name="Ceiling" type="StaticBody2D" parent="."]
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=787770268]
 position = Vector2(4, -688)
 rotation = -3.1415925
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=706705655]
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
-[node name="HazardBlock4" parent="." instance=ExtResource("6_74g1q")]
-position = Vector2(-136, 88.00001)
+[node name="HazardBlock4" parent="." unique_id=828659491 instance=ExtResource("6_74g1q")]
+position = Vector2(-140, 126.99994)
 scale = Vector2(5.329069, 1.16)
 
-[node name="HazardBlock5" parent="." instance=ExtResource("6_74g1q")]
-position = Vector2(296, 108)
-scale = Vector2(5.329069, 1.16)
+[node name="Platform8" parent="." unique_id=1487216132 instance=ExtResource("4_tsrm8")]
+position = Vector2(-46, -576)
+scale = Vector2(3.4580107, 5.3599997)
 
-[node name="HazardBlock6" parent="." instance=ExtResource("6_74g1q")]
-position = Vector2(692, 20.000008)
-scale = Vector2(5.329069, 1.16)
+[node name="HazardBlock7" parent="." unique_id=2111362905 instance=ExtResource("6_74g1q")]
+position = Vector2(-44, -293)
+scale = Vector2(10.969069, 1.16)
 
-[node name="Buckets" type="Node2D" parent="."]
+[node name="Platform9" parent="." unique_id=232114850 instance=ExtResource("4_tsrm8")]
+position = Vector2(243, -294)
+scale = Vector2(2.5011601, 7.76)
 
-[node name="Bucket" parent="Buckets" instance=ExtResource("7_xivkf")]
-position = Vector2(-348, 120)
+[node name="HazardBlock8" parent="." unique_id=284748221 instance=ExtResource("6_74g1q")]
+position = Vector2(252, 117.99997)
+scale = Vector2(7.5690727, 1.16)
+
+[node name="Buckets" type="Node2D" parent="." unique_id=691748122]
+
+[node name="Bucket" parent="Buckets" unique_id=1076440276 instance=ExtResource("7_xivkf")]
+position = Vector2(-364, 372)
 fill_amount = 20
 
-[node name="PortalPlatform" parent="." instance=ExtResource("8_cggpm")]
-position = Vector2(-340, 539)
+[node name="PortalPlatform" parent="." unique_id=2045743167 instance=ExtResource("8_cggpm")]
+position = Vector2(-340, -455)
 
-[node name="Wall" parent="." instance=ExtResource("4_tsrm8")]
+[node name="Wall" parent="." unique_id=2052011722 instance=ExtResource("4_tsrm8")]
 position = Vector2(-1206, 15)
 scale = Vector2(0.880003, 13.560001)
 
-[node name="Wall2" parent="." instance=ExtResource("4_tsrm8")]
-position = Vector2(1203, 15)
-scale = Vector2(0.880003, 13.560001)
+[node name="Wall2" parent="." unique_id=953986725 instance=ExtResource("4_tsrm8")]
+position = Vector2(873, 15)
+scale = Vector2(5.4000053, 13.560001)

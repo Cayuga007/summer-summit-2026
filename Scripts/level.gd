@@ -10,11 +10,13 @@ var _resetting := false
 
 @export var _buckets: Node2D
 @export var starting_paint_amount: float = 100
+@export var unlocks: int = 1
 
 
 func _ready() -> void:
 	LevelManager.sync_current_index_from_scene()
 	var paintbrush = PAINTBRUSH.instantiate()
+	paintbrush.num_colors = unlocks
 	add_child(paintbrush)
 	add_child(LEVEL_STARTED.instantiate())
 	add_child(LEVEL_COMPLETED.instantiate())
@@ -47,7 +49,6 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_level_completed() -> void:
-	PlayerVariables.register_level_completed(LevelManager.current_index)
 	pause_menu.hide()
 	$LevelCompleted.show()
 	get_tree().paused = true

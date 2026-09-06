@@ -13,6 +13,7 @@
 script = ExtResource("1_nkd4e")
 _buckets = NodePath("Buckets")
 starting_paint_amount = 40.0
+unlocks = 4
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
 zoom = Vector2(0.5, 0.5)
