@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		
 	if not is_on_floor():
-		var gravity := get_gravity()
+		var gravity := get_gravity() * PlayerVariables.gravity_multiplier
 		if gravity_flipped:
 			gravity = -gravity
 		velocity += gravity * delta

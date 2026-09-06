@@ -6,14 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="4_tsrm8"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_u4n5n"]
 [ext_resource type="PackedScene" uid="uid://6h63sy370xkx" path="res://HazardBlock.tscn" id="6_74g1q"]
-[ext_resource type="PackedScene" uid="uid://3x3t13qaswo7" path="res://platforms/GravityPlatform.tscn" id="7_cggpm"]
 [ext_resource type="PackedScene" uid="uid://cvgs3iuavddpo" path="res://bucket.tscn" id="7_xivkf"]
+[ext_resource type="PackedScene" uid="uid://otae08kccpyf" path="res://platforms/PortalPlatform.tscn" id="8_cggpm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
 [node name="Level_13" type="Node2D" unique_id=57220166]
 script = ExtResource("1_73ky0")
-starting_paint_amount = 30.0
+starting_paint_amount = 20.0
 
 [node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_cggpm")]
 visible = false
@@ -80,10 +80,10 @@ scale = Vector2(5.329069, 1.16)
 position = Vector2(692, 20.000008)
 scale = Vector2(5.329069, 1.16)
 
-[node name="GravityPlatform" parent="." unique_id=1470517042 instance=ExtResource("7_cggpm")]
-position = Vector2(-342, 537)
-
 [node name="Buckets" type="Node2D" parent="." unique_id=1179645244]
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_xivkf")]
 position = Vector2(-348, 120)
+
+[node name="PortalPlatform" parent="." unique_id=643953657 instance=ExtResource("8_cggpm")]
+position = Vector2(-340, 539)

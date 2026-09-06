@@ -10,7 +10,7 @@
 
 [node name="Level_8" type="Node2D" unique_id=57220166]
 script = ExtResource("1_eg1yc")
-starting_paint_amount = 30.0
+starting_paint_amount = 60.0
 
 [node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_1n1xc")]
 visible = false
