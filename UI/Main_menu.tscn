@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://dyyfwwuagtr6g"]
+[gd_scene load_steps=3 format=3 uid="uid://dyyfwwuagtr6g"]
 
 [ext_resource type="Script" uid="uid://omsdvrcb2cut" path="res://Scripts/main_menu.gd" id="1_vbv8a"]
+[ext_resource type="PackedScene" path="res://UI/sfx_button.tscn" id="2_sfxbtn"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=928084415]
 script = ExtResource("1_vbv8a")
@@ -32,20 +33,20 @@ offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=808445464]
+[node name="PlayButton" parent="VBoxContainer" unique_id=808445464 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Play"
 
-[node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=1768516389]
+[node name="LevelSelectButton" parent="VBoxContainer" unique_id=1768516389 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level Select"
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=223838787]
+[node name="SettingsButton" parent="VBoxContainer" unique_id=223838787 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Settings
 "
 
-[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=452972006]
+[node name="QuitButton" parent="VBoxContainer" unique_id=452972006 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Quit
 "

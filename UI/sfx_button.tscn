@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://7bj8yk6acw2t"]
+
+[ext_resource type="AudioStream" uid="uid://buvuvs7gfvfsn" path="res://Audio/HoverSFX.mp3" id="1_hover"]
+[ext_resource type="AudioStream" uid="uid://cb0rh5im71ai2" path="res://Audio/SelectSFX.mp3" id="2_select"]
+[ext_resource type="Script" uid="uid://chghyhi3rnnbo" path="res://Scripts/sfx_button.gd" id="3_sfx"]
+
+[node name="SfxButton" type="Button" unique_id=752989574]
+script = ExtResource("3_sfx")
+
+[node name="HoverSFX" type="AudioStreamPlayer" parent="." unique_id=777623634]
+process_mode = 3
+stream = ExtResource("1_hover")
+volume_db = -18.128
+bus = &"SFX"
+
+[node name="SelectSFX" type="AudioStreamPlayer" parent="." unique_id=629707225]
+process_mode = 3
+stream = ExtResource("2_select")
+volume_db = -7.633
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="." to="HoverSFX" method="play"]
+[connection signal="pressed" from="." to="." method="_play_select_sfx"]

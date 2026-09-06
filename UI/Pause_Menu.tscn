@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://b0idr30nj003"]
+[gd_scene load_steps=3 format=3 uid="uid://b0idr30nj003"]
 
 [ext_resource type="Script" uid="uid://uir6eopscgsp" path="res://Scripts/pause_menu.gd" id="1_pause"]
+[ext_resource type="PackedScene" path="res://UI/sfx_button.tscn" id="2_sfxbtn"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=294305811]
 script = ExtResource("1_pause")
@@ -18,23 +19,23 @@ offset_top = 192.0
 offset_right = 623.0
 offset_bottom = 328.0
 
-[node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1195012010]
+[node name="ResumeButton" parent="VBoxContainer" unique_id=1195012010 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Resume"
 
-[node name="LevelRetryButton" type="Button" parent="VBoxContainer" unique_id=1971505398]
+[node name="LevelRetryButton" parent="VBoxContainer" unique_id=1971505398 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Retry Level"
 
-[node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=97676067]
+[node name="LevelSelectButton" parent="VBoxContainer" unique_id=97676067 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level Select"
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1932217136]
+[node name="SettingsButton" parent="VBoxContainer" unique_id=1932217136 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Settings"
 
-[node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=2020914329]
+[node name="MainMenuButton" parent="VBoxContainer" unique_id=2020914329 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Main Menu"
 

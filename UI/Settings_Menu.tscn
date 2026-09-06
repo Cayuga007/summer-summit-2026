@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwj1ixkqgr8xb"]
+[gd_scene load_steps=3 format=3 uid="uid://cwj1ixkqgr8xb"]
 
 [ext_resource type="Script" uid="uid://buo0g1uw3bhr2" path="res://Scripts/settings_menu.gd" id="1_settings"]
+[ext_resource type="PackedScene" path="res://UI/sfx_button.tscn" id="2_sfxbtn"]
 
 [node name="SettingsMenu" type="CanvasLayer"]
 script = ExtResource("1_settings")
@@ -48,7 +49,7 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" parent="." instance=ExtResource("2_sfxbtn")]
 offset_left = 530.0
 offset_top = 322.0
 offset_right = 606.0

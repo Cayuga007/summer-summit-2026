@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://co0amkxemrde0"]
+[gd_scene load_steps=3 format=3 uid="uid://co0amkxemrde0"]
 
 [ext_resource type="Script" uid="uid://nqanfrmif5m3" path="res://Scripts/level_selection_ui.gd" id="1_rcy2s"]
+[ext_resource type="PackedScene" path="res://UI/sfx_button.tscn" id="2_sfxbtn"]
 
 [node name="LevelSelectionUI" type="CanvasLayer" unique_id=162670869]
 script = ExtResource("1_rcy2s")
@@ -18,19 +19,19 @@ offset_top = 285.0
 offset_right = 475.0
 offset_bottom = 421.0
 
-[node name="Level1Button" type="Button" parent="VBoxContainer" unique_id=1313344845]
+[node name="Level1Button" parent="VBoxContainer" unique_id=1313344845 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 1"
 
-[node name="Level2Button" type="Button" parent="VBoxContainer" unique_id=288912830]
+[node name="Level2Button" parent="VBoxContainer" unique_id=288912830 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 2"
 
-[node name="Level3Button" type="Button" parent="VBoxContainer" unique_id=92013467]
+[node name="Level3Button" parent="VBoxContainer" unique_id=92013467 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 3"
 
-[node name="Level4Button" type="Button" parent="VBoxContainer" unique_id=532573419]
+[node name="Level4Button" parent="VBoxContainer" unique_id=532573419 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 4"
 
@@ -40,23 +41,23 @@ offset_top = 275.0
 offset_right = 611.0
 offset_bottom = 446.0
 
-[node name="Level5Button" type="Button" parent="VBoxContainer2" unique_id=650470859]
+[node name="Level5Button" parent="VBoxContainer2" unique_id=650470859 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 5"
 
-[node name="Level6Button" type="Button" parent="VBoxContainer2" unique_id=749004779]
+[node name="Level6Button" parent="VBoxContainer2" unique_id=749004779 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 6"
 
-[node name="Level7Button" type="Button" parent="VBoxContainer2" unique_id=281829463]
+[node name="Level7Button" parent="VBoxContainer2" unique_id=281829463 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 7"
 
-[node name="Level8Button" type="Button" parent="VBoxContainer2" unique_id=108154956]
+[node name="Level8Button" parent="VBoxContainer2" unique_id=108154956 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 8"
 
-[node name="Level9Button" type="Button" parent="VBoxContainer2" unique_id=8415426]
+[node name="Level9Button" parent="VBoxContainer2" unique_id=8415426 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 9"
 
@@ -66,31 +67,31 @@ offset_top = 270.0
 offset_right = 763.0
 offset_bottom = 476.0
 
-[node name="Level10Button" type="Button" parent="VBoxContainer3" unique_id=1956870963]
+[node name="Level10Button" parent="VBoxContainer3" unique_id=1956870963 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 10"
 
-[node name="Level11Button" type="Button" parent="VBoxContainer3" unique_id=1968858092]
+[node name="Level11Button" parent="VBoxContainer3" unique_id=1968858092 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 11"
 
-[node name="Level12Button" type="Button" parent="VBoxContainer3" unique_id=1232244933]
+[node name="Level12Button" parent="VBoxContainer3" unique_id=1232244933 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 12"
 
-[node name="Level13Button" type="Button" parent="VBoxContainer3" unique_id=1769482641]
+[node name="Level13Button" parent="VBoxContainer3" unique_id=1769482641 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 13"
 
-[node name="Level14Button" type="Button" parent="VBoxContainer3" unique_id=273967682]
+[node name="Level14Button" parent="VBoxContainer3" unique_id=273967682 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 14"
 
-[node name="Level15Button" type="Button" parent="VBoxContainer3" unique_id=1061308360]
+[node name="Level15Button" parent="VBoxContainer3" unique_id=1061308360 instance=ExtResource("2_sfxbtn")]
 layout_mode = 2
 text = "Level 15"
 
-[node name="BackButton" type="Button" parent="." unique_id=879658485]
+[node name="BackButton" parent="." unique_id=879658485 instance=ExtResource("2_sfxbtn")]
 offset_left = 527.0
 offset_top = 464.0
 offset_right = 627.0
