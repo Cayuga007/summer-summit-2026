@@ -3,13 +3,13 @@ class_name Paintbrush extends Node2D
 
 @export var paint_prefab: PackedScene
 @export var paint_ui: CanvasLayer
-@export var paint_radius := 30
 @export var paint_spacing := 5.0
 
 var _is_holding := false
 var _previous_paint_position := Vector2.ZERO
 var _meter_amount := PlayerVariables.max_meter_amount
 var _current_color = 0
+var can_swap := true
 
 
 func _ready() -> void:
@@ -27,16 +27,22 @@ func _sync_selected_color() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	var num_colors = PlayerVariables.unlocked_colors.size()
-	if Input.is_action_just_pressed("swap_left"):
+	if Input.is_action_just_pressed("swap_left") and can_swap:
+		can_swap = false
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = false
 		_current_color = (_current_color - 1) % num_colors
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = true
 		paint_prefab = PlayerVariables.unlocked_colors[_current_color]
-	if Input.is_action_just_pressed("swap_right"):
+		await get_tree().create_timer(0.1).timeout
+		can_swap = true
+	if Input.is_action_just_pressed("swap_right") and can_swap:
+		can_swap = false
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = false
 		_current_color = (_current_color + 1) % num_colors
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = true
 		paint_prefab = PlayerVariables.unlocked_colors[_current_color]
+		await get_tree().create_timer(0.1).timeout
+		can_swap = true
 
 
 func _input(event: InputEvent) -> void:
@@ -44,7 +50,7 @@ func _input(event: InputEvent) -> void:
 		_is_holding = false
 		return
 	
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton:
 		if event.is_pressed():
 			_is_holding = true
 			_previous_paint_position = get_global_mouse_position()
@@ -75,18 +81,18 @@ func spawn_paint(spawn_position: Vector2) -> void:
 	add_child(new_paint)
 	new_paint.global_position = spawn_position
 
-	_resize_circle_shape(new_paint.get_node_or_null("CollisionShape2D"), paint_radius)
+	_resize_circle_shape(new_paint.get_node_or_null("CollisionShape2D"), PlayerVariables.paint_radius)
 
 	var mesh_instance: MeshInstance2D = new_paint.get_node_or_null("MeshInstance2D")
 	if mesh_instance and mesh_instance.mesh:
 		mesh_instance.mesh = mesh_instance.mesh.duplicate()
-		mesh_instance.mesh.radius = paint_radius
-		mesh_instance.mesh.height = paint_radius * 2
+		mesh_instance.mesh.radius = PlayerVariables.paint_radius
+		mesh_instance.mesh.height = PlayerVariables.paint_radius * 2
 
 	# Mechanic triggers stay ~11px unless resized; keep them a bit larger than the solid body.
 	var area := new_paint.get_node_or_null("Area2D")
 	if area:
-		_resize_circle_shape(area.get_node_or_null("CollisionShape2D"), paint_radius + 4)
+		_resize_circle_shape(area.get_node_or_null("CollisionShape2D"), PlayerVariables.paint_radius + 4)
 
 	_meter_amount -= PlayerVariables.meter_spill_amount
 	var progress_bar: ProgressBar = paint_ui.get_child(0)

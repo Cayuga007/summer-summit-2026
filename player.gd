@@ -18,6 +18,7 @@ var on_bounce: bool:
 
 # Landing recovery lock state.
 var is_landing := false
+var started_falling := false
 # Horizontal speed to keep after leaving ice / jumping.
 var _air_carry_speed := 0.0
 # Gravity pads currently overlapping. Painted strokes are many pads at once.
@@ -27,9 +28,16 @@ var _gravity_cooldown := 0.0
 var _portal_cooldown := 0.0
 var _jumped_this_airtime := false
 
+
 # Base Y-offset applied during jumping animation.
 const JUMP_Y_OFFSET: float = -109.0
+const JUMP_COOLDOWN = 0.5
+const JUMP_BUFFER_WINDOW = 0.10
+const FALL_JUMP_BUFFER_WINDOW = 0.25
 
+var jump_buffer_t := 0.0
+var fall_jump_buffer_t := FALL_JUMP_BUFFER_WINDOW
+var jump_t := 0.0
 
 func _ready() -> void:
 	# Listen for animation finish to automatically exit the landing state.
@@ -110,6 +118,10 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		move_and_slide()
 		return
+	
+	if jump_buffer_t > 0.0:
+		jump_buffer_t -= delta
+	jump_t -= delta
 
 	if Input.is_action_just_pressed("teleport debug"):
 		global_position = get_global_mouse_position()
@@ -124,13 +136,21 @@ func _physics_process(delta: float) -> void:
 
 	# Apply gravity when airborne, or when gravity just flipped and we are still on the old floor.
 	if not is_on_floor() or _gravity_is_flipping():
+		
+	if not is_on_floor():
+		if not started_falling:
+			started_falling = true
+			fall_jump_buffer_t = FALL_JUMP_BUFFER_WINDOW
 		var gravity := get_gravity() * PlayerVariables.gravity_multiplier
 		if gravity_flipped:
 			gravity = -gravity
 		velocity += gravity * delta
+		fall_jump_buffer_t -= delta
+	else:
+		started_falling = false
 
 	var just_jumped := false
-	if on_bounce and (is_on_floor() or _is_falling()):
+	if on_bounce:
 		velocity.y = _oriented(PlayerVariables.bounce_velocity)
 		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
 		just_jumped = true
@@ -142,6 +162,15 @@ func _physics_process(delta: float) -> void:
 		just_jumped = true
 		is_landing = false
 		_jumped_this_airtime = true
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_t = JUMP_BUFFER_WINDOW
+		if fall_jump_buffer_t > 0.0 and jump_t <= 0.0:
+			jump()
+			just_jumped = true
+	
+	if is_on_floor() and jump_buffer_t > 0.0 and jump_t <= 0.0:
+		jump()
+		just_jumped = true
 
 	var direction := Input.get_axis("left", "right")
 	var target_speed := PlayerVariables.speed
@@ -175,6 +204,14 @@ func _physics_process(delta: float) -> void:
 	elif _gravity_is_flipping():
 		up_direction = _desired_up()
 	update_animation()
+
+
+func jump() -> void:
+	jump_t = JUMP_COOLDOWN
+	velocity.y = _oriented(PlayerVariables.jump_velocity)
+	_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
+	jump_buffer_t = 0.0
+	is_landing = false
 
 
 func update_animation() -> void:
