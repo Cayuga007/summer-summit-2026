@@ -6,13 +6,24 @@ const PAINTBRUSH = preload("res://paintbrush.tscn")
 var pause_menu: CanvasLayer
 var _resetting := false
 
+@export var _buckets: Node2D
+@export var starting_paint_amount: float = 100
+
 
 func _ready() -> void:
 	LevelManager.sync_current_index_from_scene()
-	add_child(PAINTBRUSH.instantiate())
+	var paintbrush = PAINTBRUSH.instantiate()
+	add_child(paintbrush)
+	paintbrush.set_paint_amount(starting_paint_amount)
 	$VictoryDoor.level_completed.connect(_on_level_completed)
 	pause_menu = PAUSE_MENU.instantiate()
 	add_child(pause_menu)
+	
+	if _buckets:
+		for bucket: Node in _buckets.get_children():
+			bucket = bucket as Bucket
+			bucket.collected.connect(func(amount):
+				paintbrush.add_paint_amount(amount))
 
 
 func _physics_process(_delta: float) -> void:

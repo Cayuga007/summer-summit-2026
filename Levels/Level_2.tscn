@@ -8,7 +8,7 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
-[node name="Level_1" type="Node2D" unique_id=57220166]
+[node name="Level_2" type="Node2D" unique_id=57220166]
 script = ExtResource("1_7ubt2")
 
 [node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_tfynm")]

@@ -12,6 +12,10 @@ var unlocked_colors = [
 	preload("res://platforms/platform.tscn"),
 ]
 
+# Level parameters
+var max_meter_amount: float = 100
+var meter_spill_amount: float = 0.5
+
 # Core movement — change these anytime; the player reads them live.
 var speed := 300.0
 var jump_velocity := -600.0

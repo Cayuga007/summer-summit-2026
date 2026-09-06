@@ -3,14 +3,12 @@ class_name Paintbrush extends Node2D
 
 @export var paint_prefab: PackedScene
 @export var paint_ui: CanvasLayer
-@export var max_meter_amount: float = 100
-@export var meter_spill_amount: float = 0.1
 @export var paint_radius := 30
 @export var paint_spacing := 5.0
 
 var _is_holding := false
 var _previous_paint_position := Vector2.ZERO
-var _meter_amount := max_meter_amount
+var _meter_amount := PlayerVariables.max_meter_amount
 var _current_color = 0
 
 
@@ -29,7 +27,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if _meter_amount <= 0: return
+	if _meter_amount <= 0:
+		_is_holding = false
+		return
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
@@ -72,9 +72,21 @@ func spawn_paint(spawn_position: Vector2) -> void:
 	if area:
 		_resize_circle_shape(area.get_node_or_null("CollisionShape2D"), paint_radius + 4)
 
-	_meter_amount -= meter_spill_amount
+	_meter_amount -= PlayerVariables.meter_spill_amount
 	var progress_bar: ProgressBar = paint_ui.get_child(0)
-	progress_bar.value = _meter_amount / max_meter_amount * 100
+	progress_bar.value = _meter_amount / PlayerVariables.max_meter_amount * 100
+
+
+func set_paint_amount(amount: float) -> void:
+	_meter_amount = amount
+	var progress_bar: ProgressBar = paint_ui.get_child(0)
+	progress_bar.value = _meter_amount / PlayerVariables.max_meter_amount * 100
+
+
+func add_paint_amount(amount: float) -> void:
+	_meter_amount = clamp(_meter_amount + amount, 0, PlayerVariables.max_meter_amount)
+	var progress_bar: ProgressBar = paint_ui.get_child(0)
+	progress_bar.value = _meter_amount / PlayerVariables.max_meter_amount * 100
 
 
 func _resize_circle_shape(shape_node: CollisionShape2D, radius: float) -> void:
