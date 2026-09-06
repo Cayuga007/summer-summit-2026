@@ -621,6 +621,8 @@ radius = 85.70297
 [node name="Player" type="CharacterBody2D" unique_id=1599564440 groups=["Player"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_kpjcp")
+pixel_step = null
+death_settle_time = null
 chunk_recall_duration = 1.0
 chunk_recall_max_delay = 1.0
 
@@ -643,7 +645,7 @@ texture = SubResource("GradientTexture2D_0pi4m")
 lifetime = 3.0599999999999996
 one_shot = true
 explosiveness = 1.0
-trail_lifetime = 0.09999999999999999
+trail_lifetime = 0.1
 trail_sections = 2
 trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_cr25j")
