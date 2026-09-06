@@ -21,8 +21,16 @@ func _sync_selected_color() -> void:
 	var num_colors: int = PlayerVariables.unlocked_colors.size()
 	if num_colors <= 0:
 		return
+	if num_colors > 1:
+		paint_ui.get_child(2).visible = true
+		paint_ui.get_child(3).visible = true
+	else:
+		paint_ui.get_child(2).visible = false
+		paint_ui.get_child(3).visible = false
 	_current_color = clampi(_current_color, 0, num_colors - 1)
 	paint_prefab = PlayerVariables.unlocked_colors[_current_color]
+	for i in range(num_colors):
+		paint_ui.get_child(1).get_child(0).get_child(i).visible = true
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -30,7 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("swap_left") and can_swap:
 		can_swap = false
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 0.25
-		_current_color = (_current_color - 1) % num_colors
+		_current_color = posmod(_current_color - 1, num_colors)
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 1
 		paint_prefab = PlayerVariables.unlocked_colors[_current_color]
 		await get_tree().create_timer(0.1).timeout

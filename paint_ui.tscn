@@ -67,25 +67,61 @@ size_flags_horizontal = 4
 texture = SubResource("GradientTexture1D_85llr")
 
 [node name="Blue" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=406560320]
+visible = false
 modulate = Color(1, 1, 1, 0.2509804)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = SubResource("GradientTexture1D_t441f")
 
 [node name="Yellow" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1493756286]
+visible = false
 modulate = Color(1, 1, 1, 0.2509804)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = SubResource("GradientTexture1D_qgwt1")
 
 [node name="Green" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1418462283]
+visible = false
 modulate = Color(1, 1, 1, 0.2509804)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = SubResource("GradientTexture1D_tmioh")
 
 [node name="Purple" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=803340677]
+visible = false
 modulate = Color(1, 1, 1, 0.2509804)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = SubResource("GradientTexture1D_38eoe")
+
+[node name="Q" type="Label" parent="." unique_id=1021160819]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -367.0
+offset_top = -45.0
+offset_right = -327.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="E" type="Label" parent="." unique_id=1525528465]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 334.0
+offset_top = -45.0
+offset_right = 374.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1

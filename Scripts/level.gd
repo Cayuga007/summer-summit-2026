@@ -2,6 +2,8 @@ extends Node2D
 
 const PAUSE_MENU := preload("res://UI/Pause_Menu.tscn")
 const PAINTBRUSH = preload("res://paintbrush.tscn")
+const LEVEL_STARTED = preload("res://UI/level_started.tscn")
+const LEVEL_COMPLETED = preload("res://UI/Level_completed.tscn")
 
 var pause_menu: CanvasLayer
 var _resetting := false
@@ -14,6 +16,8 @@ func _ready() -> void:
 	LevelManager.sync_current_index_from_scene()
 	var paintbrush = PAINTBRUSH.instantiate()
 	add_child(paintbrush)
+	add_child(LEVEL_STARTED.instantiate())
+	add_child(LEVEL_COMPLETED.instantiate())
 	paintbrush.set_paint_amount(starting_paint_amount)
 	$VictoryDoor.level_completed.connect(_on_level_completed)
 	pause_menu = PAUSE_MENU.instantiate()
