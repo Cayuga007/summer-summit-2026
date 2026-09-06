@@ -81,6 +81,7 @@ scale = Vector2(7.5690727, 1.16)
 
 [node name="Bucket" parent="Buckets" unique_id=1076440276 instance=ExtResource("7_xivkf")]
 position = Vector2(-364, 372)
+paint_amount = 10.0
 
 [node name="PortalPlatform" parent="." unique_id=2045743167 instance=ExtResource("8_cggpm")]
 position = Vector2(-361, -455)

@@ -58,17 +58,18 @@ shape = SubResource("WorldBoundaryShape2D_8a5oj")
 position = Vector2(1045, -225)
 
 [node name="HazardBlock" parent="." unique_id=2111362905 instance=ExtResource("6_usv5v")]
-position = Vector2(-821, 222)
+position = Vector2(-839, 222)
 scale = Vector2(12.52, 1)
 
 [node name="HazardBlock2" parent="." unique_id=444186222 instance=ExtResource("6_usv5v")]
-position = Vector2(-821, -7.9999847)
+position = Vector2(-838, -8)
 scale = Vector2(12.52, 1)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=854977736]
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_aig73")]
 position = Vector2(-827, 110)
+paint_amount = 50.0
 
 [node name="Wall" parent="." unique_id=1559226435 instance=ExtResource("4_c0thm")]
 position = Vector2(-1206, 15)

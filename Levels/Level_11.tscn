@@ -66,6 +66,7 @@ scale = Vector2(9.600001, 1)
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_6nnr2")]
 position = Vector2(-156, 455)
+paint_amount = 30.0
 
 [node name="Wall" parent="." unique_id=1221389940 instance=ExtResource("4_05w7j")]
 position = Vector2(-1206, 15)
