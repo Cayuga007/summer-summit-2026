@@ -27,12 +27,9 @@ const JUMP_Y_OFFSET: float = -109.0
 
 
 func _ready() -> void:
-	# Listen for animation finish to automatically exit the landing state.
 	sprite.animation_finished.connect(_on_animation_finished)
+	
 
-
-func enter_ice() -> void:
-	ice_contacts += 1
 
 
 func exit_ice() -> void:
@@ -105,27 +102,7 @@ func _physics_process(delta: float) -> void:
 	update_animation()
 
 
-func die() -> void:
-	if is_dead:
-		return
-	is_dead = true
-
-	# Capture velocity at the moment of impact before zeroing movement.
-	var impact_velocity: Vector2 = velocity
-
-	# Disable collision immediately so hazards do not re-trigger.
-	if collision_shape:
-		collision_shape.set_deferred("disabled", true)
-
-	# Reset visual vertical offset.
-	sprite.offset.y = 0.0
-
-	# Trigger simultaneous pixel sand collapse with inherited momentum.
-	trigger_sand_dissolve(impact_velocity)
-
-	# Halt player body movement.
-	velocity = Vector2.ZERO
-
+	
 func update_animation() -> void:
 	# Skip ground/jump animation updates while dead.
 	if is_dead:
@@ -193,12 +170,32 @@ func _on_animation_finished() -> void:
 	if sprite.animation == "Jumping":
 		is_landing = false
 		sprite.offset.y = 0.0
+		
+func die() -> void:
+	if is_dead:
+		return
+	is_dead = true
+
+	# Capture velocity at the moment of impact for the sand shader.
+	var impact_velocity: Vector2 = velocity
+
+	if collision_shape:
+		collision_shape.set_deferred("disabled", true)
+
+	sprite.offset.y = 0.0
+
+	# Original clean approach for native death particles.
+	if death_particles:
+		death_particles.restart()
+		death_particles.emitting = true
+
+	# Trigger the pixel sand dissolve effect.
+	trigger_sand_dissolve(impact_velocity)
 
 func trigger_sand_dissolve(impact_vel: Vector2 = Vector2.ZERO) -> void:
 	if not sand_particles:
 		return
 
-	# Retrieve the exact texture of the currently active animation frame.
 	var cur_anim: String = sprite.animation
 	var cur_frame: int = sprite.frame
 	var frame_texture: Texture2D = sprite.sprite_frames.get_frame_texture(cur_anim, cur_frame)
@@ -206,19 +203,15 @@ func trigger_sand_dissolve(impact_vel: Vector2 = Vector2.ZERO) -> void:
 	if not frame_texture:
 		return
 
-	# Detach the particle system from the player node tree into world space.
-	sand_particles.top_level = true
-	sand_particles.global_position = sprite.global_position
-
-	# Pass texture, dimensions, and player velocity parameters to the custom shader.
 	var mat := sand_particles.process_material as ShaderMaterial
 	if mat:
+		var actual_size: Vector2 = frame_texture.get_size()
+		
 		mat.set_shader_parameter("sprite_texture", frame_texture)
-		mat.set_shader_parameter("sprite_size", frame_texture.get_size())
+		mat.set_shader_parameter("sprite_size", actual_size)
 		mat.set_shader_parameter("emitter_velocity", impact_vel)
 		mat.set_shader_parameter("inherit_ratio", 1.0)
 
-	# Hide the source character sprite and emit the pixel sand burst.
 	sprite.visible = false
 	sand_particles.restart()
 	sand_particles.emitting = true
