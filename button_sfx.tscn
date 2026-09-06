@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://1m3esr8rigd0"]
+
+[ext_resource type="AudioStream" uid="uid://buvuvs7gfvfsn" path="res://assets/Audio/HoverSFX.mp3" id="1_er4ts"]
+[ext_resource type="AudioStream" uid="uid://cb0rh5im71ai2" path="res://assets/Audio/SelectSFX.mp3" id="2_frmwc"]
+
+[node name="ButtonSFX" type="Node" unique_id=1754240897]
+
+[node name="HoverSFX" type="AudioStreamPlayer" parent="." unique_id=471321985]
+process_mode = 3
+stream = ExtResource("1_er4ts")
+bus = &"SFX"
+
+[node name="SelectSFX" type="AudioStreamPlayer" parent="." unique_id=1856489811]
+process_mode = 3
+stream = ExtResource("2_frmwc")
+bus = &"SFX"

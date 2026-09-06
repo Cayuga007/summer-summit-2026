@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://co0amkxemrde0"]
 
 [ext_resource type="Script" uid="uid://nqanfrmif5m3" path="res://Scripts/level_selection_ui.gd" id="1_rcy2s"]
+[ext_resource type="Script" uid="uid://cefblnv8nxqj4" path="res://Scripts/sfx_button.gd" id="2_vsq3a"]
 
 [node name="LevelSelectionUI" type="CanvasLayer" unique_id=162670869]
 script = ExtResource("1_rcy2s")
@@ -21,18 +22,22 @@ offset_bottom = 421.0
 [node name="Level1Button" type="Button" parent="VBoxContainer" unique_id=1313344845]
 layout_mode = 2
 text = "Level 1"
+script = ExtResource("2_vsq3a")
 
 [node name="Level2Button" type="Button" parent="VBoxContainer" unique_id=288912830]
 layout_mode = 2
 text = "Level 2"
+script = ExtResource("2_vsq3a")
 
 [node name="Level3Button" type="Button" parent="VBoxContainer" unique_id=92013467]
 layout_mode = 2
 text = "Level 3"
+script = ExtResource("2_vsq3a")
 
 [node name="Level4Button" type="Button" parent="VBoxContainer" unique_id=532573419]
 layout_mode = 2
 text = "Level 4"
+script = ExtResource("2_vsq3a")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1329227933]
 offset_left = 549.0
@@ -43,22 +48,27 @@ offset_bottom = 446.0
 [node name="Level5Button" type="Button" parent="VBoxContainer2" unique_id=650470859]
 layout_mode = 2
 text = "Level 5"
+script = ExtResource("2_vsq3a")
 
 [node name="Level6Button" type="Button" parent="VBoxContainer2" unique_id=749004779]
 layout_mode = 2
 text = "Level 6"
+script = ExtResource("2_vsq3a")
 
 [node name="Level7Button" type="Button" parent="VBoxContainer2" unique_id=281829463]
 layout_mode = 2
 text = "Level 7"
+script = ExtResource("2_vsq3a")
 
 [node name="Level8Button" type="Button" parent="VBoxContainer2" unique_id=108154956]
 layout_mode = 2
 text = "Level 8"
+script = ExtResource("2_vsq3a")
 
 [node name="Level9Button" type="Button" parent="VBoxContainer2" unique_id=8415426]
 layout_mode = 2
 text = "Level 9"
+script = ExtResource("2_vsq3a")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="." unique_id=1871696346]
 offset_left = 692.0
@@ -69,26 +79,32 @@ offset_bottom = 476.0
 [node name="Level10Button" type="Button" parent="VBoxContainer3" unique_id=1956870963]
 layout_mode = 2
 text = "Level 10"
+script = ExtResource("2_vsq3a")
 
 [node name="Level11Button" type="Button" parent="VBoxContainer3" unique_id=1968858092]
 layout_mode = 2
 text = "Level 11"
+script = ExtResource("2_vsq3a")
 
 [node name="Level12Button" type="Button" parent="VBoxContainer3" unique_id=1232244933]
 layout_mode = 2
 text = "Level 12"
+script = ExtResource("2_vsq3a")
 
 [node name="Level13Button" type="Button" parent="VBoxContainer3" unique_id=1769482641]
 layout_mode = 2
 text = "Level 13"
+script = ExtResource("2_vsq3a")
 
 [node name="Level14Button" type="Button" parent="VBoxContainer3" unique_id=273967682]
 layout_mode = 2
 text = "Level 14"
+script = ExtResource("2_vsq3a")
 
 [node name="Level15Button" type="Button" parent="VBoxContainer3" unique_id=1061308360]
 layout_mode = 2
 text = "Level 15"
+script = ExtResource("2_vsq3a")
 
 [node name="BackButton" type="Button" parent="." unique_id=879658485]
 offset_left = 527.0
@@ -97,6 +113,7 @@ offset_right = 627.0
 offset_bottom = 495.0
 text = "Back
 "
+script = ExtResource("2_vsq3a")
 
 [connection signal="pressed" from="VBoxContainer/Level1Button" to="." method="_on_level_1_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level2Button" to="." method="_on_level_2_button_pressed"]

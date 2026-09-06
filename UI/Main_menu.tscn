@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dyyfwwuagtr6g"]
 
 [ext_resource type="Script" uid="uid://omsdvrcb2cut" path="res://Scripts/main_menu.gd" id="1_vbv8a"]
+[ext_resource type="Script" uid="uid://cefblnv8nxqj4" path="res://Scripts/sfx_button.gd" id="2_g7cx6"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=928084415]
 script = ExtResource("1_vbv8a")
@@ -35,20 +36,24 @@ grow_vertical = 2
 [node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=808445464]
 layout_mode = 2
 text = "Play"
+script = ExtResource("2_g7cx6")
 
 [node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=1768516389]
 layout_mode = 2
 text = "Level Select"
+script = ExtResource("2_g7cx6")
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=223838787]
 layout_mode = 2
 text = "Settings
 "
+script = ExtResource("2_g7cx6")
 
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=452972006]
 layout_mode = 2
 text = "Quit
 "
+script = ExtResource("2_g7cx6")
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
