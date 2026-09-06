@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://3x3t13qaswo7"]
 
 [ext_resource type="Script" uid="uid://w3j2k1hy1uyi" path="res://Scripts/gravity_platform.gd" id="1_621p3"]
+[ext_resource type="AudioStream" uid="uid://n6lfx762kt42" path="res://assets/Audio/GravityPlatformSFX.mp3" id="2_4gr54"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_tuo1d"]
 
@@ -19,6 +20,12 @@ mesh = SubResource("SphereMesh_tuo1d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=109906355]
 shape = SubResource("CircleShape2D_7q2t7")
+
+[node name="GravityPlatformSFX" type="AudioStreamPlayer" parent="." unique_id=2004505485]
+process_mode = 3
+stream = ExtResource("2_4gr54")
+volume_db = -8.5
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

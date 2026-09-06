@@ -71,6 +71,7 @@ func _sync_selected_color() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not painting_enabled:
+		spray_sfx.stop()
 		return
 
 	if Input.is_action_just_pressed("swap_left") and can_swap:

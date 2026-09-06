@@ -19,6 +19,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		is_collected = true
 		collected.emit(paint_amount)
+		$PaintBucketSFX.play()
 		# Defer disabling collisions to prevent physics locks
 		collision_shape.set_deferred("disabled", true)
 		visible = false

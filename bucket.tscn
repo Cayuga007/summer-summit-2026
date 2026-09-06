@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cvgs3iuavddpo"]
 
 [ext_resource type="Script" uid="uid://cuaqe6gs3007p" path="res://Scripts/bucket.gd" id="1_bgj3b"]
+[ext_resource type="AudioStream" uid="uid://fjquks85glgf" path="res://assets/Audio/PaintBucketSFX.mp3" id="2_caem6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85llr"]
 radius = 50.0
@@ -18,3 +19,9 @@ shape = SubResource("CircleShape2D_85llr")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=992778188]
 modulate = Color(1, 0, 1, 1)
 mesh = SubResource("SphereMesh_85llr")
+
+[node name="PaintBucketSFX" type="AudioStreamPlayer" parent="." unique_id=313444203]
+process_mode = 3
+stream = ExtResource("2_caem6")
+volume_db = -8.5
+bus = &"SFX"
