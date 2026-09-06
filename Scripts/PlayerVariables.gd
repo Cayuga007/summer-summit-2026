@@ -30,9 +30,10 @@ var air_friction := 100.0
 var bounce_velocity := -1800
 
 # GRAVITY PLATFORM
-# Flip state lives on the player and stays until the next gravity pad.
+# Flip on any contact with a stroke (air or ground). The same painted drag is
+# one stroke and only flips once. A different stroke flips you back.
 # Only the Y gravity direction changes. Position and speed are not touched.
-# Don't flip again until you leave the current stroke, plus this extra delay.
+# Extra delay only blocks a jitter re-entry into the same stroke.
 var gravity_flip_cooldown := 0.2
 
 

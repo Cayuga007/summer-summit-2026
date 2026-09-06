@@ -26,7 +26,7 @@ shape = SubResource("CircleShape2D_7q2t7")
 [node name="PortalPlatformSFX" type="AudioStreamPlayer" parent="." unique_id=1888161586]
 process_mode = 3
 stream = ExtResource("2_hy54t")
-volume_db = 24.0
+volume_db = -10.0
 bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
