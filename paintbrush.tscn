@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1l05i3hik58a"]
 
 [ext_resource type="Script" uid="uid://br2lq756kfoy6" path="res://Scripts/paintbrush.gd" id="1_kh68u"]
-[ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/platform.tscn" id="2_7stys"]
+[ext_resource type="PackedScene" uid="uid://d2e07fxjnm3cq" path="res://platforms/platform.tscn" id="2_7stys"]
 [ext_resource type="PackedScene" uid="uid://ckomwa1i1v83q" path="res://paint_ui.tscn" id="3_slo63"]
 
 [node name="Paintbrush" type="Node2D" unique_id=1638959940 node_paths=PackedStringArray("paint_ui")]
