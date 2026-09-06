@@ -14,13 +14,9 @@ gradient = SubResource("Gradient_wyk0b")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cr25j"]
 size = Vector2(4.65197, 0.97940075)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cr25j"]
-polygon = PackedVector2Array(577, 555, -58, 558, -50, 701, 1189, 690, 1184, 551)
-
 [node name="0TimTest" type="Node2D" unique_id=784913612]
 
 [node name="Player" parent="." unique_id=1599564440 instance=ExtResource("1_wyk0b")]
-position = Vector2(453, 467)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1086898958]
 
@@ -34,10 +30,6 @@ texture = SubResource("GradientTexture1D_qrh0v")
 position = Vector2(564.125, 626.375)
 scale = Vector2(266.5, 133.5)
 shape = SubResource("RectangleShape2D_cr25j")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D" unique_id=1791219267]
-position = Vector2(3, 2)
-occluder = SubResource("OccluderPolygon2D_cr25j")
 
 [node name="HazardBlock2" parent="." unique_id=2111362905 instance=ExtResource("2_risw2")]
 position = Vector2(667, 484)
