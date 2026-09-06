@@ -8,6 +8,10 @@ var is_exit := true
 
 func _ready() -> void:
 	add_to_group("portal")
+	# Painted entries are triggers only. A solid dab would eat ice momentum on contact.
+	if not is_exit:
+		collision_layer = 0
+		collision_mask = 0
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
