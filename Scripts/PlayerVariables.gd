@@ -2,11 +2,14 @@ extends Node
 
 
 var colors = [
-	preload("res://platforms/platform.tscn"),
 	preload("res://platforms/IcePlatform.tscn"),
 	preload("res://platforms/JumpPlatform.tscn"),
 	preload("res://platforms/GravityPlatform.tscn"),
 	preload("res://platforms/PortalPlatform.tscn"),
+]
+
+var unlocked_colors = [
+	preload("res://platforms/platform.tscn"),
 ]
 
 # Core movement — change these anytime; the player reads them live.
