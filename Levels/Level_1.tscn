@@ -4,15 +4,11 @@
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_wsn87"]
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="2_8a5oj"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="3_nl7va"]
-[ext_resource type="PackedScene" uid="uid://qth4natevc18" path="res://UI/Level_completed.tscn" id="4_waoec"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
 [node name="Level_1" type="Node2D" unique_id=57220166]
 script = ExtResource("1_wsn87")
-
-[node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("4_waoec")]
-visible = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
 zoom = Vector2(0.5, 0.5)

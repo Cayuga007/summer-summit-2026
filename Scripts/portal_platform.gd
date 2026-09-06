@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-# Optional pairing if a level has more than one exit. Painted dabs keep the default.
+
 @export var portal_id: int = 0
 # Level-placed pads are exits. The brush sets this false on painted dabs.
 var is_exit := true
@@ -8,6 +8,10 @@ var is_exit := true
 
 func _ready() -> void:
 	add_to_group("portal")
+	# Painted entries are triggers only. A solid dab would eat ice momentum on contact.
+	if not is_exit:
+		collision_layer = 0
+		collision_mask = 0
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
