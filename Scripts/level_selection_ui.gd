@@ -44,6 +44,35 @@ func _on_level_9_button_pressed() -> void:
 	LevelManager.load_level(8)
 	hide()
 
+func _on_level_10_button_pressed() -> void:
+	LevelManager.load_level(9)
+	hide()
+	
+
+func _on_level_11_button_pressed() -> void:
+	LevelManager.load_level(10)
+	hide()
+	
+
+func _on_level_12_button_pressed() -> void:
+	LevelManager.load_level(11)
+	hide()
+
+
+func _on_level_13_button_pressed() -> void:
+	LevelManager.load_level(12)
+	hide()
+
+
+func _on_level_14_button_pressed() -> void:
+	LevelManager.load_level(13)
+	hide()
+
+
+func _on_level_15_button_pressed() -> void:
+	LevelManager.load_level(14)
+	hide()
+
 func _on_back_button_pressed() -> void:
 	if get_tree().current_scene == self:
 		LevelManager.go_to_main_menu()
