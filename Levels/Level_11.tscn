@@ -36,6 +36,10 @@ scale = Vector2(0.7199948, 9.44)
 position = Vector2(-40, 246.99998)
 scale = Vector2(2.8799949, 0.67999935)
 
+[node name="Platform4" parent="." unique_id=1933171087 instance=ExtResource("4_05w7j")]
+position = Vector2(763.00006, -547)
+scale = Vector2(4.079997, 0.67999935)
+
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)
 
@@ -60,6 +64,12 @@ scale = Vector2(8.920001, 1)
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_6nnr2")]
 position = Vector2(-156, 455)
+fill_amount = 10
 
-[node name="Bucket2" parent="Buckets" unique_id=589115563 instance=ExtResource("7_6nnr2")]
-position = Vector2(930, -403)
+[node name="Wall" parent="." unique_id=1221389940 instance=ExtResource("4_05w7j")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="." unique_id=351444831 instance=ExtResource("4_05w7j")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)

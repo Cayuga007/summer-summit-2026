@@ -29,16 +29,20 @@ position = Vector2(-1041, 599)
 scale = Vector2(2.4399977, 1)
 
 [node name="Platform2" parent="." unique_id=1487216132 instance=ExtResource("4_wo10n")]
-position = Vector2(-185, -1.0000153)
-scale = Vector2(19.574303, 0.9200003)
+position = Vector2(-376, -1.0000153)
+scale = Vector2(15.7869625, 0.9200003)
 
 [node name="Platform4" parent="." unique_id=1689334548 instance=ExtResource("4_wo10n")]
 position = Vector2(754, 443)
 scale = Vector2(4.254305, 0.9200003)
 
 [node name="Platform5" parent="." unique_id=1342524761 instance=ExtResource("4_wo10n")]
-position = Vector2(987.00006, 293)
+position = Vector2(987.00006, 346)
 scale = Vector2(4.254305, 0.9200003)
+
+[node name="Platform6" parent="." unique_id=142322829 instance=ExtResource("4_wo10n")]
+position = Vector2(-842, -374)
+scale = Vector2(0.7743044, 6.5599985)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)
@@ -54,18 +58,26 @@ rotation = -3.1415925
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_ov3s6")]
-position = Vector2(-1059, -241)
+position = Vector2(-761, -241)
 
 [node name="HazardBlock" parent="." unique_id=2111362905 instance=ExtResource("6_ex0ux")]
-position = Vector2(-128, 52)
-scale = Vector2(61.399998, 1)
+position = Vector2(-319, 52)
+scale = Vector2(49.519997, 1)
 
 [node name="HazardBlock2" parent="." unique_id=128917152 instance=ExtResource("6_ex0ux")]
-position = Vector2(-128, -54)
-scale = Vector2(61.399998, 1)
+position = Vector2(-319, -54)
+scale = Vector2(49.519997, 1)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=1337327784]
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_hg3os")]
 position = Vector2(385, 449)
-fill_amount = 100
+fill_amount = 75
+
+[node name="Wall" parent="." unique_id=1641121158 instance=ExtResource("4_wo10n")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="." unique_id=973733937 instance=ExtResource("4_wo10n")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)

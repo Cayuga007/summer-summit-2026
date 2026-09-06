@@ -31,6 +31,18 @@ scale = Vector2(2.5599957, 1)
 position = Vector2(-225, -403)
 scale = Vector2(18.639996, 1)
 
+[node name="Platform3" parent="." unique_id=728283367 instance=ExtResource("4_2cvve")]
+position = Vector2(-33, -677)
+scale = Vector2(25.399996, 1)
+
+[node name="Wall" parent="Platform3" unique_id=1917362305 instance=ExtResource("4_2cvve")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="Platform3" unique_id=1183652364 instance=ExtResource("4_2cvve")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)
+
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)
 
