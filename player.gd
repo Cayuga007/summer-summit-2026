@@ -171,7 +171,7 @@ func _physics_process(delta: float) -> void:
 	_try_gravity_flip()
 
 	# Apply gravity when airborne, or when gravity just flipped and we are still on the old floor.		
-	if not _is_grounded():
+	if not _is_grounded() or _gravity_is_flipping():
 		if not started_falling:
 			started_falling = true
 			fall_jump_buffer_t = FALL_JUMP_BUFFER_WINDOW
@@ -327,7 +327,18 @@ func _on_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "Jumping":
 		is_landing = false
 		$AnimatedSprite2D.offset.y = 0.0
-
+		
+func reset_gravity_state() -> void:
+	if gravity_flipped:
+		gravity_flipped = false
+		$Icon.flip_v = false
+		sprite.flip_v = false
+		up_direction = Vector2.UP
+	
+	# Clear pad overlaps and reset cooldowns so it's ready for the next life
+	_gravity_pads.clear()
+	_gravity_flip_armed = true
+	_gravity_cooldown = 0.0
 
 func die() -> void:
 	if is_dead:
@@ -384,30 +395,39 @@ func spawn_pixel_sand(impact_vel: Vector2) -> void:
 			var chunk = PIXEL_CHUNK_SCENE.instantiate() as RigidBody2D
 			get_parent().add_child(chunk)
 
-			var local_offset = Vector2(float(x), float(y)) - sprite_center
-			chunk.global_position = sprite.global_position + local_offset
+			var raw_offset = Vector2(float(x), float(y)) - sprite_center
+			
+			var spawn_offset = raw_offset
+			if sprite.flip_h:
+				spawn_offset.x = -spawn_offset.x
+			if sprite.flip_v:
+				spawn_offset.y = -spawn_offset.y
 
-			# Prevent one-frame flash to (0,0) from engine interpolation
+			chunk.global_position = sprite.global_position + spawn_offset
 			chunk.reset_physics_interpolation()
 
-			var scatter = Vector2(randf_range(-50.0, 50.0), randf_range(-80.0, -20.0))
+			var scatter_y: float = randf_range(20.0, 80.0) if gravity_flipped else randf_range(-80.0, -20.0)
+			var scatter = Vector2(randf_range(-50.0, 50.0), scatter_y)
 			var final_vel = (impact_vel * 0.4) + scatter
 			chunk.setup(col, final_vel)
+			chunk.gravity_scale = -1.0 if gravity_flipped else 1.0
 
+		
 			active_chunks.append({
 				"chunk": chunk,
-				"offset": local_offset
+				"offset": raw_offset
 			})
 
 func respawn(respawn_position: Vector2) -> void:
+	
 	global_position = respawn_position.round()
 	velocity = Vector2.ZERO
 	sprite.visible = false
 	if collision_shape:
 		collision_shape.set_deferred("disabled", true)
 
-	sprite.play("Idle")
-	sprite.set_frame_and_progress(0, 0.0)
+	##sprite.play("Idle")
+	##sprite.set_frame_and_progress(0, 0.0)
 
 	for item in active_chunks:
 		var chunk = item["chunk"]
@@ -431,5 +451,5 @@ func respawn(respawn_position: Vector2) -> void:
 		var chunk = item["chunk"]
 		if is_instance_valid(chunk):
 			chunk.queue_free()
-
+	reset_gravity_state()
 	active_chunks.clear()
