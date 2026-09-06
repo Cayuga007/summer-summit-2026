@@ -57,6 +57,11 @@ func _is_falling() -> bool:
 
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("Reset"):
+		LevelManager.retry()
+		return
+
+	
 	if _portal_cooldown > 0.0:
 		_portal_cooldown -= delta
 

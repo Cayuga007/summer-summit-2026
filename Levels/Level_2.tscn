@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/platform.tscn" id="4_dbc5v"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_t5q4t"]
 [ext_resource type="PackedScene" uid="uid://otae08kccpyf" path="res://platforms/PortalPlatform.tscn" id="6_tfynm"]
+[ext_resource type="PackedScene" uid="uid://3x3t13qaswo7" path="res://platforms/GravityPlatform.tscn" id="7_vb2uo"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
@@ -22,7 +23,7 @@ zoom = Vector2(0.5, 0.5)
 position = Vector2(1079, 126)
 
 [node name="Platform" parent="." unique_id=1061748757 instance=ExtResource("4_dbc5v")]
-position = Vector2(1080, 197)
+position = Vector2(1079, 225)
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=421238776]
 rotation = 1.5707964
@@ -38,10 +39,13 @@ position = Vector2(4, 644)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=1062209962 instance=ExtResource("5_t5q4t")]
-position = Vector2(1258, 116)
+position = Vector2(1171, 144)
 
 [node name="PortalPlatform" parent="." unique_id=1487216132 instance=ExtResource("6_tfynm")]
 position = Vector2(980, 201)
 
 [node name="PortalPlatform2" parent="." unique_id=83747843 instance=ExtResource("6_tfynm")]
 position = Vector2(252, 108)
+
+[node name="GravityPlatform" parent="." unique_id=1227455107 instance=ExtResource("7_vb2uo")]
+position = Vector2(1089, 341)
