@@ -17,10 +17,14 @@ var _current_color = 0
 func _unhandled_input(event: InputEvent) -> void:
 	var num_colors = PlayerVariables.colors.size()
 	if Input.is_action_just_pressed("swap_left"):
+		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = false
 		_current_color = (_current_color - 1) % num_colors
+		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = true
 		paint_prefab = PlayerVariables.colors[_current_color]
 	if Input.is_action_just_pressed("swap_right"):
+		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = false
 		_current_color = (_current_color + 1) % num_colors
+		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = true
 		paint_prefab = PlayerVariables.colors[_current_color]
 
 
