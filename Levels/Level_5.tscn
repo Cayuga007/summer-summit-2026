@@ -10,6 +10,7 @@
 [node name="Level_5" type="Node2D" unique_id=57220166]
 script = ExtResource("1_nje42")
 starting_paint_amount = 50.0
+unlocks = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
 zoom = Vector2(0.5, 0.5)
