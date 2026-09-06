@@ -77,7 +77,7 @@ var air_friction := 100.0
 
 # JUMP PLATFORM
 # More negative = higher bounce. Same value every launch, so height stays constant.
-var bounce_velocity := -800.0
+var bounce_velocity := -1800
 
 # GRAVITY PLATFORM
 # Flip state lives on the player and stays until the next gravity pad.
