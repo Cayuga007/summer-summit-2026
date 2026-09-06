@@ -26,6 +26,9 @@ var _gravity_pads: Array[Node2D] = []
 var _gravity_flip_armed := true
 var _gravity_cooldown := 0.0
 var _portal_cooldown := 0.0
+# After a portal warp, leftover is_on_floor() must not snap or apply ground friction.
+var _portal_exit_air := false
+var _saved_floor_snap := -1.0
 var _jumped_this_airtime := false
 
 
@@ -92,15 +95,31 @@ func is_portal_cooling() -> bool:
 	return _portal_cooldown > 0.0
 
 
+func _is_grounded() -> bool:
+	return is_on_floor() and not _portal_exit_air
+
+
 func teleport_via_portal(destination: Vector2) -> void:
+	_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
 	global_position = destination
 	_portal_cooldown = PlayerVariables.portal_cooldown
+	_portal_exit_air = true
+	started_falling = true
+	is_landing = false
+	ice_contacts = 0
+	bounce_contacts = 0
+	_gravity_pads.clear()
+	_gravity_flip_armed = true
+	if _saved_floor_snap < 0.0:
+		_saved_floor_snap = floor_snap_length
+	floor_snap_length = 0.0
+	reset_physics_interpolation()
 
 
 func _try_gravity_flip() -> void:
 	if not _gravity_flip_armed or _gravity_cooldown > 0.0:
 		return
-	if _gravity_pads.is_empty() or not is_on_floor():
+	if _gravity_pads.is_empty() or not _is_grounded():
 		return
 	toggle_gravity()
 
@@ -118,6 +137,9 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		move_and_slide()
 		return
+
+	# Teleport may fire during move_and_slide; only end air-carry after a full step at the exit.
+	var finish_portal_air := _portal_exit_air
 	
 	if jump_buffer_t > 0.0:
 		jump_buffer_t -= delta
@@ -135,7 +157,7 @@ func _physics_process(delta: float) -> void:
 	_try_gravity_flip()
 
 	# Apply gravity when airborne, or when gravity just flipped and we are still on the old floor.		
-	if not is_on_floor():
+	if not _is_grounded():
 		if not started_falling:
 			started_falling = true
 			fall_jump_buffer_t = FALL_JUMP_BUFFER_WINDOW
@@ -154,7 +176,7 @@ func _physics_process(delta: float) -> void:
 		just_jumped = true
 		is_landing = false
 		_jumped_this_airtime = true
-	elif Input.is_action_just_pressed("jump") and is_on_floor():
+	elif Input.is_action_just_pressed("jump") and _is_grounded():
 		velocity.y = _oriented(PlayerVariables.jump_velocity)
 		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
 		just_jumped = true
@@ -166,7 +188,7 @@ func _physics_process(delta: float) -> void:
 			jump()
 			just_jumped = true
 	
-	if is_on_floor() and jump_buffer_t > 0.0 and jump_t <= 0.0:
+	if _is_grounded() and jump_buffer_t > 0.0 and jump_t <= 0.0:
 		jump()
 		just_jumped = true
 
@@ -175,12 +197,12 @@ func _physics_process(delta: float) -> void:
 	var accel := PlayerVariables.acceleration
 	var decel := PlayerVariables.friction
 
-	if on_ice and is_on_floor() and not just_jumped and not _gravity_is_flipping():
+	if on_ice and _is_grounded() and not just_jumped and not _gravity_is_flipping():
 		target_speed = PlayerVariables.ice_speed
 		accel = PlayerVariables.ice_acceleration
 		decel = PlayerVariables.ice_friction
 		_air_carry_speed = abs(velocity.x)
-	elif not is_on_floor() or just_jumped or _gravity_is_flipping():
+	elif not _is_grounded() or just_jumped or _gravity_is_flipping():
 		accel = PlayerVariables.air_acceleration
 		decel = PlayerVariables.air_friction
 		target_speed = maxf(PlayerVariables.speed, maxf(_air_carry_speed, abs(velocity.x)))
@@ -197,6 +219,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, decel * delta)
 
 	move_and_slide()
+	if finish_portal_air:
+		_portal_exit_air = false
+		if _saved_floor_snap >= 0.0:
+			floor_snap_length = _saved_floor_snap
+			_saved_floor_snap = -1.0
 	if is_on_floor():
 		_jumped_this_airtime = false
 	elif _gravity_is_flipping():
@@ -223,7 +250,7 @@ func update_animation() -> void:
 		sprite.flip_h = true
 
 	# Case 1: In the air.
-	if not is_on_floor():
+	if not _is_grounded():
 		is_landing = false
 
 		# Gravity lift-off is not a jump — keep the grounded sprite so it does not pop.

@@ -92,3 +92,4 @@ var gravity_flip_cooldown := 0.2
 var portal_landing_offset := 70.0
 # Ignore painted entries briefly after a teleport.
 var portal_cooldown := 0.25
+# Exit uses air friction / ice carry so ground snap does not dump momentum.
