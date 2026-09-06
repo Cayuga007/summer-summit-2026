@@ -33,14 +33,9 @@ offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=808445464]
-layout_mode = 2
-text = "Play"
-script = ExtResource("2_g7cx6")
-
 [node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=1768516389]
 layout_mode = 2
-text = "Level Select"
+text = "Play"
 script = ExtResource("2_g7cx6")
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=223838787]
@@ -55,7 +50,6 @@ text = "Quit
 "
 script = ExtResource("2_g7cx6")
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
