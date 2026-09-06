@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://x7ddwwftr0m1"]
 
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_jd3rk"]
-[ext_resource type="PackedScene" uid="uid://qth4natevc18" path="res://UI/Level_completed.tscn" id="2_l78s2"]
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_lrybx"]
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="4_du6eh"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_784vf"]
@@ -15,9 +14,6 @@
 script = ExtResource("1_jd3rk")
 _buckets = NodePath("Buckets")
 starting_paint_amount = 5.0
-
-[node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_l78s2")]
-visible = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
 zoom = Vector2(0.5, 0.5)

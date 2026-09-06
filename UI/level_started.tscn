@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c3msxq6qv7tgu"]
+
+[ext_resource type="Script" uid="uid://dt3athrivd6ws" path="res://Scripts/level_started.gd" id="1_1oloe"]
+
+[sub_resource type="Gradient" id="Gradient_8psfc"]
+offsets = PackedFloat32Array(0, 0.23954372)
+colors = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1oloe"]
+gradient = SubResource("Gradient_8psfc")
+
+[node name="Level_started" type="CanvasLayer" unique_id=881795032]
+script = ExtResource("1_1oloe")
+
+[node name="Gradient" type="TextureRect" parent="." unique_id=1967813608]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 498.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_1oloe")
+flip_h = true
