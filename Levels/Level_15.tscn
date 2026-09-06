@@ -14,7 +14,7 @@
 [node name="Level_14" type="Node2D" unique_id=57220166 node_paths=PackedStringArray("_buckets")]
 script = ExtResource("1_jd3rk")
 _buckets = NodePath("Buckets")
-starting_paint_amount = 5.0
+starting_paint_amount = 10.0
 unlocks = 5
 
 [node name="Background" type="Sprite2D" parent="." unique_id=882441422]
@@ -28,20 +28,20 @@ zoom = Vector2(0.5, 0.5)
 position = Vector2(-1020, 482)
 
 [node name="Platform" parent="." unique_id=870433869 instance=ExtResource("4_du6eh")]
-position = Vector2(-430, 603)
-scale = Vector2(14.719994, 1.0400009)
+position = Vector2(-416, 603)
+scale = Vector2(15.199993, 1.0400009)
 
 [node name="Platform4" parent="." unique_id=1488947774 instance=ExtResource("4_du6eh")]
-position = Vector2(672, -157)
-scale = Vector2(9.599993, 1.0400009)
+position = Vector2(743, -44)
+scale = Vector2(8.11999, 1.0400009)
 
 [node name="Platform5" parent="." unique_id=1487216132 instance=ExtResource("4_du6eh")]
 position = Vector2(-576, -600.99994)
 scale = Vector2(11.599993, 1.0400009)
 
 [node name="Platform6" parent="." unique_id=498468532 instance=ExtResource("4_du6eh")]
-position = Vector2(-838.00006, -150.99998)
-scale = Vector2(6.3999934, 1.0400009)
+position = Vector2(-875.00006, -45)
+scale = Vector2(5.8399935, 1.0400009)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)
@@ -50,7 +50,7 @@ position = Vector2(0, 666)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_784vf")]
-position = Vector2(836, 4)
+position = Vector2(1001, 511)
 
 [node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
 position = Vector2(4, -688)
@@ -60,45 +60,45 @@ rotation = -3.1415925
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="HazardBlock4" parent="." unique_id=2111362905 instance=ExtResource("6_2chxn")]
-position = Vector2(-266, 188)
-scale = Vector2(15.409069, 1.16)
+position = Vector2(-291, 273)
+scale = Vector2(13.969069, 1.16)
 
-[node name="HazardBlock10" parent="." unique_id=1067025646 instance=ExtResource("6_2chxn")]
-position = Vector2(1060.0001, 628)
-scale = Vector2(12.9290695, 1.16)
+[node name="HazardBlock11" parent="." unique_id=1330063954 instance=ExtResource("6_2chxn")]
+position = Vector2(794.00006, 16)
+scale = Vector2(22.129074, 1.16)
 
 [node name="HazardBlock5" parent="." unique_id=242395237 instance=ExtResource("6_2chxn")]
-position = Vector2(-266, -352)
-scale = Vector2(1.6090708, 11.52)
+position = Vector2(-301, -322)
+scale = Vector2(1.6090708, 12.72)
 
 [node name="HazardBlock6" parent="." unique_id=1379793538 instance=ExtResource("6_2chxn")]
-position = Vector2(-540, 6.0000305)
-scale = Vector2(1.6090708, 11.52)
+position = Vector2(-564, 91.00004)
+scale = Vector2(1.6090708, 11.280001)
 
 [node name="HazardBlock7" parent="." unique_id=1491858172 instance=ExtResource("6_2chxn")]
-position = Vector2(-8, 6.0000305)
+position = Vector2(-39, 91.00004)
 scale = Vector2(1.6090708, 11.52)
 
-[node name="HazardBlock8" parent="." unique_id=1357397545 instance=ExtResource("6_2chxn")]
-position = Vector2(514, 262.00003)
-rotation = -0.6831394
-scale = Vector2(1.6090708, 28.735924)
+[node name="HazardBlock8" parent="." unique_id=1131363631 instance=ExtResource("6_2chxn")]
+position = Vector2(365, 397)
+scale = Vector2(1.6090708, 22.439997)
 
-[node name="HazardBlock9" parent="." unique_id=265624421 instance=ExtResource("6_2chxn")]
-position = Vector2(730, 130.00006)
-rotation = -0.6831394
-scale = Vector2(1.6090708, 20.456541)
+[node name="HazardBlock9" parent="." unique_id=455112930 instance=ExtResource("6_2chxn")]
+position = Vector2(771, 547)
+scale = Vector2(1.6090708, 5.8799963)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=2059548253]
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_jd3rk")]
 position = Vector2(939, -306)
+paint_amount = 20.0
 
 [node name="Bucket2" parent="Buckets" unique_id=825009688 instance=ExtResource("7_jd3rk")]
-position = Vector2(-1075, -380)
+position = Vector2(-1052, -462)
+paint_amount = 20.0
 
 [node name="PortalPlatform" parent="." unique_id=1469516988 instance=ExtResource("8_l78s2")]
-position = Vector2(442, 39)
+position = Vector2(463, 543)
 
 [node name="Wall" parent="." unique_id=588526262 instance=ExtResource("4_du6eh")]
 position = Vector2(-1206, 15)
