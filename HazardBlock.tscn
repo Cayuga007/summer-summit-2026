@@ -11,15 +11,22 @@ colors = PackedColorArray(0.56, 0.056000013, 0, 1, 0.5, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_cr25j"]
 gradient = SubResource("Gradient_61n01")
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cr25j"]
+polygon = PackedVector2Array(-18, -17, -17, 18, 15, 17, 15, -17)
+
 [node name="HazardBlock" type="Node2D" unique_id=2111362905]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1859311353]
 script = ExtResource("1_61n01")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=954683158]
+position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_cr25j")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=643210145]
 position = Vector2(-1, 0.49999976)
 scale = Vector2(0.125, 35)
 texture = SubResource("GradientTexture1D_cr25j")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Area2D" unique_id=536598844]
+occluder = SubResource("OccluderPolygon2D_cr25j")

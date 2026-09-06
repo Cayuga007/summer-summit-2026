@@ -1,5 +1,17 @@
 class_name Player extends CharacterBody2D
 
+# Pixel sand configuration and resource binding
+const PIXEL_CHUNK_SCENE = preload("res://assets/particle/PixelChunk.tscn")
+@export var pixel_step: int = 4
+@export var death_settle_time: float = 1.0
+@export var chunk_recall_duration: float = 0.85
+@export var chunk_recall_max_delay: float = 0.1
+
+# Stores active pixel chunk references and their sprite offsets
+# Format: { "chunk": RigidBody2D, "offset": Vector2 }
+var active_chunks: Array[Dictionary] = []
+var spawn_point: Vector2 = Vector2.ZERO
+
 var ice_contacts := 0
 var bounce_contacts := 0
 var gravity_flipped := false
@@ -35,8 +47,6 @@ var _saved_floor_snap := -1.0
 var _jumped_this_airtime := false
 
 
-# Base Y-offset applied during jumping animation.
-const JUMP_Y_OFFSET: float = -109.0
 const JUMP_COOLDOWN = 0.5
 const JUMP_BUFFER_WINDOW = 0.10
 const FALL_JUMP_BUFFER_WINDOW = 0.25
@@ -44,6 +54,7 @@ const FALL_JUMP_BUFFER_WINDOW = 0.25
 var jump_buffer_t := 0.0
 var fall_jump_buffer_t := FALL_JUMP_BUFFER_WINDOW
 var jump_t := 0.0
+
 
 func _ready() -> void:
 	# Listen for animation finish to automatically exit the landing state.
@@ -281,8 +292,7 @@ func update_animation() -> void:
 		if sprite.animation != "Jumping":
 			sprite.play("Jumping")
 
-		# Apply vertical jumping offset.
-		sprite.offset.y = -JUMP_Y_OFFSET if gravity_flipped else JUMP_Y_OFFSET
+
 
 		# Pause default playback so physics manually steers the frames.
 		sprite.pause()
@@ -307,16 +317,16 @@ func update_animation() -> void:
 			is_landing = true
 			sprite.set_frame_and_progress(6, 0.0)
 			sprite.play()
-			sprite.offset.y = -JUMP_Y_OFFSET if gravity_flipped else JUMP_Y_OFFSET
+
 			return
 
 	# If landing sequence (frames 6 -> 7 -> 8) is still playing, keep waiting until frame 8 finishes.
 	if is_landing:
-		sprite.offset.y = -JUMP_Y_OFFSET if gravity_flipped else JUMP_Y_OFFSET
+
 		return
 
-	# Reset Y offset for standard ground animations.
-	sprite.offset.y = 0.0
+
+
 
 	# Case 3: Standard ground states (Idle / Walking).
 	if not is_zero_approx(velocity.x):
@@ -366,7 +376,6 @@ func _play_death_sfx() -> void:
 
 
 func die() -> void:
-	# Prevent triggering death multiple times
 	if is_dead:
 		return
 	is_dead = true
@@ -374,22 +383,105 @@ func die() -> void:
 	if jump_sfx.playing:
 		jump_sfx.stop()
 
-	# 1. Stop horizontal movement and interactions
-	velocity = Vector2.ZERO
+	var impact_velocity: Vector2 = velocity
 
 	_play_death_sfx()
 	
 	# 2. Trigger the death animation
 	sprite.play("Death")
 
-	# 3. Emit the particle effect
 	if death_particles:
 		death_particles.restart()
 		death_particles.emitting = true
 
-	# 4. Optional: Disable collision so the corpse doesn't block hazards/triggers
-	$CollisionShape2D.set_deferred("disabled", true)
+	# Defer spawning to avoid physics query flushing locks
+	call_deferred("spawn_pixel_sand", impact_velocity)
+	sprite.visible = false
+	velocity = Vector2.ZERO
 
-	# 5. Handle reload or respawn after the death animation finishes
-	await sprite.animation_finished
-	LevelManager.retry()
+	# Wait for sand chunks to physically scatter and settle
+	await get_tree().create_timer(death_settle_time).timeout
+
+	# Trigger fluid reassembly back at the spawn position
+	respawn(spawn_point)
+
+
+func spawn_pixel_sand(impact_vel: Vector2) -> void:
+	active_chunks.clear()
+
+	var cur_anim: String = sprite.animation
+	var cur_frame: int = sprite.frame
+	var frame_texture: Texture2D = sprite.sprite_frames.get_frame_texture(cur_anim, cur_frame)
+	if not frame_texture:
+		return
+
+	var img: Image = frame_texture.get_image()
+	if not img:
+		return
+
+	var img_size: Vector2i = img.get_size()
+	var sprite_center: Vector2 = Vector2(img_size) * 0.5
+
+	for y in range(0, img_size.y, pixel_step):
+		for x in range(0, img_size.x, pixel_step):
+			var col: Color = img.get_pixel(x, y)
+			if col.a < 0.1:
+				continue
+
+			var chunk = PIXEL_CHUNK_SCENE.instantiate() as RigidBody2D
+			get_parent().add_child(chunk)
+
+			var local_offset = Vector2(float(x), float(y)) - sprite_center
+			chunk.global_position = sprite.global_position + local_offset
+
+			# Prevent one-frame flash to (0,0) from engine interpolation
+			chunk.reset_physics_interpolation()
+
+			var scatter = Vector2(randf_range(-50.0, 50.0), randf_range(-80.0, -20.0))
+			var final_vel = (impact_vel * 0.4) + scatter
+			chunk.setup(col, final_vel)
+
+			active_chunks.append({
+				"chunk": chunk,
+				"offset": local_offset
+			})
+
+
+func respawn(respawn_position: Vector2) -> void:
+	# 1. Snap player position to exact integer pixels
+	global_position = respawn_position.round()
+	velocity = Vector2.ZERO
+	sprite.visible = false
+	if collision_shape:
+		collision_shape.set_deferred("disabled", true)
+
+	# 2. Ensure sprite is queued to exact idle frame 0
+	sprite.play("Idle")
+	sprite.set_frame_and_progress(0, 0.0)
+
+	# 3. Command each chunk to return to its snapped target offset
+	for item in active_chunks:
+		var chunk = item["chunk"]
+		if is_instance_valid(chunk):
+			var target_pos: Vector2 = (global_position + item["offset"]).round()
+			var delay: float = randf_range(0.0, chunk_recall_max_delay)
+			chunk.recall_to(target_pos, delay, chunk_recall_duration)
+
+	# 4. Wait until the slowest chunk completes flight
+	await get_tree().create_timer(chunk_recall_duration + chunk_recall_max_delay).timeout
+
+	# 5. Brief micro-settle for one render frame to guarantee all tweens finalized
+	await get_tree().process_frame
+
+	# 6. Atomic swap: Show real sprite and purge all chunk nodes simultaneously
+	sprite.visible = true
+	is_dead = false
+	if collision_shape:
+		collision_shape.set_deferred("disabled", false)
+
+	for item in active_chunks:
+		var chunk = item["chunk"]
+		if is_instance_valid(chunk):
+			chunk.queue_free()
+
+	active_chunks.clear()
