@@ -14,7 +14,7 @@ var unlocked_colors = [
 
 # Level parameters
 var max_meter_amount: float = 100
-var meter_spill_amount: float = 0.5
+var meter_spill_amount: float = 0.25
 
 # Core movement — change these anytime; the player reads them live.
 var speed := 300.0
