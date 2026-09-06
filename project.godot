@@ -19,6 +19,10 @@ run/main_scene="uid://dyyfwwuagtr6g"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://1swsxq2rssq"
+
 [autoload]
 
 LevelManager="*res://Scripts/Level_manager.gd"

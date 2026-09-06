@@ -1,24 +1,36 @@
 [gd_scene format=3 uid="uid://cm1hyrx840p0x"]
 
 [ext_resource type="Script" uid="uid://bsb4674igw1u3" path="res://Scripts/victory_door.gd" id="1_4uxs1"]
+[ext_resource type="Texture2D" uid="uid://blss67k1tn5ax" path="res://assets/misc_sprites/star0.png" id="2_8eewx"]
 [ext_resource type="AudioStream" uid="uid://dmgn5ux2l0yxv" path="res://assets/Audio/VictorySFX.mp3" id="2_r04ow"]
+[ext_resource type="Texture2D" uid="uid://tg3wxb6o75lc" path="res://assets/misc_sprites/star1.png" id="3_p25r3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_85llr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8eewx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p25r3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpgkw"]
-size = Vector2(24, 24)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4uxs1"]
+size = Vector2(150, 150)
 
 [node name="VictoryDoor" type="Area2D" unique_id=357799818]
-scale = Vector2(2.8400002, 8.52)
 script = ExtResource("1_4uxs1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=532843511]
+sprite_frames = SubResource("SpriteFrames_85llr")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=447681966]
 shape = SubResource("RectangleShape2D_qpgkw")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1692874972]
-modulate = Color(1, 0.28627452, 0.039215688, 1)
-scale = Vector2(20, 20)
-mesh = SubResource("BoxMesh_4uxs1")
 
 [node name="VictorySFX" type="AudioStreamPlayer" parent="." unique_id=311239644]
 process_mode = 3
