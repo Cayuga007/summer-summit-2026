@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://qth4natevc18" path="res://UI/Level_completed.tscn" id="2_cggpm"]
 [ext_resource type="Texture2D" uid="uid://d3biikmt8gkfl" path="res://assets/bgs/lvl_bg6.png" id="2_t02o0"]
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_t02o0"]
-[ext_resource type="PackedScene" uid="uid://d2e07fxjnm3cq" path="res://platforms/platform.tscn" id="4_tsrm8"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_u4n5n"]
 [ext_resource type="PackedScene" uid="uid://6h63sy370xkx" path="res://HazardBlock.tscn" id="6_74g1q"]
 [ext_resource type="PackedScene" uid="uid://cvgs3iuavddpo" path="res://bucket.tscn" id="7_xivkf"]
 [ext_resource type="PackedScene" uid="uid://otae08kccpyf" path="res://platforms/PortalPlatform.tscn" id="8_cggpm"]
+[ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="9_t02o0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
@@ -31,22 +31,6 @@ zoom = Vector2(0.5, 0.5)
 [node name="Player" parent="." unique_id=864404923 instance=ExtResource("3_t02o0")]
 position = Vector2(-1020, -288)
 
-[node name="Platform" parent="." unique_id=1905428966 instance=ExtResource("4_tsrm8")]
-position = Vector2(-1018, 207.00002)
-scale = Vector2(2.8399947, 9.04)
-
-[node name="Platform2" parent="." unique_id=859226991 instance=ExtResource("4_tsrm8")]
-position = Vector2(-540, -3.0000153)
-scale = Vector2(1.6799948, 13.2)
-
-[node name="Platform3" parent="." unique_id=1164574962 instance=ExtResource("4_tsrm8")]
-position = Vector2(-142, 417.99994)
-scale = Vector2(1.6799948, 5.3599997)
-
-[node name="Platform7" parent="." unique_id=1911292054 instance=ExtResource("4_tsrm8")]
-position = Vector2(248, 489)
-scale = Vector2(7.1199937, 3.2799993)
-
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1014523875]
 position = Vector2(0, 666)
 
@@ -67,17 +51,9 @@ shape = SubResource("WorldBoundaryShape2D_8a5oj")
 position = Vector2(-140, 126.99994)
 scale = Vector2(5.329069, 1.16)
 
-[node name="Platform8" parent="." unique_id=1487216132 instance=ExtResource("4_tsrm8")]
-position = Vector2(-46, -576)
-scale = Vector2(3.4580107, 5.3599997)
-
 [node name="HazardBlock7" parent="." unique_id=2111362905 instance=ExtResource("6_74g1q")]
 position = Vector2(-44, -293)
 scale = Vector2(10.969069, 1.16)
-
-[node name="Platform9" parent="." unique_id=232114850 instance=ExtResource("4_tsrm8")]
-position = Vector2(243, -294)
-scale = Vector2(2.5011601, 7.76)
 
 [node name="HazardBlock8" parent="." unique_id=284748221 instance=ExtResource("6_74g1q")]
 position = Vector2(252, 117.99997)
@@ -91,10 +67,34 @@ position = Vector2(-364, 372)
 [node name="PortalPlatform" parent="." unique_id=2045743167 instance=ExtResource("8_cggpm")]
 position = Vector2(-340, -455)
 
-[node name="Wall" parent="." unique_id=2052011722 instance=ExtResource("4_tsrm8")]
-position = Vector2(-1206, 15)
-scale = Vector2(0.880003, 13.560001)
+[node name="LevelPlatform" parent="." unique_id=1487216132 instance=ExtResource("9_t02o0")]
+position = Vector2(-1039, 216)
+scale = Vector2(2.2800026, 9)
 
-[node name="Wall2" parent="." unique_id=953986725 instance=ExtResource("4_tsrm8")]
-position = Vector2(873, 15)
-scale = Vector2(5.4000053, 13.560001)
+[node name="LevelPlatform3" parent="." unique_id=407011722 instance=ExtResource("9_t02o0")]
+position = Vector2(-146.00002, 471)
+scale = Vector2(1.8400034, 6.4799976)
+
+[node name="LevelPlatform4" parent="." unique_id=1810053524 instance=ExtResource("9_t02o0")]
+position = Vector2(-58, -635)
+scale = Vector2(3.7200036, 6.4799976)
+
+[node name="LevelPlatform5" parent="." unique_id=4694841 instance=ExtResource("9_t02o0")]
+position = Vector2(241.99998, -357)
+scale = Vector2(2.6000054, 9.039998)
+
+[node name="LevelPlatform6" parent="." unique_id=2116953578 instance=ExtResource("9_t02o0")]
+position = Vector2(582, 634)
+scale = Vector2(12.920006, 5.6800003)
+
+[node name="LevelPlatform7" parent="." unique_id=1719009529 instance=ExtResource("9_t02o0")]
+position = Vector2(874, -106.999985)
+scale = Vector2(5.8800116, 12.759999)
+
+[node name="LevelPlatform2" parent="." unique_id=152487370 instance=ExtResource("9_t02o0")]
+position = Vector2(-591, -26)
+scale = Vector2(2.2800026, 15.239999)
+
+[node name="LevelPlatform8" parent="." unique_id=1823891978 instance=ExtResource("9_t02o0")]
+position = Vector2(-1271, -25.999998)
+scale = Vector2(2.2800026, 15.239999)
