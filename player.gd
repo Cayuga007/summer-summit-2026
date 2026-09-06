@@ -19,6 +19,7 @@ var is_dead := false
 
 @onready var death_particles: GPUParticles2D = $DeathParticles
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var walking_sfx: AudioStreamPlayer = $WalkingSFX
 @onready var jump_sfx: AudioStreamPlayer = $JumpSFX
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
