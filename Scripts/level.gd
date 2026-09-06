@@ -43,6 +43,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_level_completed() -> void:
+	PlayerVariables.register_level_completed(LevelManager.current_index)
 	pause_menu.hide()
 	$LevelCompleted.show()
 	get_tree().paused = true

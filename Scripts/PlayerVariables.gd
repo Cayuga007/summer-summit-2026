@@ -1,6 +1,9 @@
 extends Node
 
 
+const UNLOCK_EVERY := 3
+
+# Waiting to be unlocked, in order.
 var colors = [
 	preload("res://platforms/IcePlatform.tscn"),
 	preload("res://platforms/JumpPlatform.tscn"),
@@ -8,9 +11,27 @@ var colors = [
 	preload("res://platforms/PortalPlatform.tscn"),
 ]
 
+# Currently available paint colors.
 var unlocked_colors = [
 	preload("res://platforms/platform.tscn"),
 ]
+
+var completed_levels: Array[int] = []
+
+
+func register_level_completed(level_index: int) -> void:
+	if completed_levels.has(level_index):
+		return
+	completed_levels.append(level_index)
+	if completed_levels.size() % UNLOCK_EVERY == 0:
+		_unlock_next_color()
+
+
+func _unlock_next_color() -> void:
+	var next_index := unlocked_colors.size() - 1
+	if next_index < 0 or next_index >= colors.size():
+		return
+	unlocked_colors.append(colors[next_index])
 
 # Level parameters
 var max_meter_amount: float = 100

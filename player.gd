@@ -190,4 +190,4 @@ func die() -> void:
 
 	# 5. Handle reload or respawn after the death animation finishes
 	await sprite.animation_finished
-	# get_tree().reload_current_scene()
+	LevelManager.retry()
