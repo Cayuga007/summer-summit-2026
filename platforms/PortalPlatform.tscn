@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b1id6mpmjl6ot" path="res://Scripts/portal_platform.gd" id="1_hufnu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wnu83"]
-
 [sub_resource type="SphereMesh" id="SphereMesh_tuo1d"]
+radius = 9.646
+height = 19.293
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7q2t7"]
 radius = 11.0
@@ -12,9 +12,6 @@ radius = 11.0
 [node name="PortalPlatform" type="StaticBody2D" unique_id=1487216132 groups=["portal"]]
 modulate = Color(0, 1, 0.5764706, 1)
 script = ExtResource("1_hufnu")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=282006335]
-shape = SubResource("CircleShape2D_wnu83")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
 modulate = Color(0.43529412, 0, 1, 1)
