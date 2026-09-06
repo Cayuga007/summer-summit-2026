@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cm1hyrx840p0x"]
+
+[ext_resource type="Script" uid="uid://bsb4674igw1u3" path="res://Scripts/victory_door.gd" id="1_4uxs1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qpgkw"]
+size = Vector2(24, 24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4uxs1"]
+
+[node name="VictoryDoor" type="Area2D"]
+scale = Vector2(2.8400002, 8.52)
+script = ExtResource("1_4uxs1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qpgkw")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 0.28627452, 0.039215688, 1)
+scale = Vector2(20, 20)
+mesh = SubResource("BoxMesh_4uxs1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
