@@ -597,8 +597,8 @@ shader_parameter/radial_accel_min = 0.0
 shader_parameter/radial_accel_max = 0.0
 shader_parameter/tangent_accel_min = 0.0
 shader_parameter/tangent_accel_max = 0.0
-shader_parameter/damping_min = 0.0
-shader_parameter/damping_max = 0.0
+shader_parameter/damping_min = 0.3
+shader_parameter/damping_max = 0.3
 shader_parameter/initial_angle_min = 0.0
 shader_parameter/initial_angle_max = 0.0
 shader_parameter/scale_min = 1.0
@@ -637,6 +637,7 @@ sprite_frames = SubResource("SpriteFrames_cr25j")
 animation = &"Jumping"
 
 [node name="DeathParticles" type="GPUParticles2D" parent="." unique_id=365475038]
+visible = false
 emitting = false
 amount = 37
 texture = SubResource("GradientTexture2D_0pi4m")
@@ -646,6 +647,7 @@ explosiveness = 0.98
 process_material = SubResource("ParticleProcessMaterial_cr25j")
 
 [node name="SandParticles" type="GPUParticles2D" parent="." unique_id=1215569143]
+visible = false
 emitting = false
 amount = 8500
 texture = SubResource("CanvasTexture_itxgx")

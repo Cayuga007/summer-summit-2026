@@ -1,8 +1,13 @@
 class_name Player extends CharacterBody2D
 
+const pixel_chunk_scene = preload("res://assets/particle/PixelChunk.tscn")
+@export var pixel_step: int = 4
+
 var ice_contacts := 0
 var bounce_contacts := 0
 var gravity_flipped := false
+
+
 
 var on_ice: bool:
 	get:
@@ -33,6 +38,7 @@ var _air_carry_speed := 0.0
 func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
 	
+
 
 
 
@@ -213,6 +219,7 @@ func die() -> void:
 
 	# Trigger the pixel sand dissolve effect.
 	trigger_sand_dissolve(impact_velocity)
+	spawn_pixel_sand(impact_velocity)
 
 	# 5. Handle reload or respawn after the death animation finishes
 	await sprite.animation_finished
@@ -239,3 +246,41 @@ func trigger_sand_dissolve(impact_vel: Vector2 = Vector2.ZERO) -> void:
 	sprite.visible = false
 	sand_particles.restart()
 	sand_particles.emitting = true
+	
+	
+func spawn_pixel_sand(impact_vel: Vector2) -> void:
+	if not pixel_chunk_scene:
+		print("Error: PixelChunkScene not assigned in player Inspector!")
+		return
+
+	var cur_anim: String = sprite.animation
+	var cur_frame: int = sprite.frame
+	var frame_texture: Texture2D = sprite.sprite_frames.get_frame_texture(cur_anim, cur_frame)
+	
+	if not frame_texture:
+		return
+
+	var img: Image = frame_texture.get_image()
+	if not img:
+		return
+
+	var img_size: Vector2i = img.get_size()
+	var sprite_center: Vector2 = Vector2(img_size) * 0.5
+
+	for y in range(0, img_size.y, pixel_step):
+		for x in range(0, img_size.x, pixel_step):
+			var col: Color = img.get_pixel(x, y)
+			
+			if col.a < 0.1:
+				continue
+	
+			var chunk = pixel_chunk_scene.instantiate() as RigidBody2D
+			get_parent().add_child(chunk)
+		
+			var local_offset = Vector2(float(x), float(y)) - sprite_center
+			chunk.global_position = sprite.global_position + local_offset
+
+			var scatter = Vector2(randf_range(-50.0, 50.0), randf_range(-80.0, -20.0))
+			var final_vel = (impact_vel * 0.4) + scatter
+			
+			chunk.setup(col, final_vel)
