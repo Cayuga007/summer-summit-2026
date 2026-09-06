@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-# Optional pairing if a level has more than one exit. Painted dabs keep the default.
+
 @export var portal_id: int = 0
 # Level-placed pads are exits. The brush sets this false on painted dabs.
 var is_exit := true
