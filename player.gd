@@ -239,4 +239,3 @@ func trigger_sand_dissolve(impact_vel: Vector2 = Vector2.ZERO) -> void:
 	sprite.visible = false
 	sand_particles.restart()
 	sand_particles.emitting = true
-
