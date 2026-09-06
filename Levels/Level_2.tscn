@@ -10,7 +10,10 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vb2uo"]
+
 [node name="Level_2" type="Node2D" unique_id=1928027646]
+position = Vector2(0, -1)
 script = ExtResource("1_7ubt2")
 
 [node name="LevelCompleted" parent="." unique_id=1178533321 instance=ExtResource("2_tfynm")]
@@ -29,14 +32,30 @@ position = Vector2(1079, 225)
 rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=1790808192]
-position = Vector2(290, 1.9999876)
+position = Vector2(0, 2)
+shape = SubResource("WorldBoundaryShape2D_8a5oj")
+
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=521107091]
+position = Vector2(2295, 631)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=822386779]
+position = Vector2(-1, 1.9999748)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1353415659]
+position = Vector2(0, 903)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1412386952]
-position = Vector2(4, 644)
+position = Vector2(4, -1)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1152354968]
+position = Vector2(4, -400)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=543918834]
+shape = SubResource("WorldBoundaryShape2D_vb2uo")
 
 [node name="VictoryDoor" parent="." unique_id=1062209962 instance=ExtResource("5_t5q4t")]
 position = Vector2(1171, 144)

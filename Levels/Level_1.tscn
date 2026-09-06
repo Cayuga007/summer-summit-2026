@@ -12,6 +12,8 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x75k1"]
+
 [node name="Level_1" type="Node2D" unique_id=57220166]
 script = ExtResource("1_wsn87")
 
@@ -31,16 +33,33 @@ position = Vector2(121, 209)
 position = Vector2(1206.0001, 551)
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=1065250732]
+position = Vector2(0, 280)
 rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=1171622603]
-position = Vector2(290, 1.9999876)
+position = Vector2(-1, 2)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=490583263]
+position = Vector2(2304, 166)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=1395507263]
+position = Vector2(-1, 1.9999748)
+shape = SubResource("WorldBoundaryShape2D_x75k1")
+
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
+position = Vector2(2, 907)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2004289120]
-position = Vector2(4, 644)
+position = Vector2(4, 1)
+shape = SubResource("WorldBoundaryShape2D_8a5oj")
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
+position = Vector2(33, -390)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=2004289121]
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("3_nl7va")]
@@ -57,12 +76,5 @@ scale = Vector2(4, 4)
 [node name="GravityPlatform2" parent="." unique_id=1574595771 instance=ExtResource("8_uq0sc")]
 position = Vector2(700.00006, -280)
 scale = Vector2(4, 4)
-
-[node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
-position = Vector2(4, -400)
-rotation = 3.1415927
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=2004289121]
-shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="Paintbrush" parent="." unique_id=1638959940 instance=ExtResource("9_x75k1")]

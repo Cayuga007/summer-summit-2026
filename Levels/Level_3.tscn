@@ -7,7 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_fwchg"]
 [ext_resource type="PackedScene" uid="uid://3x3t13qaswo7" path="res://platforms/GravityPlatform.tscn" id="6_usv5v"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_usv5v"]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_aig73"]
 
 [node name="Level_3" type="Node2D" unique_id=1472610650]
 script = ExtResource("1_67bi5")
@@ -27,17 +31,33 @@ position = Vector2(129, 309)
 [node name="Platform" parent="Platform" unique_id=1367768912 instance=ExtResource("4_c0thm")]
 position = Vector2(87.92307, 254)
 
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=71847860]
+position = Vector2(4, -400)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=536358520]
+shape = SubResource("WorldBoundaryShape2D_usv5v")
+
 [node name="Wall" type="StaticBody2D" parent="." unique_id=2128021129]
 rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=1376913253]
-position = Vector2(290, 1.9999876)
+position = Vector2(0, 2)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=2105457073]
+position = Vector2(2302, 267)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=1538433911]
+position = Vector2(-1, 1.9999748)
+shape = SubResource("WorldBoundaryShape2D_aig73")
+
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1246017605]
+position = Vector2(0, 647)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=757868348]
-position = Vector2(4, 644)
+position = Vector2(4, -1)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=631303900 instance=ExtResource("5_fwchg")]

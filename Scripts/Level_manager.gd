@@ -41,7 +41,17 @@ func load_level(index: int) -> void:
 	get_tree().change_scene_to_file(LEVELS[current_index])
 
 
+func sync_current_index_from_scene() -> void:
+	var scene := get_tree().current_scene
+	if scene == null:
+		return
+	var idx := LEVELS.find(scene.scene_file_path)
+	if idx >= 0:
+		current_index = idx
+
+
 func retry() -> void:
+	sync_current_index_from_scene()
 	load_level(current_index)
 
 
