@@ -3,11 +3,39 @@
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_eg1yc"]
 [ext_resource type="Texture2D" uid="uid://cw8h1y14b7vvv" path="res://assets/bgs/lvl_bg3_v1.png" id="2_1n1xc"]
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_x6je6"]
-[ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="4_2cvve"]
+[ext_resource type="PackedScene" uid="uid://d2e07fxjnm3cq" path="res://platforms/level_platform.tscn" id="4_2cvve"]
+[ext_resource type="Shader" uid="uid://7k6urefi732q" path="res://Levels/CanvasGroup Platform.gdshader" id="5_2cvve"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_q50ry"]
 [ext_resource type="PackedScene" uid="uid://cvgs3iuavddpo" path="res://bucket.tscn" id="6_1n1xc"]
+[ext_resource type="Texture2D" uid="uid://c0j5fki44spfg" path="res://assets/particle/watercolor texture BW.png" id="6_q50ry"]
+[ext_resource type="Script" uid="uid://bvfrg1xb4pf8l" path="res://Levels/canvas_group.gd" id="7_uxqfw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
+
+[sub_resource type="Gradient" id="Gradient_c0thm"]
+offsets = PackedFloat32Array(0, 0.34844193, 0.66288954, 1)
+colors = PackedColorArray(0.9999997, 0.03519306, 0.25869447, 1, 1, 1, 1, 1, 0, 1, 0.89999986, 1, 0.86, 0.9953333, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fwchg"]
+gradient = SubResource("Gradient_c0thm")
+fill_from = Vector2(0.03133903, 1)
+fill_to = Vector2(1, 0.01994302)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fwchg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fwchg"]
+resource_local_to_scene = true
+shader = ExtResource("5_2cvve")
+shader_parameter/global_offset = Vector2(0, 0)
+shader_parameter/paper_texture = ExtResource("6_q50ry")
+shader_parameter/uv_scale = 0.002
+shader_parameter/color_noise = SubResource("NoiseTexture2D_fwchg")
+shader_parameter/color_noise_scale = 0.0005
+shader_parameter/color_gradient = SubResource("GradientTexture2D_fwchg")
+shader_parameter/paper_strength = 0.5570000264575
+shader_parameter/paper_contrast = 3.0
+shader_parameter/outline_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/outline_width = 5.4910002608225
 
 [node name="Level_8" type="Node2D" unique_id=57220166 node_paths=PackedStringArray("_buckets")]
 script = ExtResource("1_eg1yc")
@@ -24,26 +52,6 @@ zoom = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." unique_id=1546855037 instance=ExtResource("3_x6je6")]
 position = Vector2(-1048, 488)
-
-[node name="Platform" parent="." unique_id=870433869 instance=ExtResource("4_2cvve")]
-position = Vector2(-1043, 599)
-scale = Vector2(2.5599957, 1)
-
-[node name="Platform2" parent="." unique_id=1487216132 instance=ExtResource("4_2cvve")]
-position = Vector2(-225, -403)
-scale = Vector2(18.639996, 1)
-
-[node name="Platform3" parent="." unique_id=728283367 instance=ExtResource("4_2cvve")]
-position = Vector2(-33, -677)
-scale = Vector2(25.399996, 1)
-
-[node name="Wall" parent="Platform3" unique_id=1917362305 instance=ExtResource("4_2cvve")]
-position = Vector2(-1206, 15)
-scale = Vector2(0.880003, 13.560001)
-
-[node name="Wall2" parent="Platform3" unique_id=1183652364 instance=ExtResource("4_2cvve")]
-position = Vector2(1203, 15)
-scale = Vector2(0.880003, 13.560001)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)
@@ -65,3 +73,29 @@ position = Vector2(617, -541)
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("6_1n1xc")]
 position = Vector2(590, -152)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1568554103]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_fwchg")
+position = Vector2(2, 0)
+script = ExtResource("7_uxqfw")
+
+[node name="Platform" parent="CanvasGroup" unique_id=870433869 instance=ExtResource("4_2cvve")]
+position = Vector2(-1045, 599)
+scale = Vector2(2.5599957, 1)
+
+[node name="Platform2" parent="CanvasGroup" unique_id=1487216132 instance=ExtResource("4_2cvve")]
+position = Vector2(-227, -403)
+scale = Vector2(18.639996, 1)
+
+[node name="Platform3" parent="CanvasGroup" unique_id=728283367 instance=ExtResource("4_2cvve")]
+position = Vector2(-35, -677)
+scale = Vector2(25.399996, 1)
+
+[node name="Wall" parent="CanvasGroup/Platform3" unique_id=1917362305 instance=ExtResource("4_2cvve")]
+position = Vector2(-1206, 15)
+scale = Vector2(0.880003, 13.560001)
+
+[node name="Wall2" parent="CanvasGroup/Platform3" unique_id=1183652364 instance=ExtResource("4_2cvve")]
+position = Vector2(1203, 15)
+scale = Vector2(0.880003, 13.560001)

@@ -1,10 +1,87 @@
 [gd_scene format=3 uid="uid://dyyfwwuagtr6g"]
 
 [ext_resource type="Script" uid="uid://omsdvrcb2cut" path="res://Scripts/main_menu.gd" id="1_vbv8a"]
+[ext_resource type="Texture2D" uid="uid://cgt787j5sjhml" path="res://assets/UI/cover 2.png" id="2_3odpu"]
 [ext_resource type="Script" uid="uid://cefblnv8nxqj4" path="res://Scripts/sfx_button.gd" id="2_g7cx6"]
+[ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="3_ermsv"]
+[ext_resource type="PackedScene" uid="uid://c7dgbyb4cu8ua" path="res://assets/UI/ButtonPrefab.tscn" id="5_6byiu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3odpu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ermsv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6byiu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocwgq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bwkl7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ysjxp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_posw2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f433h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rxfi0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xkpe5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_juq6o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yp1ib"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=928084415]
 script = ExtResource("1_vbv8a")
+
+[node name="Cover2" type="Sprite2D" parent="." unique_id=1187951632]
+position = Vector2(576.3343, 324.5)
+scale = Vector2(0.34760818, 0.34780282)
+texture = ExtResource("2_3odpu")
+
+[node name="ColorRect" type="ColorRect" parent="Cover2" unique_id=2037502398]
+offset_left = -403.71393
+offset_top = 294.7072
+offset_right = 393.16034
+offset_bottom = 495.97064
+rotation = -0.037187714
+scale = Vector2(1.0818439, 0.5526136)
+color = Color(0.7254902, 0.20784314, 0.22352941, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Cover2" unique_id=3359902]
+offset_left = -291.51868
+offset_top = 355.08624
+offset_right = 505.3556
+offset_bottom = 556.34973
+rotation = -0.037187714
+scale = Vector2(1.099925, 0.513657)
+color = Color(0.7254902, 0.20784314, 0.22352941, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Cover2" unique_id=1450132176]
+offset_left = -400.8372
+offset_top = 461.46838
+offset_right = 396.03708
+offset_bottom = 662.7318
+rotation = -0.044143878
+scale = Vector2(1.0084487, 0.26555577)
+color = Color(0.7254902, 0.20784314, 0.22352941, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Cover2" unique_id=1174823668]
+offset_left = -570.56854
+offset_top = 346.46066
+offset_right = 226.30573
+offset_bottom = 547.7242
+rotation = -0.037187714
+scale = Vector2(0.988873, 0.5551478)
+color = Color(0.7254902, 0.20784314, 0.22352941, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Cover2" unique_id=1158872858]
+offset_left = -461.25006
+offset_top = 280.33124
+offset_right = 335.6242
+offset_bottom = 481.59473
+rotation = -0.08240187
+scale = Vector2(1.0358455, 0.38315058)
+color = Color(0.7254902, 0.20784314, 0.22352941, 1)
 
 [node name="Label" type="Label" parent="." unique_id=2874666]
 anchors_preset = 8
@@ -12,13 +89,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = -103.0
-offset_right = 44.0
-offset_bottom = -80.0
+offset_left = -120.0
+offset_top = 99.0
+offset_right = 123.0
+offset_bottom = 165.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Main Menu"
+theme_override_fonts/font = ExtResource("3_ermsv")
+theme_override_font_sizes/font_size = 65
+text = "Blobby"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1674546908]
 anchors_preset = 8
@@ -34,22 +113,73 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=1768516389]
+visible = false
 layout_mode = 2
 text = "Play"
 script = ExtResource("2_g7cx6")
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=223838787]
+visible = false
 layout_mode = 2
 text = "Settings
 "
 script = ExtResource("2_g7cx6")
 
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=452972006]
+visible = false
 layout_mode = 2
 text = "Quit
 "
 script = ExtResource("2_g7cx6")
 
+[node name="Control" type="Control" parent="." unique_id=1343362273]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" parent="Control" unique_id=677833116 instance=ExtResource("5_6byiu")]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 490.0
+offset_right = 1643.9995
+offset_bottom = 790.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3odpu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ermsv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6byiu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ocwgq")
+button_text = "Play"
+button_font_size = 104
+
+[node name="Button2" parent="Control" unique_id=1738026268 instance=ExtResource("5_6byiu")]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 533.0
+offset_right = 1643.9995
+offset_bottom = 833.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bwkl7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ysjxp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_posw2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f433h")
+button_text = "Setting"
+button_font_size = 104
+
+[node name="Button3" parent="Control" unique_id=2028631006 instance=ExtResource("5_6byiu")]
+layout_mode = 0
+offset_left = 485.00003
+offset_top = 587.0
+offset_right = 1644.9995
+offset_bottom = 887.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rxfi0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xkpe5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_juq6o")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yp1ib")
+button_text = "Quit"
+button_font_size = 104
+
 [connection signal="pressed" from="VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="Control/Button2" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Control/Button3" to="." method="_on_quit_button_pressed"]

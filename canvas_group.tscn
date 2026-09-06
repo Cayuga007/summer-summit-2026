@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://d0vbg8awwcewq"]
+
+[ext_resource type="Shader" uid="uid://7k6urefi732q" path="res://Levels/CanvasGroup Platform.gdshader" id="1_wgibk"]
+[ext_resource type="Texture2D" uid="uid://c0j5fki44spfg" path="res://assets/particle/watercolor texture BW.png" id="2_bpdcb"]
+[ext_resource type="Script" uid="uid://bvfrg1xb4pf8l" path="res://Levels/canvas_group.gd" id="3_oyyf4"]
+
+[sub_resource type="Gradient" id="Gradient_c0thm"]
+offsets = PackedFloat32Array(0, 0.34844193, 0.66288954, 1)
+colors = PackedColorArray(0.9999997, 0.03519306, 0.25869447, 1, 1, 1, 1, 1, 0, 1, 0.89999986, 1, 0.86, 0.9953333, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fwchg"]
+gradient = SubResource("Gradient_c0thm")
+fill_from = Vector2(0.03133903, 1)
+fill_to = Vector2(1, 0.01994302)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fwchg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fwchg"]
+resource_local_to_scene = true
+shader = ExtResource("1_wgibk")
+shader_parameter/global_offset = Vector2(0, 0)
+shader_parameter/paper_texture = ExtResource("2_bpdcb")
+shader_parameter/uv_scale = 0.002
+shader_parameter/color_noise = SubResource("NoiseTexture2D_fwchg")
+shader_parameter/color_noise_scale = 0.0005
+shader_parameter/color_gradient = SubResource("GradientTexture2D_fwchg")
+shader_parameter/paper_strength = 0.5570000264575
+shader_parameter/paper_contrast = 3.0
+shader_parameter/outline_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/outline_width = 5.4910002608225
+
+[node name="CanvasGroup" type="CanvasGroup" unique_id=117715135]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_fwchg")
+script = ExtResource("3_oyyf4")

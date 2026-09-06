@@ -3,10 +3,61 @@
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_67bi5"]
 [ext_resource type="Texture2D" uid="uid://dh6adatsyg05k" path="res://assets/bgs/lvl_bg1.png" id="2_aig73"]
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_aig73"]
-[ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="4_c0thm"]
+[ext_resource type="Texture2D" uid="uid://c0j5fki44spfg" path="res://assets/particle/watercolor texture BW.png" id="4_4t04n"]
+[ext_resource type="PackedScene" uid="uid://d2e07fxjnm3cq" path="res://platforms/level_platform.tscn" id="4_c0thm"]
+[ext_resource type="PackedScene" uid="uid://d0vbg8awwcewq" path="res://canvas_group.tscn" id="4_knaiw"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_fwchg"]
+[ext_resource type="Shader" uid="uid://7k6urefi732q" path="res://Levels/CanvasGroup Platform.gdshader" id="5_vkhu4"]
 [ext_resource type="PackedScene" uid="uid://6h63sy370xkx" path="res://HazardBlock.tscn" id="6_usv5v"]
 [ext_resource type="PackedScene" uid="uid://cvgs3iuavddpo" path="res://bucket.tscn" id="7_aig73"]
+
+[sub_resource type="Gradient" id="Gradient_c0thm"]
+offsets = PackedFloat32Array(0, 0.34844193, 0.66288954, 1)
+colors = PackedColorArray(0.9999997, 0.03519306, 0.25869447, 1, 1, 1, 1, 1, 0, 1, 0.89999986, 1, 0.86, 0.9953333, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fwchg"]
+gradient = SubResource("Gradient_c0thm")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(1, 0.01994302)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fwchg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_46jcg"]
+resource_local_to_scene = true
+shader = ExtResource("5_vkhu4")
+shader_parameter/global_offset = Vector2(0, 0)
+shader_parameter/paper_texture = ExtResource("4_4t04n")
+shader_parameter/uv_scale = 0.002
+shader_parameter/color_noise = SubResource("NoiseTexture2D_fwchg")
+shader_parameter/color_noise_scale = 0.0005
+shader_parameter/color_gradient = SubResource("GradientTexture2D_fwchg")
+shader_parameter/paper_strength = 0.5570000264575
+shader_parameter/paper_contrast = 3.0
+shader_parameter/outline_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/outline_width = 5.4910002608225
+
+[sub_resource type="Gradient" id="Gradient_4t04n"]
+offsets = PackedFloat32Array(0, 0.34844193, 0.66288954, 1)
+colors = PackedColorArray(0.5019608, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0.86, 0.9953333, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_knaiw"]
+gradient = SubResource("Gradient_4t04n")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(1, 0.01994302)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkhu4"]
+resource_local_to_scene = true
+shader = ExtResource("5_vkhu4")
+shader_parameter/global_offset = Vector2(0, 0)
+shader_parameter/paper_texture = ExtResource("4_4t04n")
+shader_parameter/uv_scale = 0.002
+shader_parameter/color_noise = SubResource("NoiseTexture2D_fwchg")
+shader_parameter/color_noise_scale = 0.0005
+shader_parameter/color_gradient = SubResource("GradientTexture2D_knaiw")
+shader_parameter/paper_strength = 0.5570000264575
+shader_parameter/paper_contrast = 3.0
+shader_parameter/outline_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/outline_width = 5.4910002608225
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
@@ -25,21 +76,35 @@ zoom = Vector2(0.5, 0.5)
 [node name="Player" parent="." unique_id=1546855037 instance=ExtResource("3_aig73")]
 position = Vector2(-758, -200)
 
-[node name="Platform" parent="." unique_id=870433869 instance=ExtResource("4_c0thm")]
+[node name="CanvasGroup" parent="." unique_id=117715135 instance=ExtResource("4_knaiw")]
+material = SubResource("ShaderMaterial_46jcg")
+
+[node name="Platform" parent="CanvasGroup" unique_id=870433869 instance=ExtResource("4_c0thm")]
 position = Vector2(-1053, -77)
 scale = Vector2(8.239998, 1)
 
-[node name="Platform3" parent="." unique_id=1487216132 instance=ExtResource("4_c0thm")]
+[node name="Platform3" parent="CanvasGroup" unique_id=1487216132 instance=ExtResource("4_c0thm")]
 position = Vector2(-1053, 453)
 scale = Vector2(8.239998, 4.2)
 
-[node name="Platform2" parent="." unique_id=323190068 instance=ExtResource("4_c0thm")]
+[node name="Platform2" parent="CanvasGroup" unique_id=323190068 instance=ExtResource("4_c0thm")]
 position = Vector2(1053, 275)
 scale = Vector2(2.2799978, 8)
 
-[node name="Platform4" parent="." unique_id=925305456 instance=ExtResource("4_c0thm")]
+[node name="Platform4" parent="CanvasGroup" unique_id=925305456 instance=ExtResource("4_c0thm")]
 position = Vector2(-1137, 275)
 scale = Vector2(2.2799978, 8)
+
+[node name="CanvasGroup2" parent="." unique_id=479968136 instance=ExtResource("4_knaiw")]
+material = SubResource("ShaderMaterial_vkhu4")
+
+[node name="HazardBlock" parent="CanvasGroup2" unique_id=2111362905 instance=ExtResource("6_usv5v")]
+position = Vector2(-839, 222)
+scale = Vector2(12.52, 1)
+
+[node name="HazardBlock2" parent="CanvasGroup2" unique_id=444186222 instance=ExtResource("6_usv5v")]
+position = Vector2(-838, -8)
+scale = Vector2(12.52, 1)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 656)
@@ -56,14 +121,6 @@ shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_fwchg")]
 position = Vector2(1045, -225)
-
-[node name="HazardBlock" parent="." unique_id=2111362905 instance=ExtResource("6_usv5v")]
-position = Vector2(-839, 222)
-scale = Vector2(12.52, 1)
-
-[node name="HazardBlock2" parent="." unique_id=444186222 instance=ExtResource("6_usv5v")]
-position = Vector2(-838, -8)
-scale = Vector2(12.52, 1)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=854977736]
 
