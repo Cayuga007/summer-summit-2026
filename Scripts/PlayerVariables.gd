@@ -33,3 +33,9 @@ var bounce_velocity := -800.0
 
 # GRAVITY PLATFORM
 # Flip state lives on the player and stays until the next gravity pad.
+
+# PORTAL PLATFORM
+# Appear this far along the player's "up" from the destination pad.
+var portal_landing_offset := 70.0
+# Ignore portal pads briefly after a teleport so you don't bounce back.
+var portal_cooldown := 0.25

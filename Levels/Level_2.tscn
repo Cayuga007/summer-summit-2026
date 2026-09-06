@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_vb2uo"]
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/platform.tscn" id="4_dbc5v"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_t5q4t"]
+[ext_resource type="PackedScene" uid="uid://otae08kccpyf" path="res://platforms/PortalPlatform.tscn" id="6_tfynm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
@@ -38,3 +39,9 @@ shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=1062209962 instance=ExtResource("5_t5q4t")]
 position = Vector2(1258, 116)
+
+[node name="PortalPlatform" parent="." unique_id=1487216132 instance=ExtResource("6_tfynm")]
+position = Vector2(980, 201)
+
+[node name="PortalPlatform2" parent="." unique_id=83747843 instance=ExtResource("6_tfynm")]
+position = Vector2(252, 108)
