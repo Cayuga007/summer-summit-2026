@@ -15,6 +15,7 @@
 script = ExtResource("1_73ky0")
 _buckets = NodePath("Buckets")
 starting_paint_amount = 20.0
+unlocks = 5
 
 [node name="LevelCompleted" parent="." unique_id=798327044 instance=ExtResource("2_cggpm")]
 visible = false

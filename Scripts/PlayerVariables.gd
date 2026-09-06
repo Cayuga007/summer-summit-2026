@@ -1,56 +1,6 @@
 extends Node
 
 
-signal unlocks_changed
-
-const UNLOCK_EVERY := 3
-const STARTER_COLOR = preload("res://platforms/platform.tscn")
-
-# Waiting to be unlocked, in order.
-var colors = [
-	preload("res://platforms/IcePlatform.tscn"),
-	preload("res://platforms/JumpPlatform.tscn"),
-	preload("res://platforms/GravityPlatform.tscn"),
-	preload("res://platforms/PortalPlatform.tscn"),
-]
-
-# Currently available paint colors.
-var unlocked_colors = [
-	STARTER_COLOR,
-]
-
-var completed_levels: Array[int] = []
-var debug_all_colors := false
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("unlock debug"):
-		toggle_debug_unlocks()
-
-
-func toggle_debug_unlocks() -> void:
-	debug_all_colors = not debug_all_colors
-	_rebuild_unlocked_colors()
-	unlocks_changed.emit()
-
-
-func register_level_completed(level_index: int) -> void:
-	if completed_levels.has(level_index):
-		return
-	completed_levels.append(level_index)
-	_rebuild_unlocked_colors()
-	unlocks_changed.emit()
-
-
-func _rebuild_unlocked_colors() -> void:
-	unlocked_colors = [STARTER_COLOR]
-	if debug_all_colors:
-		unlocked_colors.append_array(colors)
-		return
-	var unlock_count := completed_levels.size() / UNLOCK_EVERY
-	for i in range(mini(unlock_count, colors.size())):
-		unlocked_colors.append(colors[i])
-
 # Level parameters
 var max_meter_amount: float = 100
 var meter_spill_amount: float = 0.25

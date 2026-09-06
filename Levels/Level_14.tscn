@@ -12,6 +12,7 @@
 
 [node name="Level_14" type="Node2D" unique_id=1071581743]
 script = ExtResource("1_bihxa")
+unlocks = 5
 
 [node name="LevelCompleted" parent="." unique_id=1687650689 instance=ExtResource("2_ruyes")]
 visible = false

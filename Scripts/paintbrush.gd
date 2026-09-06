@@ -5,22 +5,27 @@ class_name Paintbrush extends Node2D
 @export var paint_ui: CanvasLayer
 @export var paint_spacing := 5.0
 
+var colors = [
+	preload("res://platforms/platform.tscn"),
+	preload("res://platforms/IcePlatform.tscn"),
+	preload("res://platforms/JumpPlatform.tscn"),
+	preload("res://platforms/GravityPlatform.tscn"),
+	preload("res://platforms/PortalPlatform.tscn"),
+]
+
 var _is_holding := false
 var _previous_paint_position := Vector2.ZERO
 var _meter_amount := PlayerVariables.max_meter_amount
 var _current_color = 0
 var can_swap := true
+var num_colors: int = 1
 
 
 func _ready() -> void:
-	PlayerVariables.unlocks_changed.connect(_sync_selected_color)
 	_sync_selected_color()
 
 
 func _sync_selected_color() -> void:
-	var num_colors: int = PlayerVariables.unlocked_colors.size()
-	if num_colors <= 0:
-		return
 	if num_colors > 1:
 		paint_ui.get_child(2).visible = true
 		paint_ui.get_child(3).visible = true
@@ -28,19 +33,18 @@ func _sync_selected_color() -> void:
 		paint_ui.get_child(2).visible = false
 		paint_ui.get_child(3).visible = false
 	_current_color = clampi(_current_color, 0, num_colors - 1)
-	paint_prefab = PlayerVariables.unlocked_colors[_current_color]
+	paint_prefab = colors[_current_color]
 	for i in range(num_colors):
 		paint_ui.get_child(1).get_child(0).get_child(i).visible = true
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	var num_colors = PlayerVariables.unlocked_colors.size()
 	if Input.is_action_just_pressed("swap_left") and can_swap:
 		can_swap = false
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 0.25
 		_current_color = posmod(_current_color - 1, num_colors)
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 1
-		paint_prefab = PlayerVariables.unlocked_colors[_current_color]
+		paint_prefab = colors[_current_color]
 		await get_tree().create_timer(0.1).timeout
 		can_swap = true
 	if Input.is_action_just_pressed("swap_right") and can_swap:
@@ -48,7 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 0.25
 		_current_color = (_current_color + 1) % num_colors
 		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 1
-		paint_prefab = PlayerVariables.unlocked_colors[_current_color]
+		paint_prefab = colors[_current_color]
 		await get_tree().create_timer(0.1).timeout
 		can_swap = true
 

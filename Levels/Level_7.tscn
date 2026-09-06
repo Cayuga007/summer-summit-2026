@@ -10,6 +10,7 @@
 [node name="Level_7" type="Node2D" unique_id=57220166]
 script = ExtResource("1_3psty")
 starting_paint_amount = 20.0
+unlocks = 3
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
 zoom = Vector2(0.5, 0.5)
