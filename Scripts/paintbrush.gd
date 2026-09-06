@@ -3,6 +3,7 @@ class_name Paintbrush extends Node2D
 @export var paint_prefab: PackedScene
 @export var paint_ui: CanvasLayer
 @export var paint_spacing := 5.0
+@onready var spray_sfx: AudioStreamPlayer = $SpraySFX
 
 var colors = [
 	preload("res://platforms/platform.tscn"),
@@ -43,6 +44,11 @@ func _ready() -> void:
 	_initial_num_colors = num_colors
 
 	_sync_selected_color()
+	
+	if spray_sfx.stream is AudioStreamMP3:
+		var spray_stream: AudioStreamMP3 = spray_sfx.stream.duplicate()
+		spray_stream.loop = true
+		spray_sfx.stream = spray_stream
 
 
 func _sync_selected_color() -> void:
@@ -65,6 +71,7 @@ func _sync_selected_color() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not painting_enabled:
+		spray_sfx.stop()
 		return
 
 	if Input.is_action_just_pressed("swap_left") and can_swap:
@@ -86,10 +93,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not painting_enabled:
-		_is_holding = false
-		return
-
 	if _meter_amount <= 0:
 		_is_holding = false
 		return
@@ -112,9 +115,12 @@ func paint_between(previous: Vector2, current: Vector2) -> void:
 	var steps: int = max(1, int(ceil(distance / paint_spacing)))
 	
 	for i in range(1, steps + 1):
+		_update_spray_sfx()
 		var t := float(i) / steps
 		var paint_spawn_position := previous.lerp(current, t)
 		spawn_paint(paint_spawn_position)
+	if steps <= 1:
+		spray_sfx.stop()
 
 
 func spawn_paint(spawn_position: Vector2) -> void:
@@ -183,3 +189,11 @@ func clear_paint() -> void:
 	num_colors = _initial_num_colors
 	_current_color = 0
 	_sync_selected_color()
+
+
+func _update_spray_sfx() -> void:
+	if _is_holding and _meter_amount > 0:
+		if not spray_sfx.playing:
+			spray_sfx.play()
+	elif spray_sfx.playing:
+		spray_sfx.stop()

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://buo0g1uw3bhr2" path="res://Scripts/settings_menu.gd" id="1_settings"]
 [ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="2_cib0i"]
 [ext_resource type="PackedScene" uid="uid://c7dgbyb4cu8ua" path="res://assets/UI/ButtonPrefab.tscn" id="3_mx4cl"]
+[ext_resource type="Script" uid="uid://cefblnv8nxqj4" path="res://Scripts/sfx_button.gd" id="2_obnqx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_76bc8"]
 
@@ -69,6 +70,7 @@ offset_top = 328.0
 offset_right = 608.0
 offset_bottom = 359.0
 text = "Back"
+script = ExtResource("2_obnqx")
 
 [node name="Control" type="Control" parent="." unique_id=1297735820]
 layout_mode = 3

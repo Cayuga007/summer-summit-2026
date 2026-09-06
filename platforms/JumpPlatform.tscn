@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cf5u6dpgh3adc"]
 
 [ext_resource type="Script" uid="uid://co4nr1wrjd3t7" path="res://Scripts/jump_platform.gd" id="1_bounce"]
+[ext_resource type="AudioStream" uid="uid://v1aihoyqvxpu" path="res://assets/Audio/JumpPlatformSFX.mp3" id="2_vawaq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7q2t7"]
 
@@ -25,6 +26,12 @@ position = Vector2(0, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=109906355]
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_wnu83")
+
+[node name="JumpPadSFX" type="AudioStreamPlayer" parent="." unique_id=863783046]
+process_mode = 3
+stream = ExtResource("2_vawaq")
+volume_db = -5.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

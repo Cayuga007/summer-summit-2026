@@ -26,6 +26,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if exit_portal == null:
 		return
 	body.teleport_via_portal(exit_portal.landing_point(body))
+	$PortalPlatformSFX.play()
 
 
 func landing_point(player: Node2D) -> Vector2:

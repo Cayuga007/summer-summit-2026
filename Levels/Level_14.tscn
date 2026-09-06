@@ -12,6 +12,7 @@
 
 [node name="Level_14" type="Node2D" unique_id=1071581743]
 script = ExtResource("1_bihxa")
+starting_paint_amount = 70.0
 unlocks = 5
 
 [node name="LevelCompleted" parent="." unique_id=1687650689 instance=ExtResource("2_ruyes")]
@@ -42,7 +43,7 @@ position = Vector2(0, 666)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=908644381 instance=ExtResource("5_w7fsl")]
-position = Vector2(246, -83)
+position = Vector2(1050, -591)
 
 [node name="Ceiling" type="StaticBody2D" parent="." unique_id=830335207]
 position = Vector2(4, -688)
@@ -57,7 +58,7 @@ scale = Vector2(74.56907, 1.16)
 
 [node name="HazardBlock7" parent="." unique_id=2111362905 instance=ExtResource("6_fwsov")]
 position = Vector2(-210, -152)
-scale = Vector2(8.169067, 1.16)
+scale = Vector2(5.7290688, 1.16)
 
 [node name="HazardBlock6" parent="." unique_id=696902360 instance=ExtResource("6_fwsov")]
 position = Vector2(-1019, -114)
@@ -74,10 +75,14 @@ scale = Vector2(0.880003, 13.560001)
 position = Vector2(1203, 15)
 scale = Vector2(0.880003, 13.560001)
 
-[node name="Wall4" parent="." unique_id=1487216132 instance=ExtResource("4_cew5e")]
-position = Vector2(762.00006, -200)
-scale = Vector2(9.120005, 9.600002)
-
 [node name="Wall3" parent="." unique_id=1207660801 instance=ExtResource("4_cew5e")]
 position = Vector2(-218, 64)
-scale = Vector2(2.600003, 4.0000005)
+scale = Vector2(1.8234146, 4.0000005)
+
+[node name="HazardBlock9" parent="." unique_id=691796589 instance=ExtResource("6_fwsov")]
+position = Vector2(543, -196.00003)
+scale = Vector2(18.76907, 1.16)
+
+[node name="Wall5" parent="." unique_id=2000797439 instance=ExtResource("4_cew5e")]
+position = Vector2(515, -445)
+scale = Vector2(5.973709, 4.92)

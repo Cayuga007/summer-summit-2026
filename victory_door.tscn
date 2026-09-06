@@ -1,22 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm1hyrx840p0x"]
+[gd_scene format=3 uid="uid://cm1hyrx840p0x"]
 
 [ext_resource type="Script" uid="uid://bsb4674igw1u3" path="res://Scripts/victory_door.gd" id="1_4uxs1"]
+[ext_resource type="AudioStream" uid="uid://dmgn5ux2l0yxv" path="res://assets/Audio/VictorySFX.mp3" id="2_r04ow"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpgkw"]
 size = Vector2(24, 24)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4uxs1"]
 
-[node name="VictoryDoor" type="Area2D"]
+[node name="VictoryDoor" type="Area2D" unique_id=357799818]
 scale = Vector2(2.8400002, 8.52)
 script = ExtResource("1_4uxs1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=447681966]
 shape = SubResource("RectangleShape2D_qpgkw")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1692874972]
 modulate = Color(1, 0.28627452, 0.039215688, 1)
 scale = Vector2(20, 20)
 mesh = SubResource("BoxMesh_4uxs1")
+
+[node name="VictorySFX" type="AudioStreamPlayer" parent="." unique_id=311239644]
+process_mode = 3
+stream = ExtResource("2_r04ow")
+volume_db = -13.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
