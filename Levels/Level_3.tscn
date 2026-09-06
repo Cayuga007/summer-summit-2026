@@ -50,7 +50,7 @@ rotation = -3.1415925
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_fwchg")]
-position = Vector2(1094, -237)
+position = Vector2(1045, -225)
 
 [node name="HazardBlock" parent="." unique_id=2111362905 instance=ExtResource("6_usv5v")]
 position = Vector2(-821, 222)

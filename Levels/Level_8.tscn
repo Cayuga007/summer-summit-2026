@@ -54,7 +54,7 @@ rotation = -3.1415925
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_q50ry")]
-position = Vector2(617, -557)
+position = Vector2(617, -541)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=1082894178]
 

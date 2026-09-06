@@ -43,7 +43,7 @@ position = Vector2(0, 666)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=908644381 instance=ExtResource("5_w7fsl")]
-position = Vector2(1050, -591)
+position = Vector2(972, -550)
 
 [node name="Ceiling" type="StaticBody2D" parent="." unique_id=830335207]
 position = Vector2(4, -688)

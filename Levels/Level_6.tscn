@@ -55,7 +55,7 @@ rotation = -3.1415925
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_ov3s6")]
-position = Vector2(-761, -241)
+position = Vector2(-710, -179)
 
 [node name="HazardBlock" parent="." unique_id=2111362905 instance=ExtResource("6_ex0ux")]
 position = Vector2(-319, 52)
@@ -69,7 +69,6 @@ scale = Vector2(49.519997, 1)
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_hg3os")]
 position = Vector2(385, 449)
-fill_amount = 75
 
 [node name="Wall" parent="." unique_id=1641121158 instance=ExtResource("4_wo10n")]
 position = Vector2(-1206, 15)

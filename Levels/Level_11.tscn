@@ -44,7 +44,7 @@ position = Vector2(0, 666)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_ahwxj")]
-position = Vector2(-246, 110)
+position = Vector2(-212, 119)
 
 [node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
 position = Vector2(4, -688)
@@ -61,7 +61,6 @@ scale = Vector2(9.600001, 1)
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_6nnr2")]
 position = Vector2(-156, 455)
-fill_amount = 40
 
 [node name="Wall" parent="." unique_id=1221389940 instance=ExtResource("4_05w7j")]
 position = Vector2(-1206, 15)
