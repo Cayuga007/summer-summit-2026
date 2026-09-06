@@ -6,7 +6,7 @@ var colors = [
 	preload("res://platforms/IcePlatform.tscn"),
 	preload("res://platforms/JumpPlatform.tscn"),
 	preload("res://platforms/GravityPlatform.tscn"),
-	#preload("res://platforms/PortalPlatform.tscn"),
+	preload("res://platforms/PortalPlatform.tscn"),
 ]
 
 # Core movement — change these anytime; the player reads them live.

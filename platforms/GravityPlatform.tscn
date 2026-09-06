@@ -2,21 +2,16 @@
 
 [ext_resource type="Script" uid="uid://w3j2k1hy1uyi" path="res://Scripts/gravity_platform.gd" id="1_621p3"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7q2t7"]
-radius = 11.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnu83"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_tuo1d"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7q2t7"]
+radius = 11.0
+
 [node name="GravityPlatform" type="StaticBody2D" unique_id=1487216132]
 modulate = Color(0, 1, 0.5764706, 1)
 script = ExtResource("1_621p3")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=109906355]
-shape = SubResource("CircleShape2D_7q2t7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=282006335]
 shape = SubResource("CircleShape2D_wnu83")
@@ -24,5 +19,10 @@ shape = SubResource("CircleShape2D_wnu83")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
 modulate = Color(1, 1, 0.10980392, 1)
 mesh = SubResource("SphereMesh_tuo1d")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=109906355]
+shape = SubResource("CircleShape2D_7q2t7")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -11,11 +11,18 @@ class_name Paintbrush extends Node2D
 var _is_holding := false
 var _previous_paint_position := Vector2.ZERO
 var _meter_amount := max_meter_amount
+var _current_color = 0
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _unhandled_input(event: InputEvent) -> void:
+	var num_colors = PlayerVariables.colors.size()
+	if Input.is_action_just_pressed("swap_left"):
+		_current_color = (_current_color - 1) % num_colors
+		paint_prefab = PlayerVariables.colors[_current_color]
+	if Input.is_action_just_pressed("swap_right"):
+		_current_color = (_current_color + 1) % num_colors
+		paint_prefab = PlayerVariables.colors[_current_color]
+
 
 func _input(event: InputEvent) -> void:
 	if _meter_amount <= 0: return

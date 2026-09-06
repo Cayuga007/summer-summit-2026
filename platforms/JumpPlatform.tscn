@@ -2,22 +2,15 @@
 
 [ext_resource type="Script" uid="uid://co4nr1wrjd3t7" path="res://Scripts/jump_platform.gd" id="1_bounce"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wnu83"]
-radius = 11.011357
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_7q2t7"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_tuo1d"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wnu83"]
+radius = 11.011357
+
 [node name="JumpPlatform" type="StaticBody2D" unique_id=1487216132]
 script = ExtResource("1_bounce")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
-position = Vector2(0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=109906355]
-position = Vector2(0, -1)
-shape = SubResource("CircleShape2D_wnu83")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=282006335]
 shape = SubResource("CircleShape2D_7q2t7")
@@ -25,6 +18,13 @@ shape = SubResource("CircleShape2D_7q2t7")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
 modulate = Color(1, 1, 0.10980392, 1)
 mesh = SubResource("SphereMesh_tuo1d")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1910353142]
+position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=109906355]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_wnu83")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
