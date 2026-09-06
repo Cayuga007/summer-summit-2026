@@ -65,7 +65,7 @@ position = Vector2(290, 55)
 scale = Vector2(32, 1.1599984)
 
 [node name="HazardBlock2" parent="." unique_id=1899795906 instance=ExtResource("6_lgifw")]
-position = Vector2(-96, 545)
+position = Vector2(94, 572.00006)
 scale = Vector2(1, 7.1200004)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=1257825698]
