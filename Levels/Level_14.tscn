@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://db4sirnhfyyyt"]
 
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_bihxa"]
+[ext_resource type="Texture2D" uid="uid://d3biikmt8gkfl" path="res://assets/bgs/lvl_bg6.png" id="2_bihxa"]
 [ext_resource type="PackedScene" uid="uid://qth4natevc18" path="res://UI/Level_completed.tscn" id="2_ruyes"]
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_ur2v3"]
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="4_cew5e"]
@@ -14,6 +15,10 @@
 script = ExtResource("1_bihxa")
 starting_paint_amount = 70.0
 unlocks = 5
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1903490099]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_bihxa")
 
 [node name="LevelCompleted" parent="." unique_id=1687650689 instance=ExtResource("2_ruyes")]
 visible = false

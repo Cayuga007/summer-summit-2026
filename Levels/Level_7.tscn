@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dhoh3so22l6ib"]
 
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_3psty"]
+[ext_resource type="Texture2D" uid="uid://cw8h1y14b7vvv" path="res://assets/bgs/lvl_bg3_v1.png" id="2_14x15"]
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_1bhtv"]
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="4_bb5qs"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_gho5p"]
@@ -11,6 +12,10 @@
 script = ExtResource("1_3psty")
 starting_paint_amount = 20.0
 unlocks = 3
+
+[node name="Background" type="Sprite2D" parent="." unique_id=651819685]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_14x15")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
 zoom = Vector2(0.5, 0.5)

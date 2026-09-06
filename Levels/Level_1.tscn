@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="1_ka50d"]
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_wsn87"]
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="2_8a5oj"]
+[ext_resource type="Texture2D" uid="uid://dh6adatsyg05k" path="res://assets/bgs/lvl_bg1.png" id="2_wsn87"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="3_nl7va"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
@@ -10,6 +11,10 @@
 [node name="Level_1" type="Node2D" unique_id=57220166]
 position = Vector2(0, -2)
 script = ExtResource("1_wsn87")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=885245061]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_wsn87")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
 zoom = Vector2(0.5, 0.5)
