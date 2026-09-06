@@ -20,6 +20,10 @@ var is_dead := false
 @onready var death_particles: GPUParticles2D = $DeathParticles
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var walking_sfx: AudioStreamPlayer = $WalkingSFX
+@onready var ice_sfx: AudioStreamPlayer = $IceSFX
+@onready var jump_sfx: AudioStreamPlayer = $JumpSFX
+@onready var death_sfx: AudioStreamPlayer = $DeathSFX
 
 var on_ice: bool:
 	get:
@@ -59,7 +63,15 @@ func _ready() -> void:
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
 	# Record initial coordinates as default spawn point
 	spawn_point = global_position
-
+	
+	if walking_sfx.stream is AudioStreamMP3:
+		var walk_stream: AudioStreamMP3 = walking_sfx.stream.duplicate()
+		walk_stream.loop = true
+		walking_sfx.stream = walk_stream
+	if ice_sfx.stream is AudioStreamMP3:
+		var ice_stream: AudioStreamMP3 = ice_sfx.stream.duplicate()
+		ice_stream.loop = true
+		ice_sfx.stream = ice_stream
 
 func enter_ice() -> void:
 	ice_contacts += 1
@@ -150,6 +162,7 @@ func _physics_process(delta: float) -> void:
 	# If dead, stop processing input or animation changes
 	if is_dead:
 		move_and_slide()
+		_update_walking_sfx()
 		return
 
 	# Teleport may fire during move_and_slide; only end air-carry after a full step at the exit.
@@ -243,9 +256,11 @@ func _physics_process(delta: float) -> void:
 	elif _gravity_is_flipping():
 		up_direction = _desired_up()
 	update_animation()
+	_update_walking_sfx()
 
 
 func jump() -> void:
+	jump_sfx.play()
 	jump_t = JUMP_COOLDOWN
 	velocity.y = _oriented(PlayerVariables.jump_velocity)
 	_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
@@ -312,9 +327,6 @@ func update_animation() -> void:
 
 		return
 
-
-
-
 	# Case 3: Standard ground states (Idle / Walking).
 	if not is_zero_approx(velocity.x):
 		sprite.play("Walking")
@@ -344,6 +356,8 @@ func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	_update_walking_sfx()
+	death_sfx.play()
 
 	var impact_velocity: Vector2 = velocity
 
@@ -453,3 +467,28 @@ func respawn(respawn_position: Vector2) -> void:
 			chunk.queue_free()
 	reset_gravity_state()
 	active_chunks.clear()
+
+
+func _is_walking() -> bool:
+	return (
+		not is_dead
+		and _is_grounded()
+		and not is_landing
+		and sprite.animation == "Walking"
+		and not is_zero_approx(velocity.x)
+	)
+
+
+func _update_walking_sfx() -> void:
+	var walking_on_ice := _is_walking() and on_ice
+	var walking_on_ground := _is_walking() and not on_ice
+	if walking_on_ice:
+		if not ice_sfx.playing:
+			ice_sfx.play()
+	elif ice_sfx.playing:
+		ice_sfx.stop()
+	if walking_on_ground:
+		if not walking_sfx.playing:
+			walking_sfx.play()
+	elif walking_sfx.playing:
+		walking_sfx.stop()

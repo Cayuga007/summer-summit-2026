@@ -8,9 +8,11 @@
 [node name="HoverSFX" type="AudioStreamPlayer" parent="." unique_id=471321985]
 process_mode = 3
 stream = ExtResource("1_er4ts")
+volume_db = -18.0
 bus = &"SFX"
 
 [node name="SelectSFX" type="AudioStreamPlayer" parent="." unique_id=1856489811]
 process_mode = 3
 stream = ExtResource("2_frmwc")
+volume_db = -7.0
 bus = &"SFX"

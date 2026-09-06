@@ -18,6 +18,10 @@
 [ext_resource type="Texture2D" uid="uid://e031w4au8vrk" path="res://assets/mc/mc_jump7.png" id="13_2n1s8"]
 [ext_resource type="Texture2D" uid="uid://def0bd1efqq8l" path="res://assets/mc/mc_jump8.png" id="14_3vjad"]
 [ext_resource type="Texture2D" uid="uid://2x0kmmm12087" path="res://assets/mc/mc_jump9.png" id="15_yt0h1"]
+[ext_resource type="AudioStream" uid="uid://j7y2uj5dup3p" path="res://assets/Audio/WalkingSFX.mp3" id="19_itxgx"]
+[ext_resource type="AudioStream" uid="uid://bhnx6hyk5gad5" path="res://assets/Audio/IcePlatformSFX.mp3" id="20_cgsek"]
+[ext_resource type="AudioStream" uid="uid://dlbyvv0yldy5u" path="res://assets/Audio/JumpSFX.mp3" id="21_0pi4m"]
+[ext_resource type="AudioStream" uid="uid://buqs5ir7sias2" path="res://assets/Audio/SlimeDeathSFX.mp3" id="22_sg6sq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cr25j"]
 animations = [{
@@ -654,3 +658,27 @@ process_material = SubResource("ShaderMaterial_cgsek")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665931828]
 scale = Vector2(0.9084857, 0.9084857)
 shape = SubResource("CircleShape2D_kpjcp")
+
+[node name="WalkingSFX" type="AudioStreamPlayer" parent="." unique_id=1440305530]
+process_mode = 3
+stream = ExtResource("19_itxgx")
+volume_db = -8.5
+bus = &"SFX"
+
+[node name="IceSFX" type="AudioStreamPlayer" parent="." unique_id=1002156573]
+process_mode = 3
+stream = ExtResource("20_cgsek")
+volume_db = -8.5
+bus = &"SFX"
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="." unique_id=860589359]
+process_mode = 3
+stream = ExtResource("21_0pi4m")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=501303071]
+process_mode = 3
+stream = ExtResource("22_sg6sq")
+volume_db = -13.0
+bus = &"SFX"

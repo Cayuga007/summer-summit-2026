@@ -23,6 +23,7 @@ mesh = SubResource("BoxMesh_4uxs1")
 [node name="VictorySFX" type="AudioStreamPlayer" parent="." unique_id=311239644]
 process_mode = 3
 stream = ExtResource("2_r04ow")
+volume_db = -13.0
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
