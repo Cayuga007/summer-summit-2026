@@ -90,7 +90,17 @@ func go_to_main_menu() -> void:
 
 
 func open_overlay(menu_scene: PackedScene, from_menu: CanvasLayer) -> void:
-	from_menu.hide()
+	if from_menu.name == "MainMenu":
+		from_menu.get_child(1).hide()
+		from_menu.get_child(2).hide()
+		from_menu.get_child(3).hide()
+	else:
+		from_menu.hide()
 	var menu := menu_scene.instantiate()
 	from_menu.add_sibling(menu)
-	menu.closed.connect(from_menu.show)
+	menu.closed.connect(func():
+		from_menu.show()
+		if from_menu.get_child(3):
+			from_menu.get_child(1).show()
+			from_menu.get_child(2).show()
+			from_menu.get_child(3).show())

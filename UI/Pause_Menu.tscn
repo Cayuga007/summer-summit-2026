@@ -13,6 +13,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_seuvd"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3kpto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xi7l4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uknj1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pkvbc"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxago"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_di4l5"]
@@ -29,18 +37,11 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6s0l5"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wo043"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g2vu0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0nsw4"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwppo"]
-
 [node name="PauseMenu" type="CanvasLayer" unique_id=294305811]
 script = ExtResource("1_pause")
 
 [node name="Label" type="Label" parent="." unique_id=1512054552]
+modulate = Color(0, 0, 0, 1)
 offset_left = 431.0
 offset_top = 145.0
 offset_right = 720.0
@@ -104,10 +105,10 @@ offset_left = 504.0
 offset_top = 334.0
 offset_right = 1504.0
 offset_bottom = 653.9999
-theme_override_styles/normal = SubResource("StyleBoxEmpty_oxago")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_di4l5")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_niqd5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_05j0p")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3kpto")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xi7l4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_uknj1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pkvbc")
 button_text = "Settings"
 button_font_size = 104
 
@@ -117,10 +118,10 @@ offset_left = 504.0
 offset_top = 382.00003
 offset_right = 1504.0
 offset_bottom = 701.9999
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bx36l")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_cxlvo")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_afyns")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_6s0l5")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oxago")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_di4l5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_niqd5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_05j0p")
 button_text = "Main Menu"
 button_font_size = 104
 
@@ -130,10 +131,10 @@ offset_left = 504.0
 offset_top = 288.0
 offset_right = 1504.0
 offset_bottom = 607.9999
-theme_override_styles/normal = SubResource("StyleBoxEmpty_wo043")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_g2vu0")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_0nsw4")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_uwppo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bx36l")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cxlvo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_afyns")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6s0l5")
 button_text = "Retry Level"
 button_font_size = 104
 

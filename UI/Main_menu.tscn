@@ -6,6 +6,12 @@
 [ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="3_ermsv"]
 [ext_resource type="PackedScene" uid="uid://c7dgbyb4cu8ua" path="res://assets/UI/ButtonPrefab.tscn" id="5_6byiu"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3odpu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ermsv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6byiu"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocwgq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bwkl7"]
@@ -23,12 +29,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_juq6o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yp1ib"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_goqtx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4tovq"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rcabl"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=928084415]
 script = ExtResource("1_vbv8a")
@@ -144,10 +144,10 @@ offset_left = 484.0
 offset_top = 490.0
 offset_right = 1643.9995
 offset_bottom = 790.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ocwgq")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_bwkl7")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_ysjxp")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_posw2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3odpu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ermsv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6byiu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ocwgq")
 button_text = "Play"
 button_font_size = 104
 
@@ -157,10 +157,10 @@ offset_left = 484.0
 offset_top = 533.0
 offset_right = 1643.9995
 offset_bottom = 833.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_f433h")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_rxfi0")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_xkpe5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_juq6o")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bwkl7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ysjxp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_posw2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f433h")
 button_text = "Setting"
 button_font_size = 104
 
@@ -170,10 +170,10 @@ offset_left = 485.00003
 offset_top = 587.0
 offset_right = 1644.9995
 offset_bottom = 887.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yp1ib")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_goqtx")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_4tovq")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rcabl")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rxfi0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xkpe5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_juq6o")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yp1ib")
 button_text = "Quit"
 button_font_size = 104
 
