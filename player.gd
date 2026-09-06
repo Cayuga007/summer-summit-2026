@@ -134,9 +134,7 @@ func _physics_process(delta: float) -> void:
 
 	_try_gravity_flip()
 
-	# Apply gravity when airborne, or when gravity just flipped and we are still on the old floor.
-	if not is_on_floor() or _gravity_is_flipping():
-		
+	# Apply gravity when airborne, or when gravity just flipped and we are still on the old floor.		
 	if not is_on_floor():
 		if not started_falling:
 			started_falling = true
