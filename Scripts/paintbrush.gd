@@ -2,7 +2,7 @@ class_name Paintbrush extends Node2D
 
 
 @export var paint_prefab: PackedScene
-@export var paint_meter: CanvasLayer
+@export var paint_ui: CanvasLayer
 @export var max_meter_amount: float = 100
 @export var meter_spill_amount: float = 0.1
 @export var paint_radius := 30
@@ -11,11 +11,18 @@ class_name Paintbrush extends Node2D
 var _is_holding := false
 var _previous_paint_position := Vector2.ZERO
 var _meter_amount := max_meter_amount
+var _current_color = 0
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _unhandled_input(event: InputEvent) -> void:
+	var num_colors = PlayerVariables.colors.size()
+	if Input.is_action_just_pressed("swap_left"):
+		_current_color = (_current_color - 1) % num_colors
+		paint_prefab = PlayerVariables.colors[_current_color]
+	if Input.is_action_just_pressed("swap_right"):
+		_current_color = (_current_color + 1) % num_colors
+		paint_prefab = PlayerVariables.colors[_current_color]
+
 
 func _input(event: InputEvent) -> void:
 	if _meter_amount <= 0: return
@@ -55,5 +62,5 @@ func spawn_paint(spawn_position: Vector2) -> void:
 	mesh_instance.mesh.height = paint_radius * 2
 	
 	_meter_amount -= meter_spill_amount
-	var progress_bar: ProgressBar = paint_meter.get_child(0)
+	var progress_bar: ProgressBar = paint_ui.get_child(0)
 	progress_bar.value = _meter_amount / max_meter_amount * 100

@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://br2lq756kfoy6" path="res://Scripts/paintbrush.gd" id="1_kh68u"]
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/platform.tscn" id="2_7stys"]
-[ext_resource type="PackedScene" uid="uid://ckomwa1i1v83q" path="res://paint_meter.tscn" id="3_slo63"]
+[ext_resource type="PackedScene" uid="uid://ckomwa1i1v83q" path="res://paint_ui.tscn" id="3_slo63"]
 
-[node name="Paintbrush" type="Node2D" unique_id=1638959940 node_paths=PackedStringArray("paint_meter")]
+[node name="Paintbrush" type="Node2D" unique_id=1638959940 node_paths=PackedStringArray("paint_ui")]
 script = ExtResource("1_kh68u")
 paint_prefab = ExtResource("2_7stys")
-paint_meter = NodePath("PaintMeter")
+paint_ui = NodePath("PaintUI")
 
-[node name="PaintMeter" parent="." unique_id=1937635955 instance=ExtResource("3_slo63")]
+[node name="PaintUI" parent="." unique_id=1937635955 instance=ExtResource("3_slo63")]

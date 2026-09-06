@@ -1,5 +1,14 @@
 extends Node
 
+
+var colors = [
+	preload("res://platforms/platform.tscn"),
+	preload("res://platforms/IcePlatform.tscn"),
+	preload("res://platforms/JumpPlatform.tscn"),
+	preload("res://platforms/GravityPlatform.tscn"),
+	preload("res://platforms/PortalPlatform.tscn"),
+]
+
 # Core movement — change these anytime; the player reads them live.
 var speed := 300.0
 var jump_velocity := -600.0
