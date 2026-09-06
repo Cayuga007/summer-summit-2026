@@ -1,27 +1,17 @@
 [gd_scene format=3 uid="uid://b0idr30nj003"]
 
 [ext_resource type="Script" uid="uid://uir6eopscgsp" path="res://Scripts/pause_menu.gd" id="1_pause"]
+[ext_resource type="Script" uid="uid://cefblnv8nxqj4" path="res://Scripts/sfx_button.gd" id="2_k2vpc"]
 [ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="2_s4llg"]
 [ext_resource type="PackedScene" uid="uid://c7dgbyb4cu8ua" path="res://assets/UI/ButtonPrefab.tscn" id="3_fx2e8"]
-[ext_resource type="Script" uid="uid://cefblnv8nxqj4" path="res://Scripts/sfx_button.gd" id="2_k2vpc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fx2e8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_soydj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_widwu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_seuvd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3kpto"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4llg"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fx2e8"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xi7l4"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uknj1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pkvbc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxago"]
 
@@ -44,6 +34,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g2vu0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0nsw4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwppo"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=294305811]
 script = ExtResource("1_pause")
@@ -74,11 +66,6 @@ script = ExtResource("2_k2vpc")
 visible = false
 layout_mode = 2
 text = "Retry Level"
-[node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=97676067]
-visible = false
-layout_mode = 2
-text = "Level Select"
-script = ExtResource("2_k2vpc")
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1932217136]
 visible = false
@@ -104,49 +91,36 @@ offset_left = 504.0
 offset_top = 240.0
 offset_right = 1504.0
 offset_bottom = 559.9999
-theme_override_styles/normal = SubResource("StyleBoxEmpty_soydj")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_widwu")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_seuvd")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_3kpto")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fx2e8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_soydj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_widwu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_seuvd")
 button_text = "Resume"
-button_font_size = 104
-
-[node name="Button2" parent="Control" unique_id=613817609 instance=ExtResource("3_fx2e8")]
-layout_mode = 0
-offset_left = 504.0
-offset_top = 336.0
-offset_right = 1504.0
-offset_bottom = 655.9999
-theme_override_styles/normal = SubResource("StyleBoxEmpty_s4llg")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_fx2e8")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_xi7l4")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_uknj1")
-button_text = "Level Select"
 button_font_size = 104
 
 [node name="Button4" parent="Control" unique_id=1252107195 instance=ExtResource("3_fx2e8")]
 layout_mode = 0
 offset_left = 504.0
-offset_top = 440.0
+offset_top = 334.0
 offset_right = 1504.0
-offset_bottom = 759.9999
-theme_override_styles/normal = SubResource("StyleBoxEmpty_pkvbc")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxago")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_di4l5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_niqd5")
+offset_bottom = 653.9999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oxago")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_di4l5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_niqd5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_05j0p")
 button_text = "Settings"
 button_font_size = 104
 
 [node name="Button5" parent="Control" unique_id=1045467 instance=ExtResource("3_fx2e8")]
 layout_mode = 0
 offset_left = 504.0
-offset_top = 488.00003
+offset_top = 382.00003
 offset_right = 1504.0
-offset_bottom = 807.9999
-theme_override_styles/normal = SubResource("StyleBoxEmpty_05j0p")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_bx36l")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_cxlvo")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_afyns")
+offset_bottom = 701.9999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bx36l")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cxlvo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_afyns")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6s0l5")
 button_text = "Main Menu"
 button_font_size = 104
 
@@ -156,10 +130,10 @@ offset_left = 504.0
 offset_top = 288.0
 offset_right = 1504.0
 offset_bottom = 607.9999
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6s0l5")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_wo043")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_g2vu0")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0nsw4")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wo043")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_g2vu0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0nsw4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uwppo")
 button_text = "Retry Level"
 button_font_size = 104
 
@@ -168,7 +142,6 @@ button_font_size = 104
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Control/Button" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="Control/Button2" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="Control/Button4" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Control/Button5" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Control/Button3" to="." method="_on_level_retry_button_pressed"]

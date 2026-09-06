@@ -509,6 +509,11 @@ func _is_walking() -> bool:
 	)
 
 
+func stop_walking_sfx() -> void:
+	walking_sfx.stop()
+	ice_sfx.stop()
+
+
 func _update_walking_sfx() -> void:
 	var walking_on_ice := _is_walking() and on_ice
 	var walking_on_ground := _is_walking() and not on_ice
