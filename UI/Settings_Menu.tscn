@@ -1,26 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwj1ixkqgr8xb"]
+[gd_scene format=3 uid="uid://cwj1ixkqgr8xb"]
 
 [ext_resource type="Script" uid="uid://buo0g1uw3bhr2" path="res://Scripts/settings_menu.gd" id="1_settings"]
+[ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="2_cib0i"]
+[ext_resource type="PackedScene" uid="uid://c7dgbyb4cu8ua" path="res://assets/UI/ButtonPrefab.tscn" id="3_mx4cl"]
 
-[node name="SettingsMenu" type="CanvasLayer"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_76bc8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5uxcl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g0t32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_todi1"]
+
+[node name="SettingsMenu" type="CanvasLayer" unique_id=948892221]
 script = ExtResource("1_settings")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 536.0
-offset_top = 94.0
-offset_right = 598.0
-offset_bottom = 117.0
+[node name="Label" type="Label" parent="." unique_id=969954485]
+offset_left = 489.0
+offset_top = 95.0
+offset_right = 663.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource("2_cib0i")
+theme_override_font_sizes/font_size = 35
 text = "Settings"
 
-[node name="MusicLabel" type="Label" parent="."]
-offset_left = 484.0
-offset_top = 149.0
-offset_right = 665.0
-offset_bottom = 198.0
+[node name="MusicLabel" type="Label" parent="." unique_id=555265311]
+offset_left = 485.0
+offset_top = 216.0
+offset_right = 666.0
+offset_bottom = 273.0
+theme_override_fonts/font = ExtResource("2_cib0i")
 text = "Music
 "
 
-[node name="MusicSlider" type="HSlider" parent="MusicLabel"]
+[node name="MusicSlider" type="HSlider" parent="MusicLabel" unique_id=1473166952]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 30.0
@@ -30,15 +43,16 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="SFXLabel" type="Label" parent="."]
-offset_left = 485.0
-offset_top = 224.0
-offset_right = 666.0
-offset_bottom = 273.0
+[node name="SFXLabel" type="Label" parent="." unique_id=141761077]
+offset_left = 486.0
+offset_top = 291.0
+offset_right = 667.0
+offset_bottom = 348.0
+theme_override_fonts/font = ExtResource("2_cib0i")
 text = "SFX
 "
 
-[node name="SFXSlider" type="HSlider" parent="SFXLabel"]
+[node name="SFXSlider" type="HSlider" parent="SFXLabel" unique_id=214337684]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 30.0
@@ -48,13 +62,34 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="BackButton" type="Button" parent="."]
-offset_left = 530.0
-offset_top = 322.0
-offset_right = 606.0
-offset_bottom = 353.0
+[node name="BackButton" type="Button" parent="." unique_id=1350217792]
+visible = false
+offset_left = 532.0
+offset_top = 328.0
+offset_right = 608.0
+offset_bottom = 359.0
 text = "Back"
+
+[node name="Control" type="Control" parent="." unique_id=1297735820]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" parent="Control" unique_id=677833116 instance=ExtResource("3_mx4cl")]
+layout_mode = 0
+offset_left = 515.0
+offset_top = 396.0
+offset_right = 1321.6667
+offset_bottom = 696.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_76bc8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5uxcl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g0t32")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_todi1")
+button_text = "Back"
+button_font_size = 104
 
 [connection signal="value_changed" from="MusicLabel/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SFXLabel/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://c7dgbyb4cu8ua"]
+
+[ext_resource type="Script" uid="uid://v2j66o5umh22" path="res://assets/UI/button.gd" id="1_8nbw3"]
+[ext_resource type="Shader" uid="uid://cgeembgyiaxhj" path="res://assets/UI/ButtonPrefab.gdshader" id="2_s8y5l"]
+[ext_resource type="Shader" uid="uid://lm1bong0lli4" path="res://Levels/SlimeBlobbingChalk.gdshader" id="2_wcaoo"]
+[ext_resource type="Texture2D" uid="uid://uayex7uqiwr6" path="res://assets/UI/button_base.png" id="3_vl7ma"]
+[ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="4_vl7ma"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s8y5l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fklg1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jrdtg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y5jnd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fklg1"]
+resource_local_to_scene = true
+shader = ExtResource("2_s8y5l")
+shader_parameter/hit_origin = Vector2(0, 0.5)
+shader_parameter/wave_time = 99.0
+shader_parameter/wave_speed = 2.290000085025
+shader_parameter/wave_frequency = 33.9190013736525
+shader_parameter/wave_amplitude = 0.0870000041325
+shader_parameter/wave_damping = 6.0000002375
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8y5l"]
+shader = ExtResource("2_wcaoo")
+shader_parameter/wave_speed = 4.07200019342
+shader_parameter/wave_frequency = 9.3750004453125
+shader_parameter/wave_amplitude = 0.05000000074506
+shader_parameter/jitter_fps = 16.246000724185002
+shader_parameter/jitter_amplitude = 0.0370000017575
+shader_parameter/jitter_frequency = 20.82000094145
+shader_parameter/hover_amount = 0.12800000608
+
+[node name="Button" type="Button" unique_id=677833116]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 284.99997
+offset_bottom = 299.99997
+scale = Vector2(0.15, 0.15)
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s8y5l")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fklg1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jrdtg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_y5jnd")
+script = ExtResource("1_8nbw3")
+button_text = ""
+
+[node name="DisplayContainer" type="SubViewportContainer" parent="." unique_id=626069498]
+material = SubResource("ShaderMaterial_fklg1")
+layout_mode = 1
+offset_right = 284.99997
+offset_bottom = 299.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="DisplayContainer" unique_id=1610563612]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(284, 299)
+render_target_update_mode = 4
+
+[node name="Background" type="NinePatchRect" parent="DisplayContainer/SubViewport" unique_id=1379365182]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_s8y5l")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vl7ma")
+draw_center = false
+patch_margin_left = 59
+patch_margin_top = 56
+patch_margin_right = 57
+patch_margin_bottom = 60
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="TextLabel" type="Label" parent="DisplayContainer/SubViewport" unique_id=1953373227]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+z_index = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_vl7ma")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1

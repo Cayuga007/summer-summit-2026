@@ -1,45 +1,171 @@
 [gd_scene format=3 uid="uid://b0idr30nj003"]
 
 [ext_resource type="Script" uid="uid://uir6eopscgsp" path="res://Scripts/pause_menu.gd" id="1_pause"]
+[ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="2_s4llg"]
+[ext_resource type="PackedScene" uid="uid://c7dgbyb4cu8ua" path="res://assets/UI/ButtonPrefab.tscn" id="3_fx2e8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_soydj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_widwu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_seuvd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3kpto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4llg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fx2e8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xi7l4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uknj1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pkvbc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxago"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_di4l5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_niqd5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_05j0p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bx36l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cxlvo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_afyns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6s0l5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wo043"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g2vu0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0nsw4"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=294305811]
 script = ExtResource("1_pause")
 
 [node name="Label" type="Label" parent="." unique_id=1512054552]
-offset_left = 518.0
-offset_top = 120.0
-offset_right = 624.0
-offset_bottom = 143.0
+offset_left = 431.0
+offset_top = 145.0
+offset_right = 720.0
+offset_bottom = 187.0
+theme_override_fonts/font = ExtResource("2_s4llg")
+theme_override_font_sizes/font_size = 41
 text = "Game Paused"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=606571166]
-offset_left = 524.0
-offset_top = 192.0
-offset_right = 623.0
-offset_bottom = 328.0
+visible = false
+offset_left = 520.0
+offset_top = 292.0
+offset_right = 619.0
+offset_bottom = 463.0
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1195012010]
+visible = false
 layout_mode = 2
 text = "Resume"
 
 [node name="LevelRetryButton" type="Button" parent="VBoxContainer" unique_id=1971505398]
+visible = false
 layout_mode = 2
 text = "Retry Level"
 
 [node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=97676067]
+visible = false
 layout_mode = 2
 text = "Level Select"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1932217136]
+visible = false
 layout_mode = 2
 text = "Settings"
 
 [node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=2020914329]
+visible = false
 layout_mode = 2
 text = "Main Menu"
+
+[node name="Control" type="Control" parent="." unique_id=1439194220]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" parent="Control" unique_id=677833116 instance=ExtResource("3_fx2e8")]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 240.0
+offset_right = 1504.0
+offset_bottom = 559.9999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_soydj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_widwu")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_seuvd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3kpto")
+button_text = "Resume"
+button_font_size = 104
+
+[node name="Button2" parent="Control" unique_id=613817609 instance=ExtResource("3_fx2e8")]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 336.0
+offset_right = 1504.0
+offset_bottom = 655.9999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s4llg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fx2e8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xi7l4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uknj1")
+button_text = "Level Select"
+button_font_size = 104
+
+[node name="Button4" parent="Control" unique_id=1252107195 instance=ExtResource("3_fx2e8")]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 440.0
+offset_right = 1504.0
+offset_bottom = 759.9999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pkvbc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxago")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_di4l5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_niqd5")
+button_text = "Settings"
+button_font_size = 104
+
+[node name="Button5" parent="Control" unique_id=1045467 instance=ExtResource("3_fx2e8")]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 488.00003
+offset_right = 1504.0
+offset_bottom = 807.9999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_05j0p")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bx36l")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cxlvo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_afyns")
+button_text = "Main Menu"
+button_font_size = 104
+
+[node name="Button3" parent="Control" unique_id=899494066 instance=ExtResource("3_fx2e8")]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 288.0
+offset_right = 1504.0
+offset_bottom = 607.9999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6s0l5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wo043")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g2vu0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0nsw4")
+button_text = "Retry Level"
+button_font_size = 104
 
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LevelRetryButton" to="." method="_on_level_retry_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Control/Button2" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="Control/Button4" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Control/Button5" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Control/Button3" to="." method="_on_level_retry_button_pressed"]

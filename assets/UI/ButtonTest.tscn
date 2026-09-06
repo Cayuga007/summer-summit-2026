@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://d13hcxhtmehpb"]
+
+[ext_resource type="Script" uid="uid://k2af7k0d74yt" path="res://Levels/buttontest.gd" id="1_12wha"]
+[ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="1_svfiy"]
+[ext_resource type="Texture2D" uid="uid://uayex7uqiwr6" path="res://assets/UI/button_base.png" id="2_df40u"]
+[ext_resource type="Shader" uid="uid://lm1bong0lli4" path="res://Levels/SlimeBlobbingChalk.gdshader" id="2_svfiy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_svfiy"]
+shader = ExtResource("2_svfiy")
+shader_parameter/wave_speed = 4.07200019342
+shader_parameter/wave_frequency = 9.3750004453125
+shader_parameter/wave_amplitude = 0.05000000074506
+shader_parameter/jitter_fps = 16.246000724185002
+shader_parameter/jitter_amplitude = 0.0370000017575
+shader_parameter/jitter_frequency = 20.82000094145
+shader_parameter/hover_amount = 0.12800000608
+
+[node name="Button" type="Control" unique_id=1289558130]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="." unique_id=1995345822]
+layout_mode = 0
+offset_right = 1159.0
+offset_bottom = 653.0
+theme_override_fonts/font = ExtResource("1_svfiy")
+flat = true
+script = ExtResource("1_12wha")
+
+[node name="Background" type="NinePatchRect" parent="Button" unique_id=1974456041]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_svfiy")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -994.0
+offset_bottom = -389.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_df40u")
+patch_margin_left = 82
+patch_margin_top = 132
+patch_margin_right = 83
+patch_margin_bottom = 132
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2

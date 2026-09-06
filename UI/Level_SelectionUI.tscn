@@ -1,22 +1,154 @@
 [gd_scene format=3 uid="uid://co0amkxemrde0"]
 
 [ext_resource type="Script" uid="uid://nqanfrmif5m3" path="res://Scripts/level_selection_ui.gd" id="1_rcy2s"]
+[ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="2_tgv8c"]
+[ext_resource type="PackedScene" uid="uid://c7dgbyb4cu8ua" path="res://assets/UI/ButtonPrefab.tscn" id="2_vsq3a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tgv8c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5njs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h8oa6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q377a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xts21"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xng0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynnqi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56wto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kk0tt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rtgq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1g84t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lccep"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hbdoi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m1jvq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qmmo6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5asuu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ehdmm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nb86h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7fh2w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kd4y3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dk6vn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4gni"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ai1qm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kn750"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l27g6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxf27"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcaca"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n3exv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hlp3a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k0pcr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u37ev"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4vyt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d8pqa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_km55w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ef0u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vvsnt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0r0rj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qc6t5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rvoh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmr00"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_68s6x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l5frl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_30s81"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2s8og"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3x7ig"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4j0e3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2pyu7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2yf0e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2iml"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcsei"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nevyd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_04eql"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_00rju"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7syk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cfkpu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58mff"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5fqjj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwxen"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8u7mf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hc70g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0j8a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vavgv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tutg7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2f3u"]
 
 [node name="LevelSelectionUI" type="CanvasLayer" unique_id=162670869]
 script = ExtResource("1_rcy2s")
 
 [node name="Label" type="Label" parent="." unique_id=2028740065]
-offset_left = 525.0
-offset_top = 240.0
-offset_right = 616.0
-offset_bottom = 263.0
+offset_left = 59.0
+offset_top = 92.0
+offset_right = 304.0
+offset_bottom = 127.0
+theme_override_fonts/font = ExtResource("2_tgv8c")
+theme_override_font_sizes/font_size = 34
 text = "Level Select"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1324103756]
-offset_left = 413.0
-offset_top = 285.0
-offset_right = 475.0
-offset_bottom = 421.0
+offset_left = 364.0
+offset_top = 676.0
+offset_right = 426.0
+offset_bottom = 812.0
 
 [node name="Level1Button" type="Button" parent="VBoxContainer" unique_id=1313344845]
 layout_mode = 2
@@ -35,10 +167,10 @@ layout_mode = 2
 text = "Level 4"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1329227933]
-offset_left = 549.0
-offset_top = 275.0
-offset_right = 611.0
-offset_bottom = 446.0
+offset_left = 500.0
+offset_top = 666.0
+offset_right = 562.0
+offset_bottom = 837.0
 
 [node name="Level5Button" type="Button" parent="VBoxContainer2" unique_id=650470859]
 layout_mode = 2
@@ -61,10 +193,10 @@ layout_mode = 2
 text = "Level 9"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="." unique_id=1871696346]
-offset_left = 692.0
-offset_top = 270.0
-offset_right = 763.0
-offset_bottom = 476.0
+offset_left = 643.0
+offset_top = 661.0
+offset_right = 714.0
+offset_bottom = 867.0
 
 [node name="Level10Button" type="Button" parent="VBoxContainer3" unique_id=1956870963]
 layout_mode = 2
@@ -91,12 +223,226 @@ layout_mode = 2
 text = "Level 15"
 
 [node name="BackButton" type="Button" parent="." unique_id=879658485]
-offset_left = 527.0
-offset_top = 464.0
-offset_right = 627.0
-offset_bottom = 495.0
+offset_left = 478.0
+offset_top = 855.0
+offset_right = 578.0
+offset_bottom = 886.0
 text = "Back
 "
+
+[node name="Control" type="Control" parent="." unique_id=2035239817]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" parent="Control" unique_id=677833116 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 435.0
+offset_right = 330.9902
+offset_bottom = 740.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tgv8c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n5njs")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h8oa6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q377a")
+button_text = "1"
+button_font_size = 104
+
+[node name="Button2" parent="Control" unique_id=1333817699 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 473.0
+offset_right = 400.9902
+offset_bottom = 778.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xts21")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1xng0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ynnqi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_56wto")
+button_text = "2"
+button_font_size = 104
+
+[node name="Button3" parent="Control" unique_id=429861332 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 443.0
+offset_right = 475.9902
+offset_bottom = 748.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kk0tt")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8rtgq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1g84t")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lccep")
+button_text = "3"
+button_font_size = 104
+
+[node name="Button4" parent="Control" unique_id=134329968 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 456.0
+offset_right = 549.99023
+offset_bottom = 761.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hbdoi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m1jvq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qmmo6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5asuu")
+button_text = "4"
+button_font_size = 104
+
+[node name="Button5" parent="Control" unique_id=804835048 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 412.0
+offset_right = 612.99023
+offset_bottom = 717.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ehdmm")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nb86h")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7fh2w")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kd4y3")
+button_text = "5"
+button_font_size = 104
+
+[node name="Button6" parent="Control" unique_id=659178863 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 364.0
+offset_right = 689.99023
+offset_bottom = 669.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dk6vn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_e4gni")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ai1qm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kn750")
+button_text = "6"
+button_font_size = 104
+
+[node name="Button7" parent="Control" unique_id=1924532882 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 350.0
+offset_right = 768.99023
+offset_bottom = 655.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l27g6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pxf27")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fcaca")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n3exv")
+button_text = "7"
+button_font_size = 104
+
+[node name="Button8" parent="Control" unique_id=243981250 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 372.0
+offset_right = 845.99023
+offset_bottom = 677.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hlp3a")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_k0pcr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u37ev")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u4vyt")
+button_text = "8"
+button_font_size = 104
+
+[node name="Button9" parent="Control" unique_id=794444875 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 342.0
+offset_right = 912.99023
+offset_bottom = 647.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_d8pqa")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_km55w")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5ef0u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vvsnt")
+button_text = "9"
+button_font_size = 104
+
+[node name="Button10" parent="Control" unique_id=830968281 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 675.0
+offset_top = 321.0
+offset_right = 982.99023
+offset_bottom = 626.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0r0rj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qc6t5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1rvoh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lmr00")
+button_text = "10"
+button_font_size = 104
+
+[node name="Button11" parent="Control" unique_id=909537206 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 747.0
+offset_top = 286.0
+offset_right = 1054.9902
+offset_bottom = 591.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_68s6x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_l5frl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_30s81")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2s8og")
+button_text = "11"
+button_font_size = 104
+
+[node name="Button12" parent="Control" unique_id=1341019724 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 297.0
+offset_right = 1131.9902
+offset_bottom = 602.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3x7ig")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4j0e3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2pyu7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2yf0e")
+button_text = "12"
+button_font_size = 104
+
+[node name="Button13" parent="Control" unique_id=324851143 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 893.0
+offset_top = 250.0
+offset_right = 1200.9902
+offset_bottom = 555.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m2iml")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wcsei")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nevyd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_04eql")
+button_text = "13"
+button_font_size = 104
+
+[node name="Button14" parent="Control" unique_id=1669126350 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 965.0
+offset_top = 199.0
+offset_right = 1272.9902
+offset_bottom = 504.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_00rju")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r7syk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cfkpu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_58mff")
+button_text = "14"
+button_font_size = 104
+
+[node name="Button15" parent="Control" unique_id=1094587624 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 1033.0
+offset_top = 151.0
+offset_right = 1340.9902
+offset_bottom = 456.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5fqjj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cwxen")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8u7mf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hc70g")
+button_text = "15"
+button_font_size = 104
+
+[node name="Button16" parent="Control" unique_id=543317868 instance=ExtResource("2_vsq3a")]
+layout_mode = 0
+offset_left = 506.0
+offset_top = 566.0
+offset_right = 1319.3329
+offset_bottom = 852.6665
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i0j8a")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vavgv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tutg7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_d2f3u")
+button_text = "Back"
+button_font_size = 104
 
 [connection signal="pressed" from="VBoxContainer/Level1Button" to="." method="_on_level_1_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level2Button" to="." method="_on_level_2_button_pressed"]
@@ -114,3 +460,19 @@ text = "Back
 [connection signal="pressed" from="VBoxContainer3/Level14Button" to="." method="_on_level_14_button_pressed"]
 [connection signal="pressed" from="VBoxContainer3/Level15Button" to="." method="_on_level_15_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="Control/Button2" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="Control/Button3" to="." method="_on_level_3_button_pressed"]
+[connection signal="pressed" from="Control/Button4" to="." method="_on_level_4_button_pressed"]
+[connection signal="pressed" from="Control/Button5" to="." method="_on_level_5_button_pressed"]
+[connection signal="pressed" from="Control/Button6" to="." method="_on_level_6_button_pressed"]
+[connection signal="pressed" from="Control/Button7" to="." method="_on_level_7_button_pressed"]
+[connection signal="pressed" from="Control/Button8" to="." method="_on_level_8_button_pressed"]
+[connection signal="pressed" from="Control/Button9" to="." method="_on_level_9_button_pressed"]
+[connection signal="pressed" from="Control/Button10" to="." method="_on_level_10_button_pressed"]
+[connection signal="pressed" from="Control/Button11" to="." method="_on_level_11_button_pressed"]
+[connection signal="pressed" from="Control/Button12" to="." method="_on_level_12_button_pressed"]
+[connection signal="pressed" from="Control/Button13" to="." method="_on_level_13_button_pressed"]
+[connection signal="pressed" from="Control/Button14" to="." method="_on_level_14_button_pressed"]
+[connection signal="pressed" from="Control/Button15" to="." method="_on_level_15_button_pressed"]
+[connection signal="pressed" from="Control/Button16" to="." method="_on_back_button_pressed"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_73ky0"]
 [ext_resource type="PackedScene" uid="uid://qth4natevc18" path="res://UI/Level_completed.tscn" id="2_cggpm"]
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_t02o0"]
-[ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="4_tsrm8"]
+[ext_resource type="PackedScene" uid="uid://d2e07fxjnm3cq" path="res://platforms/level_platform.tscn" id="4_tsrm8"]
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_u4n5n"]
 [ext_resource type="PackedScene" uid="uid://6h63sy370xkx" path="res://HazardBlock.tscn" id="6_74g1q"]
 [ext_resource type="PackedScene" uid="uid://cvgs3iuavddpo" path="res://bucket.tscn" id="7_xivkf"]
@@ -82,7 +82,6 @@ scale = Vector2(7.5690727, 1.16)
 
 [node name="Bucket" parent="Buckets" unique_id=1076440276 instance=ExtResource("7_xivkf")]
 position = Vector2(-364, 372)
-fill_amount = 20
 
 [node name="PortalPlatform" parent="." unique_id=2045743167 instance=ExtResource("8_cggpm")]
 position = Vector2(-340, -455)

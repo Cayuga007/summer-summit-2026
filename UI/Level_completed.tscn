@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://qth4natevc18"]
 
 [ext_resource type="Script" uid="uid://klo6cmqe81lk" path="res://Scripts/level_completed.gd" id="1_qp5ha"]
+[ext_resource type="PackedScene" uid="uid://c7dgbyb4cu8ua" path="res://assets/UI/ButtonPrefab.tscn" id="2_0kgi5"]
+[ext_resource type="FontFile" uid="uid://xwyrmmypdvci" path="res://assets/UI/Tengoku.ttf" id="2_uh386"]
 
 [sub_resource type="Gradient" id="Gradient_d4yoq"]
 offsets = PackedFloat32Array(0, 0.06844103, 0.2319392)
@@ -9,47 +11,80 @@ colors = PackedColorArray(1, 1, 1, 0, 0.46666667, 0.46666667, 0.46666667, 0.3254
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qp5ha"]
 gradient = SubResource("Gradient_d4yoq")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uh386"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kt3ak"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aepfp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8n80s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ilp87"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8e1cf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bvps"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mhyoj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rrbaf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wb1v5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o8v8c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lk8op"]
+
 [node name="LevelCompleted" type="CanvasLayer" unique_id=993404378]
 script = ExtResource("1_qp5ha")
 
 [node name="Label" type="Label" parent="." unique_id=1976327430]
-offset_left = 513.0
-offset_top = 204.0
-offset_right = 642.0
-offset_bottom = 227.0
+offset_left = 311.0
+offset_top = 243.0
+offset_right = 818.0
+offset_bottom = 299.0
+theme_override_fonts/font = ExtResource("2_uh386")
+theme_override_font_sizes/font_size = 55
 text = "Level Completed"
 
 [node name="RetryLevel" type="VBoxContainer" parent="." unique_id=1251580034]
+visible = false
 offset_left = 533.0
 offset_top = 326.0
 offset_right = 623.0
 offset_bottom = 357.0
 
 [node name="RetryButton" type="Button" parent="RetryLevel" unique_id=1450970417]
+visible = false
 layout_mode = 2
 text = "Retry Level"
 
 [node name="NextLevel" type="VBoxContainer" parent="." unique_id=818110124]
+visible = false
 offset_left = 681.0
 offset_top = 325.0
 offset_right = 771.0
 offset_bottom = 391.0
 
 [node name="NextButton" type="Button" parent="NextLevel" unique_id=1014155409]
+visible = false
 layout_mode = 2
 text = "Next Level"
 
 [node name="LevelSelect" type="VBoxContainer" parent="." unique_id=1194652709]
+visible = false
 offset_left = 399.0
 offset_top = 325.0
 offset_right = 489.0
 offset_bottom = 365.0
 
 [node name="LevelSelectButton" type="Button" parent="LevelSelect" unique_id=847771875]
+visible = false
 layout_mode = 2
 text = "Level Select"
 
 [node name="Gradient" type="TextureRect" parent="." unique_id=394105397]
+z_index = 5
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -59,6 +94,57 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_qp5ha")
 
+[node name="Control" type="Control" parent="." unique_id=640552622]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" parent="Control" unique_id=677833116 instance=ExtResource("2_0kgi5")]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 356.0
+offset_right = 1129.0
+offset_bottom = 671.0001
+scale = Vector2(0.2, 0.2)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uh386")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kt3ak")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_aepfp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8n80s")
+button_text = "Level Select"
+button_font_size = 90
+
+[node name="Button3" parent="Control" unique_id=547121649 instance=ExtResource("2_0kgi5")]
+layout_mode = 0
+offset_left = 735.0
+offset_top = 356.0
+offset_right = 1625.0
+offset_bottom = 671.0001
+scale = Vector2(0.2, 0.2)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ilp87")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8e1cf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2bvps")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mhyoj")
+button_text = "Next Level"
+button_font_size = 90
+
+[node name="Button2" parent="Control" unique_id=598451451 instance=ExtResource("2_0kgi5")]
+layout_mode = 0
+offset_left = 479.0
+offset_top = 356.0
+offset_right = 1369.0
+offset_bottom = 671.0001
+scale = Vector2(0.2, 0.2)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rrbaf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wb1v5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o8v8c")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lk8op")
+button_text = "Retry Level"
+button_font_size = 90
+
 [connection signal="pressed" from="RetryLevel/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="NextLevel/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="LevelSelect/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="Control/Button3" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="Control/Button2" to="." method="_on_retry_button_pressed"]
