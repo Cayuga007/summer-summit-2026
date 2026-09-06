@@ -14,6 +14,7 @@ var colors = [
 ]
 
 var _is_holding := false
+var _is_dragging := false
 var _stroke_id := 0
 var _previous_paint_position := Vector2.ZERO
 var _meter_amount := PlayerVariables.max_meter_amount
@@ -93,9 +94,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		can_swap = true
 
 
+func _process(_delta: float) -> void:
+	_update_spray_sfx()
+	_is_dragging = false
+
+
 func _input(event: InputEvent) -> void:
 	if _meter_amount <= 0:
 		_is_holding = false
+		_is_dragging = false
+		_update_spray_sfx()
 		return
 	
 	if event is InputEventMouseButton:
@@ -106,10 +114,13 @@ func _input(event: InputEvent) -> void:
 			spawn_paint(_previous_paint_position)
 		else:
 			_is_holding = false
+			_is_dragging = false
+			_update_spray_sfx()
 	elif event is InputEventMouseMotion and _is_holding:
 		var current_position := get_global_mouse_position()
 		paint_between(_previous_paint_position, current_position)
 		_previous_paint_position = current_position
+		_is_dragging = true
 
 
 func paint_between(previous: Vector2, current: Vector2) -> void:
@@ -117,12 +128,9 @@ func paint_between(previous: Vector2, current: Vector2) -> void:
 	var steps: int = max(1, int(ceil(distance / paint_spacing)))
 	
 	for i in range(1, steps + 1):
-		_update_spray_sfx()
 		var t := float(i) / steps
 		var paint_spawn_position := previous.lerp(current, t)
 		spawn_paint(paint_spawn_position)
-	if steps <= 1:
-		spray_sfx.stop()
 
 
 func spawn_paint(spawn_position: Vector2) -> void:
@@ -186,6 +194,8 @@ func _resize_circle_shape(shape_node: CollisionShape2D, radius: float) -> void:
 # Resets drawn strokes, restores the exact initial level paint amount, and synchronizes unlocks
 func clear_paint() -> void:
 	_is_holding = false
+	_is_dragging = false
+	_update_spray_sfx()
 
 	# 1. Batch remove all painted stroke bodies
 	for stroke in _stroke_container.get_children():
@@ -202,7 +212,7 @@ func clear_paint() -> void:
 
 
 func _update_spray_sfx() -> void:
-	if _is_holding and _meter_amount > 0:
+	if _is_dragging and _meter_amount > 0:
 		if not spray_sfx.playing:
 			spray_sfx.play()
 	elif spray_sfx.playing:
