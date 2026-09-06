@@ -14,10 +14,10 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="summer-summit-2026"
+config/name="Blobby"
 run/main_scene="uid://dyyfwwuagtr6g"
 config/features=PackedStringArray("4.7", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://cpoq28cbxqg8n"
 <<<<<<<HEADrun/main_scene="uid://dyyfwwuagtr6g"
 
 [audio]
@@ -101,3 +101,5 @@ common/physics_interpolation=true
 
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true
