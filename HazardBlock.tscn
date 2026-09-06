@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://6h63sy370xkx"]
 
 [ext_resource type="Script" uid="uid://d1bkj2oa8xocp" path="res://hazard_block.gd" id="1_61n01"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cr25j"]
-size = Vector2(30, 34)
+[ext_resource type="Script" uid="uid://yjkfo074216q" path="res://static_body_2d.gd" id="2_ggx15"]
 
 [sub_resource type="Gradient" id="Gradient_61n01"]
 colors = PackedColorArray(0.56, 0.056000013, 0, 1, 0.5, 0, 0, 1)
@@ -14,14 +12,16 @@ gradient = SubResource("Gradient_61n01")
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cr25j"]
 polygon = PackedVector2Array(-18, -17, -17, 18, 15, 17, 15, -17)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrh0v"]
+size = Vector2(33, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1ttv"]
+size = Vector2(32.79, 21.166)
+
 [node name="HazardBlock" type="Node2D" unique_id=2111362905]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1859311353]
 script = ExtResource("1_61n01")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=954683158]
-position = Vector2(-1, 1)
-shape = SubResource("RectangleShape2D_cr25j")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=643210145]
 position = Vector2(-1, 0.49999976)
@@ -30,3 +30,16 @@ texture = SubResource("GradientTexture1D_cr25j")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Area2D" unique_id=536598844]
 occluder = SubResource("OccluderPolygon2D_cr25j")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area2D" unique_id=1689959791]
+script = ExtResource("2_ggx15")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/StaticBody2D" unique_id=424294430]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_qrh0v")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="Area2D/StaticBody2D" unique_id=836232023]
+position = Vector2(-1.205, 0.66)
+scale = Vector2(1.0400025, 1.7216551)
+shape = SubResource("RectangleShape2D_f1ttv")
+target_position = Vector2(0, 0)

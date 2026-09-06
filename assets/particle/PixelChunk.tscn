@@ -10,7 +10,6 @@ bounce = 0.7
 size = Vector2(4, 4)
 
 [node name="PixelChunk" type="RigidBody2D" unique_id=1078544451]
-position = Vector2(1, -1)
 mass = 0.115
 physics_material_override = SubResource("PhysicsMaterial_61n01")
 script = ExtResource("1_oj1fl")

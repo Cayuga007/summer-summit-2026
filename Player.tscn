@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b28e6i86n267t" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://biao75isgycq5" path="res://icon.svg" id="1_xhfnw"]
-[ext_resource type="Texture2D" uid="uid://cxtfcxayh1q52" path="res://assets/mc/mc_death.png" id="3_itxgx"]
 [ext_resource type="Texture2D" uid="uid://cpoq28cbxqg8n" path="res://assets/mc/mc_idle0.png" id="3_wi0c6"]
 [ext_resource type="Texture2D" uid="uid://dron5ox730a4b" path="res://assets/mc/mc_idle1.png" id="4_hp6x6"]
 [ext_resource type="Texture2D" uid="uid://dev0eq2c5u73k" path="res://assets/mc/mc_idle2.png" id="5_3tkgg"]
@@ -22,14 +21,6 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cr25j"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_itxgx")
-}],
-"loop": 0,
-"name": &"Death",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 0.7,
 "texture": ExtResource("3_wi0c6")
@@ -621,8 +612,6 @@ radius = 85.70297
 [node name="Player" type="CharacterBody2D" unique_id=1599564440 groups=["Player"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_kpjcp")
-pixel_step = null
-death_settle_time = null
 chunk_recall_duration = 1.0
 chunk_recall_max_delay = 1.0
 
@@ -632,10 +621,12 @@ position = Vector2(0, 9.536743e-07)
 texture = ExtResource("1_xhfnw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=287264362]
-position = Vector2(16, -36)
+position = Vector2(-4, -36)
 scale = Vector2(2.05, 2.05)
 sprite_frames = SubResource("SpriteFrames_cr25j")
 animation = &"Jumping"
+frame = 8
+frame_progress = 1.0
 
 [node name="DeathParticles" type="GPUParticles2D" parent="." unique_id=365475038]
 visible = false
@@ -661,4 +652,5 @@ explosiveness = 1.0
 process_material = SubResource("ShaderMaterial_cgsek")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665931828]
+scale = Vector2(0.9084857, 0.9084857)
 shape = SubResource("CircleShape2D_kpjcp")
