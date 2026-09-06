@@ -57,7 +57,7 @@ func _is_falling() -> bool:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("reset"):
+	if Input.is_action_just_pressed("Reset"):
 		LevelManager.retry()
 		return
 

@@ -54,13 +54,28 @@ func spawn_paint(spawn_position: Vector2) -> void:
 	var new_paint: StaticBody2D = paint_prefab.instantiate()
 	add_child(new_paint)
 	new_paint.global_position = spawn_position
-	
-	var collision_shape: CollisionShape2D = new_paint.get_child(0)
-	collision_shape.shape.radius = paint_radius
-	var mesh_instance: MeshInstance2D = new_paint.get_child(1)
-	mesh_instance.mesh.radius = paint_radius
-	mesh_instance.mesh.height = paint_radius * 2
-	
+
+	_resize_circle_shape(new_paint.get_node_or_null("CollisionShape2D"), paint_radius)
+
+	var mesh_instance: MeshInstance2D = new_paint.get_node_or_null("MeshInstance2D")
+	if mesh_instance and mesh_instance.mesh:
+		mesh_instance.mesh = mesh_instance.mesh.duplicate()
+		mesh_instance.mesh.radius = paint_radius
+		mesh_instance.mesh.height = paint_radius * 2
+
+	# Mechanic triggers stay ~11px unless resized; keep them a bit larger than the solid body.
+	var area := new_paint.get_node_or_null("Area2D")
+	if area:
+		_resize_circle_shape(area.get_node_or_null("CollisionShape2D"), paint_radius + 4)
+
 	_meter_amount -= meter_spill_amount
 	var progress_bar: ProgressBar = paint_ui.get_child(0)
 	progress_bar.value = _meter_amount / max_meter_amount * 100
+
+
+func _resize_circle_shape(shape_node: CollisionShape2D, radius: float) -> void:
+	if shape_node == null or shape_node.shape == null:
+		return
+	shape_node.shape = shape_node.shape.duplicate()
+	if shape_node.shape is CircleShape2D:
+		shape_node.shape.radius = radius
