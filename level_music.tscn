@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://07sicatjcnxt"]
+
+[ext_resource type="AudioStream" uid="uid://ctfss0pyn7jh3" path="res://assets/level_music.wav" id="1_m242i"]
+
+[node name="LevelMusic" type="AudioStreamPlayer" unique_id=620994816]
+process_mode = 3
+stream = ExtResource("1_m242i")
+autoplay = true
+bus = &"Music"

@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 LevelManager="*res://Scripts/Level_manager.gd"
 PlayerVariables="*uid://sli8dx076pjj"
+LevelMusic="*uid://07sicatjcnxt"
 
 [display]
 
