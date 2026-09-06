@@ -14,6 +14,7 @@ var colors = [
 ]
 
 var _is_holding := false
+var _stroke_id := 0
 var _previous_paint_position := Vector2.ZERO
 var _meter_amount := PlayerVariables.max_meter_amount
 var _current_color = 0
@@ -100,6 +101,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			_is_holding = true
+			_stroke_id += 1
 			_previous_paint_position = get_global_mouse_position()
 			spawn_paint(_previous_paint_position)
 		else:
@@ -139,9 +141,17 @@ func spawn_paint(spawn_position: Vector2) -> void:
 		mesh_instance.mesh.radius = PlayerVariables.paint_radius
 		mesh_instance.mesh.height = PlayerVariables.paint_radius * 2
 
+	if "stroke_id" in new_paint:
+		new_paint.stroke_id = _stroke_id
+
 	var area := new_paint.get_node_or_null("Area2D")
 	if area:
-		_resize_circle_shape(area.get_node_or_null("CollisionShape2D"), PlayerVariables.paint_radius + 4)
+		# Gravity triggers match the visible dab. Solid platforms keep a
+		# slightly larger trigger so you catch them before landing.
+		var trigger_radius := PlayerVariables.paint_radius
+		if not ("stroke_id" in new_paint):
+			trigger_radius += 4
+		_resize_circle_shape(area.get_node_or_null("CollisionShape2D"), trigger_radius)
 
 	_meter_amount -= PlayerVariables.meter_spill_amount
 	var progress_bar: ProgressBar = paint_ui.get_child(0)

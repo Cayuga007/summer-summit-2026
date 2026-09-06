@@ -38,9 +38,10 @@ var is_landing := false
 var started_falling := false
 # Horizontal speed to keep after leaving ice / jumping.
 var _air_carry_speed := 0.0
-# Gravity pads currently overlapping. Painted strokes are many pads at once.
+# Gravity pads currently overlapping. Painted dabs from one drag share a stroke id.
 var _gravity_pads: Array[Node2D] = []
-var _gravity_flip_armed := true
+var _gravity_stroke_id := 0
+var _last_gravity_stroke_id := 0
 var _gravity_cooldown := 0.0
 var _portal_cooldown := 0.0
 # After a portal warp, leftover is_on_floor() must not snap or apply ground friction.
@@ -93,16 +94,19 @@ func enter_gravity_pad(pad: Node2D) -> void:
 	if _gravity_pads.has(pad):
 		return
 	_gravity_pads.append(pad)
+	_try_gravity_flip()
 
 
 func exit_gravity_pad(pad: Node2D) -> void:
 	_gravity_pads.erase(pad)
 	if _gravity_pads.is_empty():
-		_gravity_flip_armed = true
+		_gravity_stroke_id = 0
+		return
+	if not _overlaps_gravity_stroke(_gravity_stroke_id):
+		_gravity_stroke_id = _pad_stroke_id(_gravity_pads[0])
 
 
 func toggle_gravity() -> void:
-	_gravity_flip_armed = false
 	_gravity_cooldown = PlayerVariables.gravity_flip_cooldown
 	gravity_flipped = not gravity_flipped
 	$Icon.flip_v = gravity_flipped
@@ -135,19 +139,44 @@ func teleport_via_portal(destination: Vector2) -> void:
 	ice_contacts = 0
 	bounce_contacts = 0
 	_gravity_pads.clear()
-	_gravity_flip_armed = true
+	_gravity_stroke_id = 0
+	_last_gravity_stroke_id = 0
 	if _saved_floor_snap < 0.0:
 		_saved_floor_snap = floor_snap_length
 	floor_snap_length = 0.0
 	reset_physics_interpolation()
 
 
+func _pad_stroke_id(pad: Node2D) -> int:
+	if pad.has_method("get_stroke_id"):
+		return pad.get_stroke_id()
+	return pad.get_instance_id()
+
+
+func _overlaps_gravity_stroke(stroke_id: int) -> bool:
+	if stroke_id == 0:
+		return false
+	for pad in _gravity_pads:
+		if _pad_stroke_id(pad) == stroke_id:
+			return true
+	return false
+
+
 func _try_gravity_flip() -> void:
-	if not _gravity_flip_armed or _gravity_cooldown > 0.0:
+	if _gravity_pads.is_empty():
 		return
-	if _gravity_pads.is_empty() or not _is_grounded():
+	var sid := _pad_stroke_id(_gravity_pads[_gravity_pads.size() - 1])
+	if sid == _gravity_stroke_id:
+		return
+	# Ignore a physics jitter re-entry into the same stroke, but always
+	# honor a different stroke (airborne or grounded).
+	if sid == _last_gravity_stroke_id and _gravity_cooldown > 0.0:
 		return
 	toggle_gravity()
+	_gravity_stroke_id = sid
+	_last_gravity_stroke_id = sid
+	if _gravity_pads[_gravity_pads.size() - 1].has_method("play_flip_sfx"):
+		_gravity_pads[_gravity_pads.size() - 1].play_flip_sfx()
 
 
 func _oriented(upward: float) -> float:
@@ -349,7 +378,8 @@ func reset_gravity_state() -> void:
 	
 	# Clear pad overlaps and reset cooldowns so it's ready for the next life
 	_gravity_pads.clear()
-	_gravity_flip_armed = true
+	_gravity_stroke_id = 0
+	_last_gravity_stroke_id = 0
 	_gravity_cooldown = 0.0
 
 func die() -> void:
