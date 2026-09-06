@@ -12,6 +12,19 @@ var _meter_amount := PlayerVariables.max_meter_amount
 var _current_color = 0
 
 
+func _ready() -> void:
+	PlayerVariables.unlocks_changed.connect(_sync_selected_color)
+	_sync_selected_color()
+
+
+func _sync_selected_color() -> void:
+	var num_colors: int = PlayerVariables.unlocked_colors.size()
+	if num_colors <= 0:
+		return
+	_current_color = clampi(_current_color, 0, num_colors - 1)
+	paint_prefab = PlayerVariables.unlocked_colors[_current_color]
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	var num_colors = PlayerVariables.unlocked_colors.size()
 	if Input.is_action_just_pressed("swap_left"):

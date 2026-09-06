@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bt0h7gicy4eq2"]
+
+[ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_tkk0n"]
+[ext_resource type="PackedScene" uid="uid://qth4natevc18" path="res://UI/Level_completed.tscn" id="2_7rt3t"]
+[ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_ym2fi"]
+[ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="4_bhjwr"]
+[ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_f4oyo"]
+[ext_resource type="PackedScene" uid="uid://6h63sy370xkx" path="res://HazardBlock.tscn" id="6_yuuu4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
+
+[node name="Level_10" type="Node2D" unique_id=57220166]
+script = ExtResource("1_tkk0n")
+starting_paint_amount = 30.0
+
+[node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_7rt3t")]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
+zoom = Vector2(0.5, 0.5)
+
+[node name="Player" parent="." unique_id=1546855037 instance=ExtResource("3_ym2fi")]
+position = Vector2(-1048, 488)
+
+[node name="Platform" parent="." unique_id=870433869 instance=ExtResource("4_bhjwr")]
+position = Vector2(-928, 599)
+scale = Vector2(4.5999947, 1)
+
+[node name="Platform4" parent="." unique_id=1487216132 instance=ExtResource("4_bhjwr")]
+position = Vector2(-928, -182)
+scale = Vector2(4.5999947, 7.8)
+
+[node name="Platform5" parent="." unique_id=923603183 instance=ExtResource("4_bhjwr")]
+position = Vector2(991, -97.00002)
+scale = Vector2(3.559997, 9.479998)
+
+[node name="Platform6" parent="." unique_id=2096265866 instance=ExtResource("4_bhjwr")]
+position = Vector2(102.99994, 93.999954)
+scale = Vector2(10.039997, 9.200001)
+
+[node name="Platform2" parent="." unique_id=1441687969 instance=ExtResource("4_bhjwr")]
+position = Vector2(0, -613)
+scale = Vector2(23.519993, 1)
+
+[node name="Platform3" parent="." unique_id=2514462 instance=ExtResource("4_bhjwr")]
+position = Vector2(385, 597)
+scale = Vector2(15.679996, 1)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
+position = Vector2(0, 666)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2004289120]
+shape = SubResource("WorldBoundaryShape2D_8a5oj")
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
+position = Vector2(4, -688)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=2004289121]
+shape = SubResource("WorldBoundaryShape2D_8a5oj")
+
+[node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_f4oyo")]
+position = Vector2(1108, 464)
+
+[node name="HazardBlock4" parent="." unique_id=608772852 instance=ExtResource("6_yuuu4")]
+position = Vector2(-911, 225.00002)
+scale = Vector2(15.400002, 1.1599984)
+
+[node name="HazardBlock5" parent="." unique_id=2111362905 instance=ExtResource("6_yuuu4")]
+position = Vector2(136, -379)
+scale = Vector2(31.360006, 1.1599984)
