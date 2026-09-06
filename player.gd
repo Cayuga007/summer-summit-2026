@@ -20,20 +20,33 @@ var on_bounce: bool:
 # Landing recovery lock state.
 var is_landing := false
 var is_dead := false
-
+var started_falling := false
 # Horizontal speed to keep after leaving ice / jumping.
 var _air_carry_speed := 0.0
+# Gravity pads currently overlapping. Painted strokes are many pads at once.
+var _gravity_pads: Array[Node2D] = []
+var _gravity_flip_armed := true
+var _gravity_cooldown := 0.0
+var _portal_cooldown := 0.0
+var _jumped_this_airtime := false
+
 
 
 # Base Y-offset applied during jumping animation.
-
-
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_particles: GPUParticles2D = $DeathParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 @onready var sand_particles: GPUParticles2D = $SandParticles
 
+const JUMP_Y_OFFSET: float = -109.0
+const JUMP_COOLDOWN = 0.5
+const JUMP_BUFFER_WINDOW = 0.10
+const FALL_JUMP_BUFFER_WINDOW = 0.25
+
+var jump_buffer_t := 0.0
+var fall_jump_buffer_t := FALL_JUMP_BUFFER_WINDOW
+var jump_t := 0.0
 
 func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
@@ -54,20 +67,57 @@ func exit_bounce() -> void:
 	bounce_contacts = maxi(bounce_contacts - 1, 0)
 
 
+func enter_gravity_pad(pad: Node2D) -> void:
+	if _gravity_pads.has(pad):
+		return
+	_gravity_pads.append(pad)
+
+
+func exit_gravity_pad(pad: Node2D) -> void:
+	_gravity_pads.erase(pad)
+	if _gravity_pads.is_empty():
+		_gravity_flip_armed = true
+
+
 func toggle_gravity() -> void:
+	_gravity_flip_armed = false
+	_gravity_cooldown = PlayerVariables.gravity_flip_cooldown
 	gravity_flipped = not gravity_flipped
-	up_direction = Vector2.DOWN if gravity_flipped else Vector2.UP
 	$Icon.flip_v = gravity_flipped
-	# Launch into the new "down" so we leave the pad instead of sticking to it.
-	velocity.y = abs(PlayerVariables.jump_velocity) * (-1.0 if gravity_flipped else 1.0)
+	sprite.flip_v = gravity_flipped
+
+
+func _desired_up() -> Vector2:
+	return Vector2.DOWN if gravity_flipped else Vector2.UP
+
+
+func _gravity_is_flipping() -> bool:
+	return up_direction != _desired_up()
+
+
+func is_portal_cooling() -> bool:
+	return _portal_cooldown > 0.0
+
+
+func teleport_via_portal(destination: Vector2) -> void:
+	global_position = destination
+	_portal_cooldown = PlayerVariables.portal_cooldown
+
+
+func _try_gravity_flip() -> void:
+	if not _gravity_flip_armed or _gravity_cooldown > 0.0:
+		return
+	if _gravity_pads.is_empty() or not is_on_floor():
+		return
+	toggle_gravity()
 
 
 func _oriented(upward: float) -> float:
-	return -upward if gravity_flipped else upward
+	return -upward if up_direction == Vector2.DOWN else upward
 
 
 func _is_falling() -> bool:
-	return velocity.y <= 0.0 if gravity_flipped else velocity.y >= 0.0
+	return velocity.y <= 0.0 if up_direction == Vector2.DOWN else velocity.y >= 0.0
 
 
 func _physics_process(delta: float) -> void:
@@ -76,41 +126,72 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		velocity = Vector2.ZERO
 		return
+	
+	if jump_buffer_t > 0.0:
+		jump_buffer_t -= delta
+	jump_t -= delta
 
 	if Input.is_action_just_pressed("teleport debug"):
 		global_position = get_global_mouse_position()
 		velocity = Vector2.ZERO
-		
+	if Input.is_action_just_pressed("teleport debug"):
+		global_position = get_global_mouse_position()
+		velocity = Vector2.ZERO
 
+	if _gravity_cooldown > 0.0:
+		_gravity_cooldown = maxf(_gravity_cooldown - delta, 0.0)
+	if _portal_cooldown > 0.0:
+		_portal_cooldown = maxf(_portal_cooldown - delta, 0.0)
+
+	_try_gravity_flip()
+
+	# Apply gravity when airborne, or when gravity just flipped and we are still on the old floor.
 	if not is_on_floor():
+		if not started_falling:
+			started_falling = true
+			fall_jump_buffer_t = FALL_JUMP_BUFFER_WINDOW
 		var gravity := get_gravity() * PlayerVariables.gravity_multiplier
 		if gravity_flipped:
 			gravity = -gravity
 		velocity += gravity * delta
+		fall_jump_buffer_t -= delta
+	else:
+		started_falling = false
 
 	var just_jumped := false
-	if on_bounce and (is_on_floor() or _is_falling()):
+	if on_bounce:
 		velocity.y = _oriented(PlayerVariables.bounce_velocity)
 		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
 		just_jumped = true
 		is_landing = false
+		_jumped_this_airtime = true
 	elif Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = _oriented(PlayerVariables.jump_velocity)
 		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
 		just_jumped = true
 		is_landing = false
+		_jumped_this_airtime = true
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_t = JUMP_BUFFER_WINDOW
+		if fall_jump_buffer_t > 0.0 and jump_t <= 0.0:
+			jump()
+			just_jumped = true
+	
+	if is_on_floor() and jump_buffer_t > 0.0 and jump_t <= 0.0:
+		jump()
+		just_jumped = true
 
 	var direction := Input.get_axis("left", "right")
 	var target_speed: float = PlayerVariables.speed
 	var accel: float = PlayerVariables.acceleration
 	var decel: float = PlayerVariables.friction
 
-	if on_ice and is_on_floor() and not just_jumped:
+	if on_ice and is_on_floor() and not just_jumped and not _gravity_is_flipping():
 		target_speed = PlayerVariables.ice_speed
 		accel = PlayerVariables.ice_acceleration
 		decel = PlayerVariables.ice_friction
 		_air_carry_speed = abs(velocity.x)
-	elif not is_on_floor() or just_jumped:
+	elif not is_on_floor() or just_jumped or _gravity_is_flipping():
 		accel = PlayerVariables.air_acceleration
 		decel = PlayerVariables.air_friction
 		target_speed = maxf(PlayerVariables.speed, maxf(_air_carry_speed, abs(velocity.x)))
@@ -127,14 +208,27 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, decel * delta)
 
 	move_and_slide()
+	if is_on_floor():
+		_jumped_this_airtime = false
+	elif _gravity_is_flipping():
+		up_direction = _desired_up()
 	update_animation()
 
 
-	
+func jump() -> void:
+	jump_t = JUMP_COOLDOWN
+	velocity.y = _oriented(PlayerVariables.jump_velocity)
+	_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
+	jump_buffer_t = 0.0
+	is_landing = false
+
 func update_animation() -> void:
 	# Skip ground/jump animation updates while dead.
 	if is_dead:
 		return
+
+	var sprite: AnimatedSprite2D = $AnimatedSprite2D
+	sprite.flip_v = gravity_flipped
 
 	# Handle horizontal facing direction.
 	if velocity.x > 0.0:
@@ -145,6 +239,15 @@ func update_animation() -> void:
 	# Case 1: In the air.
 	if not is_on_floor():
 		is_landing = false
+
+		# Gravity lift-off is not a jump — keep the grounded sprite so it does not pop.
+		if not _jumped_this_airtime:
+			sprite.offset.y = 0.0
+			if not is_zero_approx(velocity.x):
+				sprite.play("Walking")
+			else:
+				sprite.play("Idle")
+			return
 
 		if sprite.animation != "Jumping":
 			sprite.play("Jumping")

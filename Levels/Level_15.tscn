@@ -11,8 +11,9 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
-[node name="Level_14" type="Node2D" unique_id=57220166]
+[node name="Level_14" type="Node2D" unique_id=57220166 node_paths=PackedStringArray("_buckets")]
 script = ExtResource("1_jd3rk")
+_buckets = NodePath("Buckets")
 starting_paint_amount = 5.0
 
 [node name="LevelCompleted" parent="." unique_id=1998881133 instance=ExtResource("2_l78s2")]
@@ -95,4 +96,4 @@ position = Vector2(939, -306)
 position = Vector2(-1075, -380)
 
 [node name="PortalPlatform" parent="." unique_id=1469516988 instance=ExtResource("8_l78s2")]
-position = Vector2(428, -37)
+position = Vector2(442, 39)

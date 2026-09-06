@@ -1,33 +1,27 @@
 extends StaticBody2D
 
-# Portals with the same id teleport to each other. Level 2 can leave this at 0.
+# Optional pairing if a level has more than one exit. Painted dabs keep the default.
 @export var portal_id: int = 0
-
-var _closed := false
+# Level-placed pads are exits. The brush sets this false on painted dabs.
+var is_exit := true
 
 
 func _ready() -> void:
 	add_to_group("portal")
 
 
-func close() -> void:
-	_closed = true
-	modulate.a = 0.4
-
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if _closed:
+	# Only painted entries teleport. Standing on the level exit does nothing.
+	if is_exit:
 		return
 	if not body.is_in_group("Player") or not body.has_method("teleport_via_portal"):
 		return
-	if body.is_portal_cooling():
+	if body.has_method("is_portal_cooling") and body.is_portal_cooling():
 		return
-	var partner := _find_partner()
-	if partner == null:
+	var exit_portal := _find_exit()
+	if exit_portal == null:
 		return
-	partner.close()
-	close()
-	body.teleport_via_portal(partner.landing_point(body))
+	body.teleport_via_portal(exit_portal.landing_point(body))
 
 
 func landing_point(player: Node2D) -> Vector2:
@@ -37,8 +31,13 @@ func landing_point(player: Node2D) -> Vector2:
 	return global_position + up * PlayerVariables.portal_landing_offset
 
 
-func _find_partner() -> Node:
+func _find_exit() -> Node:
+	var fallback: Node = null
 	for node in get_tree().get_nodes_in_group("portal"):
-		if node != self and node.get("portal_id") == portal_id:
+		if node == self or node.get("is_exit") != true:
+			continue
+		if node.get("portal_id") == portal_id:
 			return node
-	return null
+		if fallback == null:
+			fallback = node
+	return fallback
