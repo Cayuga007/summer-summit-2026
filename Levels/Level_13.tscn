@@ -9,8 +9,28 @@
 [ext_resource type="PackedScene" uid="uid://cvgs3iuavddpo" path="res://bucket.tscn" id="7_xivkf"]
 [ext_resource type="PackedScene" uid="uid://otae08kccpyf" path="res://platforms/PortalPlatform.tscn" id="8_cggpm"]
 [ext_resource type="PackedScene" uid="uid://cm2yksx2t35f0" path="res://platforms/level_platform.tscn" id="9_t02o0"]
+[ext_resource type="Texture2D" uid="uid://b0u0hnnwuy0uc" path="res://assets/mc/portal0.png" id="9_tsrm8"]
+[ext_resource type="Texture2D" uid="uid://sc6u4va7imfd" path="res://assets/mc/portal1.png" id="10_74g1q"]
+[ext_resource type="Texture2D" uid="uid://bc36tv54cuqd0" path="res://assets/mc/portal2.png" id="11_xivkf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1v8no"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_tsrm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_74g1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_xivkf")
+}],
+"loop": 1,
+"name": &"Portal",
+"speed": 5.0
+}]
 
 [node name="Level_13" type="Node2D" unique_id=389958481 node_paths=PackedStringArray("_buckets")]
 script = ExtResource("1_73ky0")
@@ -29,13 +49,11 @@ visible = false
 zoom = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." unique_id=864404923 instance=ExtResource("3_t02o0")]
+z_index = 1
 position = Vector2(-1020, -288)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1014523875]
 position = Vector2(0, 666)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2023435161]
-shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=1387641807 instance=ExtResource("5_u4n5n")]
 position = Vector2(470, -529)
@@ -65,7 +83,12 @@ scale = Vector2(7.5690727, 1.16)
 position = Vector2(-364, 372)
 
 [node name="PortalPlatform" parent="." unique_id=2045743167 instance=ExtResource("8_cggpm")]
-position = Vector2(-340, -455)
+position = Vector2(-361, -455)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PortalPlatform" unique_id=847425876]
+sprite_frames = SubResource("SpriteFrames_1v8no")
+animation = &"Portal"
+autoplay = "Portal"
 
 [node name="LevelPlatform" parent="." unique_id=1487216132 instance=ExtResource("9_t02o0")]
 position = Vector2(-1039, 216)

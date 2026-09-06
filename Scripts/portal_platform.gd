@@ -8,6 +8,9 @@ var is_exit := true
 
 func _ready() -> void:
 	add_to_group("portal")
+	var sprite := get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite:
+		sprite.play()
 	# Painted entries are triggers only. A solid dab would eat ice momentum on contact.
 	if not is_exit:
 		collision_layer = 0

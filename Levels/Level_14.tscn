@@ -8,8 +8,28 @@
 [ext_resource type="PackedScene" uid="uid://cm1hyrx840p0x" path="res://victory_door.tscn" id="5_w7fsl"]
 [ext_resource type="PackedScene" uid="uid://6h63sy370xkx" path="res://HazardBlock.tscn" id="6_fwsov"]
 [ext_resource type="PackedScene" uid="uid://otae08kccpyf" path="res://platforms/PortalPlatform.tscn" id="7_npj2g"]
+[ext_resource type="Texture2D" uid="uid://b0u0hnnwuy0uc" path="res://assets/mc/portal0.png" id="9_cew5e"]
+[ext_resource type="Texture2D" uid="uid://sc6u4va7imfd" path="res://assets/mc/portal1.png" id="10_w7fsl"]
+[ext_resource type="Texture2D" uid="uid://bc36tv54cuqd0" path="res://assets/mc/portal2.png" id="11_fwsov"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b3bti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_cew5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w7fsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fwsov")
+}],
+"loop": 1,
+"name": &"Portal",
+"speed": 5.0
+}]
 
 [node name="Level_14" type="Node2D" unique_id=1071581743]
 script = ExtResource("1_bihxa")
@@ -27,6 +47,7 @@ visible = false
 zoom = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." unique_id=1891517377 instance=ExtResource("3_ur2v3")]
+z_index = 1
 position = Vector2(-1020, 482)
 
 [node name="Platform" parent="." unique_id=325479051 instance=ExtResource("4_cew5e")]
@@ -71,6 +92,11 @@ scale = Vector2(8.769069, 1.16)
 
 [node name="PortalPlatform" parent="." unique_id=1779441807 instance=ExtResource("7_npj2g")]
 position = Vector2(-1026, 73)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PortalPlatform" unique_id=1569746691]
+sprite_frames = SubResource("SpriteFrames_b3bti")
+animation = &"Portal"
+autoplay = "Portal"
 
 [node name="Wall" parent="." unique_id=18446848 instance=ExtResource("4_cew5e")]
 position = Vector2(-1206, 15)
