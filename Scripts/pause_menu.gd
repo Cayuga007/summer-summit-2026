@@ -22,9 +22,13 @@ func _on_settings_button_pressed() -> void:
 func _on_level_retry_button_pressed() -> void:
 	LevelManager.retry()
 
+func _on_level_select_button_pressed() -> void:
+	LevelManager.go_to_level_select()
 
 func _on_main_menu_button_pressed() -> void:
 	LevelManager.go_to_main_menu()
+
+
 
 
 func _unhandled_input(event: InputEvent) -> void:

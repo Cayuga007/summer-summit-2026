@@ -66,6 +66,9 @@ func reset_level_state() -> void:
 
 func _on_level_completed() -> void:
 	pause_menu.hide()
+	var player := get_node_or_null("Player")
+	if player and player.has_method("stop_walking_sfx"):
+		player.stop_walking_sfx()
 	$LevelCompleted.show()
 	get_tree().paused = true
 
