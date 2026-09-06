@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://cvgs3iuavddpo"]
+[gd_scene load_steps=5 format=3 uid="uid://cvgs3iuavddpo"]
 
 [ext_resource type="Script" uid="uid://cuaqe6gs3007p" path="res://Scripts/bucket.gd" id="1_bgj3b"]
+[ext_resource type="AudioStream" uid="uid://fjquks85glgf" path="res://Audio/PaintBucketSFX.mp3" id="2_bucketsfx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85llr"]
 radius = 50.0
@@ -9,12 +10,17 @@ radius = 50.0
 radius = 50.0
 height = 100.0
 
-[node name="Bucket" type="Area2D" unique_id=2015066064]
+[node name="Bucket" type="Area2D"]
 script = ExtResource("1_bgj3b")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1058665784]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_85llr")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=992778188]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(1, 0, 1, 1)
 mesh = SubResource("SphereMesh_85llr")
+
+[node name="PaintBucketSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_bucketsfx")
+volume_db = -8.587
+bus = &"SFX"

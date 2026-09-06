@@ -5,6 +5,8 @@ class_name Paintbrush extends Node2D
 @export var paint_ui: CanvasLayer
 @export var paint_spacing := 5.0
 
+@onready var spray_sfx: AudioStreamPlayer = $SpraySFX
+
 var _is_holding := false
 var _previous_paint_position := Vector2.ZERO
 var _meter_amount := PlayerVariables.max_meter_amount
@@ -15,6 +17,10 @@ var can_swap := true
 func _ready() -> void:
 	PlayerVariables.unlocks_changed.connect(_sync_selected_color)
 	_sync_selected_color()
+	if spray_sfx.stream is AudioStreamMP3:
+		var spray_stream: AudioStreamMP3 = spray_sfx.stream.duplicate()
+		spray_stream.loop = true
+		spray_sfx.stream = spray_stream
 
 
 func _sync_selected_color() -> void:
@@ -56,6 +62,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _input(event: InputEvent) -> void:
 	if _meter_amount <= 0:
 		_is_holding = false
+		_update_spray_sfx()
 		return
 	
 	if event is InputEventMouseButton:
@@ -65,6 +72,7 @@ func _input(event: InputEvent) -> void:
 			spawn_paint(_previous_paint_position)
 		else:
 			_is_holding = false
+		_update_spray_sfx()
 	elif event is InputEventMouseMotion and _is_holding:
 		var current_position := get_global_mouse_position()
 		paint_between(_previous_paint_position, current_position)
@@ -82,6 +90,10 @@ func paint_between(previous: Vector2, current: Vector2) -> void:
 
 
 func spawn_paint(spawn_position: Vector2) -> void:
+	if _meter_amount <= 0:
+		_is_holding = false
+		_update_spray_sfx()
+		return
 	var new_paint: StaticBody2D = paint_prefab.instantiate()
 	# Painted portal dabs are entries; level-placed PortalPlatform nodes stay exits.
 	if "is_exit" in new_paint:
@@ -105,6 +117,11 @@ func spawn_paint(spawn_position: Vector2) -> void:
 	_meter_amount -= PlayerVariables.meter_spill_amount
 	var progress_bar: ProgressBar = paint_ui.get_child(0)
 	progress_bar.value = _meter_amount / PlayerVariables.max_meter_amount * 100
+	if _meter_amount <= 0:
+		_meter_amount = 0
+		_is_holding = false
+		progress_bar.value = 0
+	_update_spray_sfx()
 
 
 func set_paint_amount(amount: float) -> void:
@@ -125,3 +142,11 @@ func _resize_circle_shape(shape_node: CollisionShape2D, radius: float) -> void:
 	shape_node.shape = shape_node.shape.duplicate()
 	if shape_node.shape is CircleShape2D:
 		shape_node.shape.radius = radius
+
+
+func _update_spray_sfx() -> void:
+	if _is_holding and _meter_amount > 0:
+		if not spray_sfx.playing:
+			spray_sfx.play()
+	elif spray_sfx.playing:
+		spray_sfx.stop()

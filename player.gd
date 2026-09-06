@@ -8,6 +8,8 @@ var is_dead := false
 @onready var death_particles: GPUParticles2D = $DeathParticles
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var walking_sfx: AudioStreamPlayer = $WalkingSFX
+@onready var jump_sfx: AudioStreamPlayer = $JumpSFX
+@onready var death_sfx: AudioStreamPlayer = $DeathSFX
 
 var on_ice: bool:
 	get:
@@ -176,6 +178,7 @@ func _physics_process(delta: float) -> void:
 		started_falling = false
 
 	var just_jumped := false
+	var did_jump_action := false
 	if on_bounce:
 		velocity.y = _oriented(PlayerVariables.bounce_velocity)
 		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
@@ -188,15 +191,21 @@ func _physics_process(delta: float) -> void:
 		just_jumped = true
 		is_landing = false
 		_jumped_this_airtime = true
+		did_jump_action = true
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer_t = JUMP_BUFFER_WINDOW
 		if fall_jump_buffer_t > 0.0 and jump_t <= 0.0:
 			jump()
 			just_jumped = true
+			did_jump_action = true
 	
 	if _is_grounded() and jump_buffer_t > 0.0 and jump_t <= 0.0:
 		jump()
 		just_jumped = true
+		did_jump_action = true
+
+	if did_jump_action:
+		_play_jump_sfx()
 
 	var direction := Input.get_axis("left", "right")
 	var target_speed := PlayerVariables.speed
@@ -341,16 +350,35 @@ func _update_walking_sfx() -> void:
 		walking_sfx.stop()
 
 
+func _play_jump_sfx() -> void:
+	jump_sfx.play()
+
+
+func _play_death_sfx() -> void:
+	var sfx := death_sfx
+	if sfx.get_parent() == self:
+		remove_child(sfx)
+		# Keep the splat playing through the level reload.
+		get_tree().root.add_child(sfx)
+	sfx.play()
+	if not sfx.finished.is_connected(sfx.queue_free):
+		sfx.finished.connect(sfx.queue_free)
+
+
 func die() -> void:
 	# Prevent triggering death multiple times
 	if is_dead:
 		return
 	is_dead = true
 	_update_walking_sfx()
+	if jump_sfx.playing:
+		jump_sfx.stop()
 
 	# 1. Stop horizontal movement and interactions
 	velocity = Vector2.ZERO
 
+	_play_death_sfx()
+	
 	# 2. Trigger the death animation
 	sprite.play("Death")
 

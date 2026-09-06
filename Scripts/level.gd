@@ -42,7 +42,10 @@ func _physics_process(_delta: float) -> void:
 		var collider := player.get_slide_collision(i).get_collider()
 		if collider is Node and collider.name in ["Floor", "Ceiling"]:
 			_resetting = true
-			LevelManager.retry()
+			if player.has_method("die"):
+				player.die()
+			else:
+				LevelManager.retry()
 			return
 
 

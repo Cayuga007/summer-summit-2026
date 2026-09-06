@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dtilofk12es8a"]
+[gd_scene load_steps=6 format=3 uid="uid://dtilofk12es8a"]
 
 [ext_resource type="Script" uid="uid://bsc26vk53x34t" path="res://Scripts/level.gd" id="1_7ubt2"]
 [ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="3_vb2uo"]
@@ -7,43 +7,43 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8a5oj"]
 
-[node name="Level_2" type="Node2D" unique_id=57220166]
+[node name="Level_2" type="Node2D"]
 script = ExtResource("1_7ubt2")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1819212034]
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 
-[node name="Player" parent="." unique_id=1546855037 instance=ExtResource("3_vb2uo")]
+[node name="Player" parent="." instance=ExtResource("3_vb2uo")]
 position = Vector2(-1058, 490)
 
-[node name="Platform" parent="." unique_id=870433869 instance=ExtResource("4_dbc5v")]
+[node name="Platform" parent="." instance=ExtResource("4_dbc5v")]
 position = Vector2(-745.00006, 605)
 scale = Vector2(8.239998, 1)
 
-[node name="Platform2" parent="." unique_id=1487216132 instance=ExtResource("4_dbc5v")]
+[node name="Platform2" parent="." instance=ExtResource("4_dbc5v")]
 position = Vector2(739, 275)
 scale = Vector2(8.239998, 8)
 
-[node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
+[node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(0, 666)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2004289120]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
-[node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
+[node name="Ceiling" type="StaticBody2D" parent="."]
 position = Vector2(4, -688)
 rotation = -3.1415925
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=2004289121]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
-[node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_t5q4t")]
+[node name="VictoryDoor" parent="." instance=ExtResource("5_t5q4t")]
 position = Vector2(1094, -237)
 
-[node name="Wall" parent="." unique_id=897354254 instance=ExtResource("4_dbc5v")]
+[node name="Wall" parent="." instance=ExtResource("4_dbc5v")]
 position = Vector2(-1206, 15)
 scale = Vector2(0.880003, 13.560001)
 
-[node name="Wall2" parent="." unique_id=129586191 instance=ExtResource("4_dbc5v")]
+[node name="Wall2" parent="." instance=ExtResource("4_dbc5v")]
 position = Vector2(1203, 15)
 scale = Vector2(0.880003, 13.560001)
