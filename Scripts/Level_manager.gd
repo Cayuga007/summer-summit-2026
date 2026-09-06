@@ -21,8 +21,8 @@ const LEVELS: Array[String] = [
 	
 ]
 
-const MAIN_MENU := "res://UI/Main_menu.tscn"
-const LEVEL_SELECT := "res://UI/Level_SelectionUI.tscn"
+const MAIN_MENU := preload("res://UI/Main_menu.tscn")
+const LEVEL_SELECT := preload("res://UI/Level_SelectionUI.tscn")
 const SETTINGS_MENU := preload("res://UI/Settings_Menu.tscn")
 const LEVEL_SELECT_MENU := preload("res://UI/Level_SelectionUI.tscn")
 
@@ -81,12 +81,12 @@ func has_next_level() -> bool:
 
 func go_to_level_select() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file(LEVEL_SELECT)
+	get_tree().change_scene_to_file("res://UI/Level_SelectionUI.tscn")
 
 
 func go_to_main_menu() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file(MAIN_MENU)
+	get_tree().change_scene_to_file("res://UI/Main_menu.tscn")
 
 
 func open_overlay(menu_scene: PackedScene, from_menu: CanvasLayer) -> void:
