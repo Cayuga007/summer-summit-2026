@@ -26,8 +26,8 @@ position = Vector2(-1041, 599)
 scale = Vector2(2.4399977, 1)
 
 [node name="Platform2" parent="." unique_id=1487216132 instance=ExtResource("4_7bqri")]
-position = Vector2(911, 599)
-scale = Vector2(5.054302, 1)
+position = Vector2(1009.0001, 599)
+scale = Vector2(2.974302, 1)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)

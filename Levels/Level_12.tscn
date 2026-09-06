@@ -25,12 +25,16 @@ zoom = Vector2(0.5, 0.5)
 position = Vector2(-1020, 498)
 
 [node name="Platform" parent="." unique_id=870433869 instance=ExtResource("4_ikr5p")]
-position = Vector2(-1018, 601)
-scale = Vector2(2.8399947, 1)
+position = Vector2(-895, 599)
+scale = Vector2(5.8399944, 1)
 
-[node name="Platform4" parent="." unique_id=1487216132 instance=ExtResource("4_ikr5p")]
-position = Vector2(608, 601)
-scale = Vector2(11.199994, 1)
+[node name="Platform3" parent="." unique_id=1487216132 instance=ExtResource("4_ikr5p")]
+position = Vector2(-641.00006, 164)
+scale = Vector2(0.71999454, 7.7599974)
+
+[node name="Platform2" parent="." unique_id=1656088050 instance=ExtResource("4_ikr5p")]
+position = Vector2(649, -665)
+scale = Vector2(3.1199923, 1)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=905060382]
 position = Vector2(0, 666)
@@ -39,7 +43,7 @@ position = Vector2(0, 666)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("5_fp1c7")]
-position = Vector2(158, 436)
+position = Vector2(650, 162)
 
 [node name="Ceiling" type="StaticBody2D" parent="." unique_id=905060383]
 position = Vector2(4, -688)
@@ -48,39 +52,27 @@ rotation = -3.1415925
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=2004289121]
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
-[node name="HazardBlock" parent="." unique_id=2111362905 instance=ExtResource("6_kfpfw")]
-position = Vector2(-560.00006, -206.00002)
-rotation = -0.8765065
-scale = Vector2(40.009075, 1)
-
-[node name="HazardBlock2" parent="." unique_id=695596843 instance=ExtResource("6_kfpfw")]
-position = Vector2(-422.00003, 157.00003)
-rotation = -0.8765065
-scale = Vector2(40.009075, 1)
-
-[node name="HazardBlock3" parent="." unique_id=402187711 instance=ExtResource("6_kfpfw")]
-position = Vector2(541, -661)
-scale = Vector2(42.449074, 1)
-
 [node name="HazardBlock4" parent="." unique_id=2076683303 instance=ExtResource("6_kfpfw")]
-position = Vector2(398.00003, -152)
-scale = Vector2(25.44907, 1)
+position = Vector2(114, -213)
+scale = Vector2(46.60907, 1)
 
 [node name="HazardBlock5" parent="." unique_id=647292856 instance=ExtResource("6_kfpfw")]
-position = Vector2(801, -66)
-scale = Vector2(1.5690718, 6.199999)
+position = Vector2(801, -72)
+scale = Vector2(1.5690718, 10.119998)
 
 [node name="HazardBlock6" parent="." unique_id=903249218 instance=ExtResource("6_kfpfw")]
-position = Vector2(1097, -65.99999)
-scale = Vector2(1.5690718, 6.199999)
+position = Vector2(1097, 154)
+scale = Vector2(1.5690718, 22.479996)
 
 [node name="Buckets" type="Node2D" parent="." unique_id=1179645244]
 
 [node name="Bucket" parent="Buckets" unique_id=2015066064 instance=ExtResource("7_ous34")]
-position = Vector2(444, -252)
+position = Vector2(171, -407)
+fill_amount = 20
 
 [node name="Bucket2" parent="Buckets" unique_id=589115563 instance=ExtResource("7_ous34")]
-position = Vector2(945, -544)
+position = Vector2(647, -544)
+fill_amount = 20
 
 [node name="Wall" parent="." unique_id=597471235 instance=ExtResource("4_ikr5p")]
 position = Vector2(-1206, 15)

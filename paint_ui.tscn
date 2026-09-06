@@ -1,9 +1,43 @@
 [gd_scene format=3 uid="uid://ckomwa1i1v83q"]
 
 [sub_resource type="Gradient" id="Gradient_4l4kc"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_85llr"]
 gradient = SubResource("Gradient_4l4kc")
+width = 128
+
+[sub_resource type="Gradient" id="Gradient_57nvs"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t441f"]
+gradient = SubResource("Gradient_57nvs")
+width = 128
+
+[sub_resource type="Gradient" id="Gradient_vx4c4"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qgwt1"]
+gradient = SubResource("Gradient_vx4c4")
+width = 128
+
+[sub_resource type="Gradient" id="Gradient_t441f"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tmioh"]
+gradient = SubResource("Gradient_t441f")
+width = 128
+
+[sub_resource type="Gradient" id="Gradient_mw4sg"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.5019608, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_38eoe"]
+gradient = SubResource("Gradient_mw4sg")
 width = 128
 
 [node name="PaintUI" type="CanvasLayer" unique_id=1937635955]
@@ -27,28 +61,31 @@ grow_vertical = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1328092433]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1386511140]
-layout_mode = 2
-size_flags_horizontal = 4
-texture = SubResource("GradientTexture1D_85llr")
-flip_h = true
-
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=406560320]
+[node name="Red" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1386511140]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = SubResource("GradientTexture1D_85llr")
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1493756286]
+[node name="Blue" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=406560320]
+modulate = Color(1, 1, 1, 0.2509804)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = SubResource("GradientTexture1D_85llr")
+texture = SubResource("GradientTexture1D_t441f")
 
-[node name="TextureRect4" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1418462283]
+[node name="Yellow" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1493756286]
+modulate = Color(1, 1, 1, 0.2509804)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = SubResource("GradientTexture1D_85llr")
+texture = SubResource("GradientTexture1D_qgwt1")
 
-[node name="TextureRect5" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=803340677]
+[node name="Green" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1418462283]
+modulate = Color(1, 1, 1, 0.2509804)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = SubResource("GradientTexture1D_85llr")
+texture = SubResource("GradientTexture1D_tmioh")
+
+[node name="Purple" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=803340677]
+modulate = Color(1, 1, 1, 0.2509804)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("GradientTexture1D_38eoe")
