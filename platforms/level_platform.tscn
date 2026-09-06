@@ -12,6 +12,7 @@ size = Vector2(100, 100)
 shape = SubResource("RectangleShape2D_cms5r")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
+visible = false
 modulate = Color(0, 0, 0, 1)
 mesh = SubResource("QuadMesh_85llr")
 
