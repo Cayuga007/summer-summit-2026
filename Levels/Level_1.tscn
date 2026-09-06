@@ -25,7 +25,7 @@ zoom = Vector2(0.5, 0.5)
 position = Vector2(117, 99)
 
 [node name="Platform" parent="." unique_id=870433869 instance=ExtResource("2_8a5oj")]
-position = Vector2(133.00006, 214)
+position = Vector2(268, 228)
 
 [node name="Platform3" parent="." unique_id=1487216132 instance=ExtResource("2_8a5oj")]
 position = Vector2(1206.0001, 551)
@@ -44,7 +44,7 @@ position = Vector2(4, 644)
 shape = SubResource("WorldBoundaryShape2D_8a5oj")
 
 [node name="VictoryDoor" parent="." unique_id=619035289 instance=ExtResource("3_nl7va")]
-position = Vector2(2267, 249)
+position = Vector2(527, -315)
 
 [node name="IcePlatform" parent="." unique_id=1287491701 instance=ExtResource("6_ntpbt")]
 position = Vector2(914, 220)
@@ -55,7 +55,7 @@ position = Vector2(616, 271)
 scale = Vector2(4, 4)
 
 [node name="GravityPlatform" parent="." unique_id=1574595770 instance=ExtResource("8_uq0sc")]
-position = Vector2(356.00003, 212)
+position = Vector2(117, 217)
 scale = Vector2(4, 4)
 
 [node name="GravityPlatform2" parent="." unique_id=1574595771 instance=ExtResource("8_uq0sc")]
