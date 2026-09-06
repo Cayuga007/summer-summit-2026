@@ -29,17 +29,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	var num_colors = PlayerVariables.unlocked_colors.size()
 	if Input.is_action_just_pressed("swap_left") and can_swap:
 		can_swap = false
-		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = false
+		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 0.25
 		_current_color = (_current_color - 1) % num_colors
-		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = true
+		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 1
 		paint_prefab = PlayerVariables.unlocked_colors[_current_color]
 		await get_tree().create_timer(0.1).timeout
 		can_swap = true
 	if Input.is_action_just_pressed("swap_right") and can_swap:
 		can_swap = false
-		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = false
+		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 0.25
 		_current_color = (_current_color + 1) % num_colors
-		paint_ui.get_child(1).get_child(0).get_child(_current_color).flip_h = true
+		paint_ui.get_child(1).get_child(0).get_child(_current_color).modulate.a = 1
 		paint_prefab = PlayerVariables.unlocked_colors[_current_color]
 		await get_tree().create_timer(0.1).timeout
 		can_swap = true
