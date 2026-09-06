@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bxtqr4scws7qn"]
+
+[ext_resource type="PackedScene" uid="uid://32q6t44ytub2" path="res://Player.tscn" id="1_wyk0b"]
+[ext_resource type="PackedScene" uid="uid://6h63sy370xkx" path="res://HazardBlock.tscn" id="2_risw2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_cr25j"]
+
+[sub_resource type="Gradient" id="Gradient_wyk0b"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qrh0v"]
+gradient = SubResource("Gradient_wyk0b")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cr25j"]
+size = Vector2(4.65197, 0.97940075)
+
+[node name="0TimTest" type="Node2D" unique_id=784913612]
+
+[node name="Player" parent="." unique_id=1599564440 instance=ExtResource("1_wyk0b")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1086898958]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D" unique_id=1130380929]
+position = Vector2(560, 622.75)
+scale = Vector2(1252, 133.5)
+mesh = SubResource("QuadMesh_cr25j")
+texture = SubResource("GradientTexture1D_qrh0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=642681139]
+position = Vector2(564.125, 626.375)
+scale = Vector2(266.5, 133.5)
+shape = SubResource("RectangleShape2D_cr25j")
+
+[node name="HazardBlock2" parent="." unique_id=2111362905 instance=ExtResource("2_risw2")]
+position = Vector2(667, 484)
