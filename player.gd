@@ -345,17 +345,19 @@ func die() -> void:
 		death_particles.restart()
 		death_particles.emitting = true
 
-	# Defer spawning to avoid physics query flushing locks
+	# 1. Reset paintbrush strokes and ink quota
+	get_tree().call_group("paintbrush", "set", "painting_enabled", false)
+	get_tree().call_group("paintbrush", "clear_paint")
+
+	# 2. Reset level pickups (buckets, coins, switches, etc.)
+	get_tree().call_group("level", "reset_level_state")
+
 	call_deferred("spawn_pixel_sand", impact_velocity)
 	sprite.visible = false
 	velocity = Vector2.ZERO
 
-	# Wait for sand chunks to physically scatter and settle
 	await get_tree().create_timer(death_settle_time).timeout
-
-	# Trigger fluid reassembly back at the spawn position
 	respawn(spawn_point)
-
 
 func spawn_pixel_sand(impact_vel: Vector2) -> void:
 	active_chunks.clear()
@@ -397,20 +399,16 @@ func spawn_pixel_sand(impact_vel: Vector2) -> void:
 				"offset": local_offset
 			})
 
-
 func respawn(respawn_position: Vector2) -> void:
-	# 1. Snap player position to exact integer pixels
 	global_position = respawn_position.round()
 	velocity = Vector2.ZERO
 	sprite.visible = false
 	if collision_shape:
 		collision_shape.set_deferred("disabled", true)
 
-	# 2. Ensure sprite is queued to exact idle frame 0
 	sprite.play("Idle")
 	sprite.set_frame_and_progress(0, 0.0)
 
-	# 3. Command each chunk to return to its snapped target offset
 	for item in active_chunks:
 		var chunk = item["chunk"]
 		if is_instance_valid(chunk):
@@ -418,17 +416,16 @@ func respawn(respawn_position: Vector2) -> void:
 			var delay: float = randf_range(0.0, chunk_recall_max_delay)
 			chunk.recall_to(target_pos, delay, chunk_recall_duration)
 
-	# 4. Wait until the slowest chunk completes flight
 	await get_tree().create_timer(chunk_recall_duration + chunk_recall_max_delay).timeout
-
-	# 5. Brief micro-settle for one render frame to guarantee all tweens finalized
 	await get_tree().process_frame
 
-	# 6. Atomic swap: Show real sprite and purge all chunk nodes simultaneously
 	sprite.visible = true
 	is_dead = false
 	if collision_shape:
 		collision_shape.set_deferred("disabled", false)
+
+	# Re-enable painting once the character is fully reconstituted
+	get_tree().call_group("paintbrush", "set", "painting_enabled", true)
 
 	for item in active_chunks:
 		var chunk = item["chunk"]
