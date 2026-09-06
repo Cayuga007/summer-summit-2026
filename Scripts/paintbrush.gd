@@ -69,6 +69,9 @@ func paint_between(previous: Vector2, current: Vector2) -> void:
 
 func spawn_paint(spawn_position: Vector2) -> void:
 	var new_paint: StaticBody2D = paint_prefab.instantiate()
+	# Painted portal dabs are entries; level-placed PortalPlatform nodes stay exits.
+	if "is_exit" in new_paint:
+		new_paint.is_exit = false
 	add_child(new_paint)
 	new_paint.global_position = spawn_position
 

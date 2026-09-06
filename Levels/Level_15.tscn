@@ -95,4 +95,4 @@ position = Vector2(939, -306)
 position = Vector2(-1075, -380)
 
 [node name="PortalPlatform" parent="." unique_id=1469516988 instance=ExtResource("8_l78s2")]
-position = Vector2(428, -37)
+position = Vector2(442, 39)

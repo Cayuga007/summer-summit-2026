@@ -70,8 +70,8 @@ var ice_speed := 1200.0
 var ice_acceleration := 2000.0
 var ice_friction := 50.0
 
-# Air: keep ice momentum, still allow some steering.
-var air_acceleration := 300
+# Air: keep ice momentum, but A/D should still steer freely.
+var air_acceleration := 2500.0
 var air_friction := 100.0
 
 # JUMP PLATFORM
@@ -80,9 +80,14 @@ var bounce_velocity := -800.0
 
 # GRAVITY PLATFORM
 # Flip state lives on the player and stays until the next gravity pad.
+# Only the Y gravity direction changes. Position and speed are not touched.
+# Don't flip again until you leave the current stroke, plus this extra delay.
+var gravity_flip_cooldown := 0.2
+
 
 # PORTAL PLATFORM
-# Appear this far along the player's "up" from the destination pad.
+# Painted dabs are entries; the level-placed pad is the one-way exit.
+# Appear this far along the player's "up" from the exit pad.
 var portal_landing_offset := 70.0
-# Ignore portal pads briefly after a teleport so you don't bounce back.
+# Ignore painted entries briefly after a teleport.
 var portal_cooldown := 0.25
