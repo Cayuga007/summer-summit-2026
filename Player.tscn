@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://32q6t44ytub2"]
+[gd_scene load_steps=24 format=3 uid="uid://32q6t44ytub2"]
 
 [ext_resource type="Script" uid="uid://b28e6i86n267t" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://biao75isgycq5" path="res://icon.svg" id="1_xhfnw"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://ydxdtlkrgho6" path="res://assets/draft/jump7.png" id="12_47wu6"]
 [ext_resource type="Texture2D" uid="uid://81d8ne1w8tl2" path="res://assets/draft/jump8.png" id="13_2n1s8"]
 [ext_resource type="Texture2D" uid="uid://b68ujdvsb15ul" path="res://assets/draft/jump9.png" id="14_3vjad"]
+[ext_resource type="AudioStream" uid="uid://j7y2uj5dup3p" path="res://Audio/WalkingSFX.mp3" id="15_walksfx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
 radius = 85.70297
@@ -29,7 +30,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_itxgx")
 }],
-"loop": 0,
+"loop": false,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -43,7 +44,7 @@ animations = [{
 "duration": 0.7,
 "texture": ExtResource("5_3tkgg")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Idle",
 "speed": 5.0
 }, {
@@ -75,7 +76,7 @@ animations = [{
 "duration": 0.7,
 "texture": ExtResource("14_3vjad")
 }],
-"loop": 0,
+"loop": false,
 "name": &"Jumping",
 "speed": 5.0
 }, {
@@ -92,7 +93,7 @@ animations = [{
 "duration": 0.7,
 "texture": ExtResource("9_r3kul")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Walking",
 "speed": 5.0
 }]
@@ -101,25 +102,30 @@ animations = [{
 particle_flag_disable_z = true
 gravity = Vector3(0, 98, 0)
 
-[node name="Player" type="CharacterBody2D" unique_id=1599564440 groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_kpjcp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665931828]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kpjcp")
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=905120733]
+[node name="Icon" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, 9.536743e-07)
 texture = ExtResource("1_xhfnw")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=287264362]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.05, 2.05)
 sprite_frames = SubResource("SpriteFrames_cr25j")
 animation = &"Death"
 
-[node name="DeathParticles" type="GPUParticles2D" parent="." unique_id=365475038]
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
 emitting = false
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_cr25j")
+
+[node name="WalkingSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_walksfx")
+volume_db = -8.587
+bus = &"SFX"

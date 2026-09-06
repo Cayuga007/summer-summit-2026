@@ -7,6 +7,7 @@ var is_dead := false
 
 @onready var death_particles: GPUParticles2D = $DeathParticles
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var walking_sfx: AudioStreamPlayer = $WalkingSFX
 
 var on_ice: bool:
 	get:
@@ -45,6 +46,10 @@ var jump_t := 0.0
 func _ready() -> void:
 	# Listen for animation finish to automatically exit the landing state.
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
+	if walking_sfx.stream is AudioStreamMP3:
+		var walk_stream: AudioStreamMP3 = walking_sfx.stream.duplicate()
+		walk_stream.loop = true
+		walking_sfx.stream = walk_stream
 
 
 func enter_ice() -> void:
@@ -136,6 +141,7 @@ func _physics_process(delta: float) -> void:
 	# If dead, stop processing input or animation changes
 	if is_dead:
 		move_and_slide()
+		_update_walking_sfx()
 		return
 
 	# Teleport may fire during move_and_slide; only end air-carry after a full step at the exit.
@@ -229,6 +235,7 @@ func _physics_process(delta: float) -> void:
 	elif _gravity_is_flipping():
 		up_direction = _desired_up()
 	update_animation()
+	_update_walking_sfx()
 
 
 func jump() -> void:
@@ -316,11 +323,30 @@ func _on_animation_finished() -> void:
 		$AnimatedSprite2D.offset.y = 0.0
 		
 		
+func _is_walking() -> bool:
+	return (
+		not is_dead
+		and _is_grounded()
+		and not is_landing
+		and sprite.animation == "Walking"
+		and not is_zero_approx(velocity.x)
+	)
+
+
+func _update_walking_sfx() -> void:
+	if _is_walking():
+		if not walking_sfx.playing:
+			walking_sfx.play()
+	elif walking_sfx.playing:
+		walking_sfx.stop()
+
+
 func die() -> void:
 	# Prevent triggering death multiple times
 	if is_dead:
 		return
 	is_dead = true
+	_update_walking_sfx()
 
 	# 1. Stop horizontal movement and interactions
 	velocity = Vector2.ZERO
