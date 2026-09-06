@@ -11,6 +11,10 @@ config_version=5
 [application]
 
 config/name="summer-summit-2026"
+<<<<<<< Updated upstream
+=======
+run/main_scene="uid://dyyfwwuagtr6g"
+>>>>>>> Stashed changes
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
