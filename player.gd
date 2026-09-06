@@ -3,11 +3,22 @@ class_name Player extends CharacterBody2D
 const pixel_chunk_scene = preload("res://assets/particle/PixelChunk.tscn")
 @export var pixel_step: int = 4
 
+# Time in seconds sand chunks simulate physics on the ground before recalling
+@export var death_settle_time: float = 1.0
+
+# Flight duration for chunks to travel back to the spawn coordinate
+@export var chunk_recall_duration: float = 0.6
+
+# Staggered launch delay to make chunks lift off asynchronously
+@export var chunk_recall_max_delay: float = 0.2
+
 var ice_contacts := 0
 var bounce_contacts := 0
 var gravity_flipped := false
 
-
+# Stores references to active sand chunks and their relative sprite offsets
+# Format: { "chunk": RigidBody2D, "offset": Vector2 }
+var active_chunks: Array[Dictionary] = []
 
 var on_ice: bool:
 	get:
@@ -20,38 +31,27 @@ var on_bounce: bool:
 # Landing recovery lock state.
 var is_landing := false
 var is_dead := false
-var started_falling := false
+
 # Horizontal speed to keep after leaving ice / jumping.
 var _air_carry_speed := 0.0
-# Gravity pads currently overlapping. Painted strokes are many pads at once.
-var _gravity_pads: Array[Node2D] = []
-var _gravity_flip_armed := true
-var _gravity_cooldown := 0.0
-var _portal_cooldown := 0.0
-var _jumped_this_airtime := false
-
 
 
 # Base Y-offset applied during jumping animation.
+
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_particles: GPUParticles2D = $DeathParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 @onready var sand_particles: GPUParticles2D = $SandParticles
 
-const JUMP_Y_OFFSET: float = -109.0
-const JUMP_COOLDOWN = 0.5
-const JUMP_BUFFER_WINDOW = 0.10
-const FALL_JUMP_BUFFER_WINDOW = 0.25
-
-var jump_buffer_t := 0.0
-var fall_jump_buffer_t := FALL_JUMP_BUFFER_WINDOW
-var jump_t := 0.0
+# Stores the default spawn/checkpoint coordinate
+var spawn_point: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
-	
-
+	# Record current starting coordinate as the initial spawn point
+	spawn_point = global_position
 
 
 
@@ -67,57 +67,20 @@ func exit_bounce() -> void:
 	bounce_contacts = maxi(bounce_contacts - 1, 0)
 
 
-func enter_gravity_pad(pad: Node2D) -> void:
-	if _gravity_pads.has(pad):
-		return
-	_gravity_pads.append(pad)
-
-
-func exit_gravity_pad(pad: Node2D) -> void:
-	_gravity_pads.erase(pad)
-	if _gravity_pads.is_empty():
-		_gravity_flip_armed = true
-
-
 func toggle_gravity() -> void:
-	_gravity_flip_armed = false
-	_gravity_cooldown = PlayerVariables.gravity_flip_cooldown
 	gravity_flipped = not gravity_flipped
+	up_direction = Vector2.DOWN if gravity_flipped else Vector2.UP
 	$Icon.flip_v = gravity_flipped
-	sprite.flip_v = gravity_flipped
-
-
-func _desired_up() -> Vector2:
-	return Vector2.DOWN if gravity_flipped else Vector2.UP
-
-
-func _gravity_is_flipping() -> bool:
-	return up_direction != _desired_up()
-
-
-func is_portal_cooling() -> bool:
-	return _portal_cooldown > 0.0
-
-
-func teleport_via_portal(destination: Vector2) -> void:
-	global_position = destination
-	_portal_cooldown = PlayerVariables.portal_cooldown
-
-
-func _try_gravity_flip() -> void:
-	if not _gravity_flip_armed or _gravity_cooldown > 0.0:
-		return
-	if _gravity_pads.is_empty() or not is_on_floor():
-		return
-	toggle_gravity()
+	# Launch into the new "down" so we leave the pad instead of sticking to it.
+	velocity.y = abs(PlayerVariables.jump_velocity) * (-1.0 if gravity_flipped else 1.0)
 
 
 func _oriented(upward: float) -> float:
-	return -upward if up_direction == Vector2.DOWN else upward
+	return -upward if gravity_flipped else upward
 
 
 func _is_falling() -> bool:
-	return velocity.y <= 0.0 if up_direction == Vector2.DOWN else velocity.y >= 0.0
+	return velocity.y <= 0.0 if gravity_flipped else velocity.y >= 0.0
 
 
 func _physics_process(delta: float) -> void:
@@ -126,72 +89,41 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		velocity = Vector2.ZERO
 		return
-	
-	if jump_buffer_t > 0.0:
-		jump_buffer_t -= delta
-	jump_t -= delta
 
 	if Input.is_action_just_pressed("teleport debug"):
 		global_position = get_global_mouse_position()
 		velocity = Vector2.ZERO
-	if Input.is_action_just_pressed("teleport debug"):
-		global_position = get_global_mouse_position()
-		velocity = Vector2.ZERO
+		
 
-	if _gravity_cooldown > 0.0:
-		_gravity_cooldown = maxf(_gravity_cooldown - delta, 0.0)
-	if _portal_cooldown > 0.0:
-		_portal_cooldown = maxf(_portal_cooldown - delta, 0.0)
-
-	_try_gravity_flip()
-
-	# Apply gravity when airborne, or when gravity just flipped and we are still on the old floor.
 	if not is_on_floor():
-		if not started_falling:
-			started_falling = true
-			fall_jump_buffer_t = FALL_JUMP_BUFFER_WINDOW
-		var gravity := get_gravity() * PlayerVariables.gravity_multiplier
+		var gravity = get_gravity() * PlayerVariables.gravity_multiplier
 		if gravity_flipped:
 			gravity = -gravity
 		velocity += gravity * delta
-		fall_jump_buffer_t -= delta
-	else:
-		started_falling = false
 
 	var just_jumped := false
-	if on_bounce:
+	if on_bounce and (is_on_floor() or _is_falling()):
 		velocity.y = _oriented(PlayerVariables.bounce_velocity)
 		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
 		just_jumped = true
 		is_landing = false
-		_jumped_this_airtime = true
 	elif Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = _oriented(PlayerVariables.jump_velocity)
 		_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
 		just_jumped = true
 		is_landing = false
-		_jumped_this_airtime = true
-	if Input.is_action_just_pressed("jump"):
-		jump_buffer_t = JUMP_BUFFER_WINDOW
-		if fall_jump_buffer_t > 0.0 and jump_t <= 0.0:
-			jump()
-			just_jumped = true
-	
-	if is_on_floor() and jump_buffer_t > 0.0 and jump_t <= 0.0:
-		jump()
-		just_jumped = true
 
 	var direction := Input.get_axis("left", "right")
 	var target_speed: float = PlayerVariables.speed
 	var accel: float = PlayerVariables.acceleration
 	var decel: float = PlayerVariables.friction
 
-	if on_ice and is_on_floor() and not just_jumped and not _gravity_is_flipping():
+	if on_ice and is_on_floor() and not just_jumped:
 		target_speed = PlayerVariables.ice_speed
 		accel = PlayerVariables.ice_acceleration
 		decel = PlayerVariables.ice_friction
 		_air_carry_speed = abs(velocity.x)
-	elif not is_on_floor() or just_jumped or _gravity_is_flipping():
+	elif not is_on_floor() or just_jumped:
 		accel = PlayerVariables.air_acceleration
 		decel = PlayerVariables.air_friction
 		target_speed = maxf(PlayerVariables.speed, maxf(_air_carry_speed, abs(velocity.x)))
@@ -208,27 +140,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, decel * delta)
 
 	move_and_slide()
-	if is_on_floor():
-		_jumped_this_airtime = false
-	elif _gravity_is_flipping():
-		up_direction = _desired_up()
 	update_animation()
 
 
-func jump() -> void:
-	jump_t = JUMP_COOLDOWN
-	velocity.y = _oriented(PlayerVariables.jump_velocity)
-	_air_carry_speed = maxf(_air_carry_speed, abs(velocity.x))
-	jump_buffer_t = 0.0
-	is_landing = false
-
+	
 func update_animation() -> void:
 	# Skip ground/jump animation updates while dead.
 	if is_dead:
 		return
-
-	var sprite: AnimatedSprite2D = $AnimatedSprite2D
-	sprite.flip_v = gravity_flipped
 
 	# Handle horizontal facing direction.
 	if velocity.x > 0.0:
@@ -239,15 +158,6 @@ func update_animation() -> void:
 	# Case 1: In the air.
 	if not is_on_floor():
 		is_landing = false
-
-		# Gravity lift-off is not a jump — keep the grounded sprite so it does not pop.
-		if not _jumped_this_airtime:
-			sprite.offset.y = 0.0
-			if not is_zero_approx(velocity.x):
-				sprite.play("Walking")
-			else:
-				sprite.play("Idle")
-			return
 
 		if sprite.animation != "Jumping":
 			sprite.play("Jumping")
@@ -307,7 +217,6 @@ func die() -> void:
 		return
 	is_dead = true
 
-	# Capture velocity at the moment of impact for the sand shader.
 	var impact_velocity: Vector2 = velocity
 
 	if collision_shape:
@@ -315,18 +224,18 @@ func die() -> void:
 
 	sprite.offset.y = 0.0
 
-	# Original clean approach for native death particles.
 	if death_particles:
 		death_particles.restart()
 		death_particles.emitting = true
 
-	# Trigger the pixel sand dissolve effect.
-	trigger_sand_dissolve(impact_velocity)
-	spawn_pixel_sand(impact_velocity)
+	call_deferred("spawn_pixel_sand", impact_velocity)
+	sprite.visible = false
 
-	# 5. Handle reload or respawn after the death animation finishes
-	await sprite.animation_finished
-	LevelManager.retry()
+	# Wait for chunks to hit the floor, scatter, and settle
+	await get_tree().create_timer(death_settle_time).timeout
+
+	# Trigger the sand reassembly back to the spawn point
+	respawn(spawn_point)
 
 func trigger_sand_dissolve(impact_vel: Vector2 = Vector2.ZERO) -> void:
 	if not sand_particles:
@@ -350,16 +259,12 @@ func trigger_sand_dissolve(impact_vel: Vector2 = Vector2.ZERO) -> void:
 	sand_particles.restart()
 	sand_particles.emitting = true
 	
-	
 func spawn_pixel_sand(impact_vel: Vector2) -> void:
-	if not pixel_chunk_scene:
-		print("Error: PixelChunkScene not assigned in player Inspector!")
-		return
+	active_chunks.clear()
 
 	var cur_anim: String = sprite.animation
 	var cur_frame: int = sprite.frame
 	var frame_texture: Texture2D = sprite.sprite_frames.get_frame_texture(cur_anim, cur_frame)
-	
 	if not frame_texture:
 		return
 
@@ -373,17 +278,66 @@ func spawn_pixel_sand(impact_vel: Vector2) -> void:
 	for y in range(0, img_size.y, pixel_step):
 		for x in range(0, img_size.x, pixel_step):
 			var col: Color = img.get_pixel(x, y)
-			
 			if col.a < 0.1:
 				continue
-	
+
 			var chunk = pixel_chunk_scene.instantiate() as RigidBody2D
 			get_parent().add_child(chunk)
-		
+
 			var local_offset = Vector2(float(x), float(y)) - sprite_center
 			chunk.global_position = sprite.global_position + local_offset
+			
+			# Prevent one-frame flash to (0,0) from engine interpolation
+			chunk.reset_physics_interpolation()
 
 			var scatter = Vector2(randf_range(-50.0, 50.0), randf_range(-80.0, -20.0))
 			var final_vel = (impact_vel * 0.4) + scatter
-			
 			chunk.setup(col, final_vel)
+
+			# Record chunk instance and its relative sprite offset
+			active_chunks.append({
+				"chunk": chunk,
+				"offset": local_offset
+			})
+			
+func respawn(respawn_position: Vector2) -> void:
+	global_position = respawn_position.round()
+	velocity = Vector2.ZERO
+	sprite.visible = false
+	if collision_shape:
+		collision_shape.set_deferred("disabled", true)
+
+	sprite.play("Idle")
+	sprite.set_frame_and_progress(0, 0.0)
+
+	var total_max_delay: float = 0.0
+
+	for item in active_chunks:
+		var chunk = item["chunk"]
+		if is_instance_valid(chunk):
+			var target_pos: Vector2 = (global_position + item["offset"]).round()
+
+			# Calculate staggered delay based on distance + slight randomness
+			# Chunks closer to the respawn point start returning slightly earlier
+			var distance_ratio: float = clampf(chunk.global_position.distance_to(target_pos) / 500.0, 0.0, 1.0)
+			var delay: float = (distance_ratio * chunk_recall_max_delay) + randf_range(0.0, 0.1)
+			total_max_delay = maxf(total_max_delay, delay)
+
+			chunk.recall_to(target_pos, delay, chunk_recall_duration)
+
+	# Wait until the longest flight path finishes
+	await get_tree().create_timer(chunk_recall_duration + total_max_delay).timeout
+	await get_tree().process_frame
+
+	# Reveal player and destroy pixel chunks
+	sprite.visible = true
+	is_dead = false
+	if collision_shape:
+		collision_shape.set_deferred("disabled", false)
+
+	for item in active_chunks:
+		var chunk = item["chunk"]
+		if is_instance_valid(chunk):
+			chunk.queue_free()
+
+	active_chunks.clear()

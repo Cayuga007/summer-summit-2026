@@ -20,9 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://def0bd1efqq8l" path="res://assets/mc/mc_jump8.png" id="14_3vjad"]
 [ext_resource type="Texture2D" uid="uid://2x0kmmm12087" path="res://assets/mc/mc_jump9.png" id="15_yt0h1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
-radius = 85.70297
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_cr25j"]
 animations = [{
 "frames": [{
@@ -121,13 +118,13 @@ particle_flag_disable_z = true
 particle_flag_damping_as_friction = true
 emission_shape = 1
 emission_sphere_radius = 54.07
-inherit_velocity_ratio = 0.765
+inherit_velocity_ratio = 0.698
 velocity_pivot = Vector3(0, -90, 0)
 direction = Vector3(0, -90, 0)
 spread = 60.0
 flatness = 1.0
 initial_velocity_min = 63.35
-initial_velocity_max = 334.75
+initial_velocity_max = 148.3
 gravity = Vector3(0, 198, 0)
 scale_min = 0.0
 scale_curve = SubResource("CurveTexture_cgsek")
@@ -618,12 +615,14 @@ shader_parameter/gravity = Vector3(0, 98, 0)
 shader_parameter/collision_friction = 0.595
 shader_parameter/collision_bounce = 0.64
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
+radius = 85.70297
+
 [node name="Player" type="CharacterBody2D" unique_id=1599564440 groups=["Player"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_kpjcp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665931828]
-shape = SubResource("CircleShape2D_kpjcp")
+chunk_recall_duration = 1.0
+chunk_recall_max_delay = 1.0
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=905120733]
 visible = false
@@ -631,7 +630,7 @@ position = Vector2(0, 9.536743e-07)
 texture = ExtResource("1_xhfnw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=287264362]
-position = Vector2(-2, -34)
+position = Vector2(16, -36)
 scale = Vector2(2.05, 2.05)
 sprite_frames = SubResource("SpriteFrames_cr25j")
 animation = &"Jumping"
@@ -643,7 +642,10 @@ amount = 37
 texture = SubResource("GradientTexture2D_0pi4m")
 lifetime = 3.0599999999999996
 one_shot = true
-explosiveness = 0.98
+explosiveness = 1.0
+trail_lifetime = 0.09999999999999999
+trail_sections = 2
+trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_cr25j")
 
 [node name="SandParticles" type="GPUParticles2D" parent="." unique_id=1215569143]
@@ -655,3 +657,6 @@ lifetime = 49.76
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ShaderMaterial_cgsek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665931828]
+shape = SubResource("CircleShape2D_kpjcp")

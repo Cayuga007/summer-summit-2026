@@ -2,10 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dy1kh6rijc6hy" path="res://assets/particle/pixel_chunk.gd" id="1_oj1fl"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_61n01"]
+friction = 0.51
+bounce = 0.7
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cr25j"]
 size = Vector2(4, 4)
 
 [node name="PixelChunk" type="RigidBody2D" unique_id=1078544451]
+position = Vector2(1, -1)
+mass = 0.115
+physics_material_override = SubResource("PhysicsMaterial_61n01")
 script = ExtResource("1_oj1fl")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1624189246]
