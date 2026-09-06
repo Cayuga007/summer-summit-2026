@@ -1,5 +1,21 @@
 extends Node
 
+
+var colors = [
+	preload("res://platforms/IcePlatform.tscn"),
+	preload("res://platforms/JumpPlatform.tscn"),
+	preload("res://platforms/GravityPlatform.tscn"),
+	preload("res://platforms/PortalPlatform.tscn"),
+]
+
+var unlocked_colors = [
+	preload("res://platforms/platform.tscn"),
+]
+
+# Level parameters
+var max_meter_amount: float = 100
+var meter_spill_amount: float = 0.25
+
 # Core movement — change these anytime; the player reads them live.
 var speed := 300.0
 var jump_velocity := -600.0
@@ -24,3 +40,9 @@ var bounce_velocity := -800.0
 
 # GRAVITY PLATFORM
 # Flip state lives on the player and stays until the next gravity pad.
+
+# PORTAL PLATFORM
+# Appear this far along the player's "up" from the destination pad.
+var portal_landing_offset := 70.0
+# Ignore portal pads briefly after a teleport so you don't bounce back.
+var portal_cooldown := 0.25

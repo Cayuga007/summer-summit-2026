@@ -19,6 +19,8 @@ func _on_resume_button_pressed() -> void:
 func _on_settings_button_pressed() -> void:
 	LevelManager.open_overlay(LevelManager.SETTINGS_MENU, self)
 
+func _on_level_retry_button_pressed() -> void:
+	LevelManager.retry()
 
 func _on_level_select_button_pressed() -> void:
 	LevelManager.open_overlay(LevelManager.LEVEL_SELECT_MENU, self)

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 var ice_contacts := 0
 var bounce_contacts := 0
