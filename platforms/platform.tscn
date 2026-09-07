@@ -12,3 +12,10 @@ shape = SubResource("CircleShape2D_7stys")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2135289451]
 modulate = Color(1, 0.05882353, 0, 1)
 mesh = SubResource("SphereMesh_slo63")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=203875951]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
